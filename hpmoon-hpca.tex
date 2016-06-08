@@ -18,7 +18,7 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \title{Parallel Multi-objective optimization using co-evolutionary islands and search space overlapping}
 
-\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, Pedro Angel Castill and Juan Juli\'an Merelo\affilnum{1}}
+\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
 
 \affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
 
@@ -40,44 +40,20 @@ This paper...
 
 \section{Introduction}
 
+Different approaches have been used to parallelize Evolutionary Algorithms (EAs), as each individual can be considered as an independient unit \cite{Alba13parallel}. Classic methods, such as the global parallel EAs (Master-Slave), or the spatially structured algorithms (Island model or Cellular EAs) have been applied successfully in the past \cite{Folino03cellular,Alba02Parallelism}.  In the case of Multi-Objective Evolutionary Algorithms (MOEAs), these approaches \cite{Luna15Survey} need to deal with a whole solution set called Pareto Front (PFs). This imply to use different distribution and sharing mechanisms, as there exist a tension between the speedup achievable from parallelization and the need to globally recombine results to accurately identify the PF \cite{Branke04Parallelizingcone}.
 
-%Evolutionary Algorithms (EAs) are inherently parallelizable, as each
-%individual can be considered as an independent unit
-%\cite{Alba13parallel}, and therefore, the
-%computational performance can be improved over their non-parallel
-%versions. This can also be applied to Multi-Objective Evolutionary 
-%Algorithms (MOEAs). Besides, as this kind of algorithms may be computationally
-%expensive, several parallelization methods have been proposed
-%\cite{Luna15Survey}. However, as MOEAs deal with whole solution sets
-%called Pareto Fronts (PFs), different distribution and sharing
-%mechanisms need to be addressed, as there exist a tension between 
-%the speedup achievable from parallelization and the need to globally 
-%recombine results to accurately identify the PF \cite{Branke04Parallelizingcone}.
-%
-%
-%Classic approaches, such as the
-%global parallel EAs (Master-Slave), or the spatially structured
-%algorithms (Island model or Cellular EAs) have been applied successfully in the past \cite{Folino03cellular,Alba02Parallelism}.  
-%
-%MOEAs have gained attention in the last years, mostly because their application in real-world problems \cite{Luna15Survey,Mukhopadhyay14Survey}. Usually these problems require a higher number of decision variables, and these larger individuals require a significant extra time for crossover, mutation and transmission. Therefore, dividing the decision space (that is, the chromosome) may improve high performance and solution quality. In this aspect, the co-%evolution model is a dimension-distributed model where a
-%high-dimensional problem is divided into lower dimensional problems
-%\cite{Gong15models}, and evolved separately. Also, applying parallelism techniques in EAs not only implies a reduction in the execution time, 
-%but developing new and more efficient search models \cite{Luna15Survey}.  The idea of dividing the decision space has been
-%studied in \cite{Kimovski15Parallel}. In that work, different workers
-%evolve sub-populations created and recombined by a master process,
-%which performs different recombination alternatives from the parts returned by
-%worker processes. A high dimensional problem was used to compare these
-%alternatives. In \cite{Dorronsoro13superlinear}, a distributed coevolutionary island model was used.  In both previous works
-%significant speedups were attained, although only a low number of nodes were used (8). However, when increasing the number of islands, the division of %each section of the chromosome becomes smaller, and the scalability may be affected by obtaining lower quality solutions in the same amount of time.
-%
-%
-%The hypothesis of this paper is that using overlapped sections of the chromosome in a coevolutionary multi-objective island-based algorithm can improve %the quality of the
-%solutions in the same computing time when the number of islands increases. To demonstrate this, a new overlapping islands scheme will be compared with a baseline version of a distributed NSGA-II \cite{Deb00NSGAII} and with a coevolutionary disjoint section approach, in different benchmarks problems and %with different large number of islands. Results show that this new technique can improve different quality indicators in
-%the same amount of time. 
-%
-%The rest of the paper is structured as follows: after a background in parallelization in MOEAs, 
- %the compared algorithms and the used methodology (Section \ref{sec:met}) are presented. 
-%Then, the results of the experiments are shown (Section \ref{sec:res}), followed by conclusions and suggestions for future work lines.
+
+The application of MOEAs to solve real-world problems have gained attention in the last years \cite{Luna15Survey,Mukhopadhyay14Survey}. These kind of problems require a high number of variables, meaning that the EAs need to deal with large individuals and spent significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional problems \cite{Gong15models}, and evolved separately. One example of application of this technique was described in \cite{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
+alternatives. In \cite{Dorronsoro13superlinear}, a distributed coevolutionary island model was used.  Although in both previous works significant speedups were attained, only a low number of nodes were used (8). However, when increasing the number of islands, the division of each section of the chromosome becomes smaller, and the scalability may be affected by obtaining lower quality solutions in the same amount of time.
+
+In \cite{Garcia16Evostar} we tried to demonstrate that using overlapped sections of the chromosome in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time when the number of islands increases. We discovered that the most adequate overlapping size chosen varies depending on a relation between the number of islands and the indidivual size. Moreover, the experiments were conducted in a mono-processor and synchronous island model. This motivates us to continue this research line, but this time, proposing a new method to automatically adapt the size of the overlapped sections, but also, performing all the experiments in a real cluster with up to 128 nodes, with extra number of islands.
+
+
+The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to disjoint and partly overlaped methods. To demonstrate this, a new overlapping islands scheme has been compared with a baseline version of a distributed NSGA-II \cite{Deb00NSGAII}, a coevolutionary disjoint section approach, and a fixed-size overlapped method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
+
+The rest of the paper is organized as follows: after a background in parallelization in MOEAs, 
+the compared algorithms and the used methodology (Section \ref{sec:met}) are presented. 
+Then, the results of the experiments are shown (Section \ref{sec:res}), followed by conclusions and suggestions for future work lines.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,55 +61,41 @@ This paper...
 \section{State of the Art}
 \label{sec:soa}
 
+Since the early 2000s, the distributed and parallel Evolutionary Algorithms have been used, mostly to take the most from systems such as clusters or grids \cite{Talbi08Parallel}. But in the case of MOEAs, the distribution and parallelization is not as direct as in single-objective EAs. This is because in different steps of the algorithm a whole set of dependent solutions, the Pareto Front, should be managed as a whole, spending time in gather all individuals from the different process or islands.
 
-%Distributed and parallel Evolutionary Algorithms have been used since
-%the early 2000s \cite{Talbi08Parallel} to leverage the capabilities of new common parallel computer architectures, such as
-%clusters or grids. However, distributing MOEAs is not as easy as it is
-%in single-objective EAs, as they have to deal with a whole set of dependent solutions, the Pareto Front, that should be managed in several steps of the %algorithm. %unfinished Pablo: Done
-%Some authors have focused on Master-Slave approaches to parallelize this kind of EAs. For example, Durillo et
-%al. \cite{Durillo08masterslave} compared different master-slave
-%approaches to save time when running the EA. The method proposed by
-%Hiroyasu \cite{Hiroyasu07discussion} generates offspring depending on
-%the computation power.  
-%
-%
-%
-%First approaches for distributed MOEAs (dMOEAs) were studied in
-%\cite{Deb03distributed}. In that work, the dominance of solutions is
-%divided in the islands using a transformation of coordinates. Authors
-%concluded that dividing the search space is a good idea, but achieve
-%this is not trivial. Other ideas for dividing the search space include
-%objective separation in different processors \cite{Xiao03specialized},
-%or divide in two populations: one for elite and other search
-%\cite{Wang09parallel}. Martens, in \cite{Martens13asynchronous} generated a
-%Barabasi-Albert network as the island topology, and selection based on migrating
-%individuals from a not-crowded area and acceptance based on
-%diversity. 
-%
-%More similar approaches to the one presented here were studied in the
- %next two works, also using cooperative coevolution for high-dimensional problems. Dorronsoro et al. in
-%\cite{Dorronsoro13superlinear} obtained super-linear performance
-%in several instances using cooperative coevolution, focusing each island on a portion of the chromosome. However, in some instances the parallel version %not always 
-%improved the sequential version.  Kimovski et al. \cite{Kimovski15Parallel} proposed a
-%master-slave method that splits the population into several processors,
-%each one running in parallel a MOEA that only affects some portion of
-%the individuals. After a certain number of generations, the master
-%process receives all the sub-populations to be combined. Different
-%combination alternatives in this step are compared. Up to 8 processors
-%were used in the experimental setup. Our approach in this paper does not
-%broadcast all solutions to all islands for recombination, as previous
-%works, but only one solution to a random island, needing less
-%communication time. Besides, the maximum number of islands of
-%Dorronsoro or Kimovsky approaches was 8, while in this paper we have
-%used up to 128 islands. 
-%
-%Lately, some researchers \cite{cheng2015adaptive} have focused on
-%working on solution space, dividing the Pareto front in different
-%clusters in order to model it. This {\em divide and conquer} approach
-%is readily paralellizable and, in the sense of giving the
-%responsibility of different parts of the search space to different
-%modules, is similar to the one presented in this paper. We will
-%describe how we have tested our approach in the next Section.
+To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example, Durillo et al. \cite{Durillo08masterslave} compared different master-slave approaches TODO DESCRIBIR MEJOR ESTE TRABAJO. The method proposed by Hiroyasu \cite{Hiroyasu07discussion} generates offspring depending on the computation power. TODO Y ESTE
+
+The work by Deb in 2003 was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of solutions was divided in the islands using a transformation of coordinates. Their authors concluded that dividing the search space is a good idea, but achieve this is not trivial. Other approaches for dividing the search space include objective separation in different processors \cite{Xiao03specialized}, or divide in two populations: one for elite and other search \cite{Wang09parallel}. Martens, in \cite{Martens13asynchronous} generated a Barabasi-Albert network as the island topology, and selection based on migrating individuals from a not-crowded area and acceptance based on diversity. 
+
+
+More similar approaches to the one presented here were studied in the
+next two works, also using cooperative coevolution for high-dimensional problems. Dorronsoro et al. in
+\cite{Dorronsoro13superlinear} obtained super-linear performance
+in several instances using cooperative coevolution, focusing each island on a portion of the chromosome. However, in some instances the parallel version 
+improved the sequential version.  Kimovski et al. \cite{Kimovski15Parallel} proposed a
+master-slave method that splits the population into several processors,
+each one running in parallel a MOEA that only affects some portion of
+the individuals. After a certain number of generations, the master
+process receives all the sub-populations to be combined. Different
+combination alternatives in this step are compared. Up to 8 processors
+were used in the experimental setup. Our approach in this paper does not
+broadcast all solutions to all islands for recombination, as previous
+works, but only one solution to a random island, needing less
+communication time. Besides, the maximum number of islands of
+Dorronsoro or Kimovsky approaches was 8, while in this paper we have
+used up to 128 islands. 
+
+Lately, some researchers \cite{cheng2015adaptive} have focused on
+working on solution space, dividing the Pareto front in different
+clusters in order to model it. This {\em divide and conquer} approach
+is readily paralellizable and, in the sense of giving the
+responsibility of different parts of the search space to different
+modules, is similar to the one presented in this paper.
+
+In our previous work \cite{Garcia16Evostar} we used some of the previous ideas to compare two co-evolutionary dMOEAs. The first one divided the chromosome in $P$ sections, being $P$ the number of islands. Every island $p$ only performed the mutation and crossover in that part ($p_{th}$) of the chromosome, while the fitness was calculated using the whole individual. After certain number of generations, individuals were migrated randomly to other islands. The performance metrics were calculated at the end of the run. The second method, coevolution with overlapping islands, used the $p_{th-1}$ and $p_{th+1}$ sections of each chromosome, besides the $p_{th}$ part. During the same amount of time both methods obtained better results than a baseline algorithm that dealt with the whole chromosome in each island for crossover and mutation. We discovered that the performance using one or another method depends on the number of sections of the individuals and the number of islands used. This motivates us to find a new adaptive method to select this number of sections of the chromosome to use, depending on the number of islands. Moreover, previous experiments were performed in a single processor synchronous island model with a limited number of islands (8, 32 and 128). In this paper, we have used 8, 16, 32, 64 and 128 islands, and this time, using a real cluster. Therefore, at the same time we are proposing an adaptive method to divide the individual search space, we are validating the previous methods.
+
+
+We will describe how we have tested our approach in the next Section.
 
 
 
