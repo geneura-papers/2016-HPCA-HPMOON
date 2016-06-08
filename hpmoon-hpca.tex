@@ -270,6 +270,84 @@ Runs per configuration & 30 \\ \hline
 %Different metrics, explained in the previous section, have been used to calculate the quality of the obtained PFs in each configuration. As some of the metrics require a reference point to be calculated (such as HV), the point (1,9) has been chosen as reference, as none of the generated PFs in all runs are dominated by it. Metrics are then normalized with respect to that point. A Kruskall-Wallis significance test has been performed to the metrics of all runs of the configurations, as the Kolmogorov-Smirnov test detected non-normal distributions. The average results for each configuration are shown in Table \ref{tab:results}.
 
 
+\begin{table*}
+\centering
+\resizebox{12cm}{!}{
+\begin{tabular}{|c||c|c|c|c||c|c|c|c||c|c|c|c||}
+\hline
+	&	\multicolumn{4}{|c|}{HV}													&	\multicolumn{4}{|c|}{Spread}														&	\multicolumn{4}{|c|}{IGD}														\\ \hline
+%\multicolumn{13}{|c|}{2048 dimenOionO}																																													\\ \hline
+\#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A			&	B		&	D		&	O		&	A					\\ \hline
+\multicolumn{13}{|c|}{ZDT1}																																													\\ \hline
+8	&	0.900		&	0.816		& \textbf{	0.926	}		&	Equiv. D			& \textbf{	0.729	}	&	1.041			&	0.898			&	Equiv. D			&	0.013		&	0.029		& \textbf{	0.007	}	&	Equiv. D					\\
+16	& \textbf{	0.880	}	&	0.675		&	0.839			&	Equiv. O			& \textbf{	0.721	}	&	0.897			&	0.983		D	&	Equiv. O			& \textbf{	0.017	}	&	0.062		&	0.025		&	Equiv. O					\\
+32	& \textbf{	0.829	}	&	0.618		&	0.698			&	0.790			& \textbf{	0.763	}	&	0.879			&	0.886		D	&	0.913	DO		& \textbf{	0.027	}	&	0.076		&	0.056		&	0.036					\\
+64	& \textbf{	0.769	}	&	0.596		&	0.628			&	0.736			& \textbf{	0.820	}	&	0.897			&	0.872			&	0.890	DO		& \textbf{	0.040	}	&	0.080		&	0.071		&	0.047					\\
+128	& \textbf{	0.707	}	&	0.585		&	0.598			&	0.668			& \textbf{	0.850	}	&	0.956			&	0.883			&	0.910	O		& \textbf{	0.053	}	&	0.083		&	0.079		&	0.062					\\ \hline
+\multicolumn{13}{|c|}{ZDT2}																																													\\ \hline
+8	&	0.830		&	0.786		& \textbf{	0.851	}		&	Equiv. D			& \textbf{	0.866	}	&	0.996			&	0.987		D	&	Equiv. D			&	0.023		&	0.037		& \textbf{	0.017	}	&	Equiv. D					\\
+16	& \textbf{	0.810	}	&	0.601		&	0.776			&	Equiv. O			& \textbf{	0.916	}	&	0.990			&	1.005		D	&	Equiv. O			& \textbf{	0.029	}	&	0.091		&	0.040		&	Equiv. O					\\
+32	& \textbf{	0.756	}	&	0.498		&	0.617			&	0.682			& \textbf{	0.976	}	& \textbf{	0.976	}	B	& \textbf{	0.978	}	BD	&	1.054			& \textbf{	0.045	}	&	0.119		&	0.086		&	0.068					\\
+64	& \textbf{	0.668	}	&	0.451		&	0.504			&	0.601			&	1.002		& \textbf{	0.976	}		& \textbf{	0.974	}	D	&	1.025	B		& \textbf{	0.070	}	&	0.132		&	0.117		&	0.091					\\
+128	& \textbf{	0.576	}	&	0.434		&	0.452			&	0.526			&	1.002		&	1.023			& \textbf{	0.978	}		&	1.015	BD		& \textbf{	0.096	}	&	0.137		&	0.132		&	0.110					\\ \hline
+\multicolumn{13}{|c|}{ZDT3}																																													\\ \hline
+8	&	0.928		&	0.838		& \textbf{	0.951	}		&	Equiv. D			& \textbf{	0.869	}	&	1.028			&	0.983		D	&	Equiv. D			& \textbf{	0.008	}	&	0.018		&	0.005		&	Equiv. D					\\
+16	& \textbf{	0.903	}	&	0.715		&	0.870			&	Equiv. O			& \textbf{	0.846	}	&	0.899			&	0.960			&	Equiv. O			& \textbf{	0.011	}	&	0.032		&	0.014		&	Equiv. O					\\
+32	& \textbf{	0.857	}	&	0.655		&	0.737			&	0.824			& \textbf{	0.845	}	&	0.879			&	0.873		D	&	0.881	DO		& \textbf{	0.016	}	&	0.039		&	0.030		&	0.019					\\
+64	& \textbf{	0.796	}	&	0.632		&	0.662			&	0.761			& \textbf{	0.859	}	&	0.887			&	0.885		D	&	0.879	BDO		& \textbf{	0.023	}	&	0.042		&	0.038		&	0.027					\\
+128	& \textbf{	0.738	}	&	0.620		&	0.633			&	0.705			& \textbf{	0.882	}	&	0.968			& \textbf{	0.888	}	B	&	0.911			& \textbf{	0.029	}	&	0.044		&	0.042		&	0.033					\\ \hline
+\multicolumn{13}{|c|}{ZDT6}																																													\\ \hline
+8	&	0.268		&	0.223		& \textbf{	0.298	}		&	Equiv. D			& \textbf{	0.988	}	& \textbf{	0.972	}	B	& \textbf{	0.996	}	B	&	Equiv. D			& \textbf{	0.173	}	&	0.191		&	0.160		&	Equiv. D					\\
+16	& \textbf{	0.243	}	&	0.113		&	0.219			&	Equiv. O			& \textbf{	0.995	}	& \textbf{	0.987	}	B	& \textbf{	0.987	}	BD	&	Equiv. O			& \textbf{	0.184	}	&	0.240		&	0.193		&	Equiv. O					\\
+32	& \textbf{	0.196	}	&	0.071		&	0.115			&	0.162			& \textbf{	0.998	}	& \textbf{	0.989	}	B	& \textbf{	0.988	}	BD	&	1.005	B		& \textbf{	0.204	}	&	0.257		&	0.238		&	0.220					\\
+64	& \textbf{	0.145	}	&	0.056		&	0.075			&	0.120			&	0.996		&	0.986		B	& \textbf{	0.983	}	D	&	0.998	B		& \textbf{	0.226	}	&	0.264		&	0.255		&	0.235					\\
+128	& \textbf{	0.104	}	&	0.049		&	0.055			&	0.084			&	0.993		&	1.007			& \textbf{	0.979	}		&	0.998	BD		& \textbf{	0.244	}	&	0.266		&	0.263		&	0.251					\\ \hline
+
+\end{tabular}
+}
+\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
+\label{tab:results512}
+\end{table*}
+
+
+\begin{table*}
+\centering
+\resizebox{12cm}{!}{
+\begin{tabular}{|c||c|c|c|c||c|c|c|c||c|c|c|c||}
+\hline
+	&	\multicolumn{4}{|c|}{HV}													&	\multicolumn{4}{|c|}{Spread}														&	\multicolumn{4}{|c|}{IGD}														\\ \hline
+
+\#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A			&	B		&	D		&	O		&	A					\\ \hline
+\multicolumn{13}{|c|}{ZDT1}																																													\\ \hline
+8	&	0.891		& \textbf{	0.953	}	&	0.937			&	Equiv. D			& \textbf{	0.681	}	& \textbf{	0.635	}	B	&	0.661		D	&	Equiv. D			&	0.015		& \textbf{	0.002	}	&	0.005		&	Equiv. D					\\
+16	&	0.884		&	0.850		& \textbf{	0.942	}		&	Equiv. O			& \textbf{	0.705	}	&	0.908			& \textbf{	0.670	}	B	&	Equiv. O			&	0.016		&	0.022		& \textbf{	0.004	}	&	Equiv. O					\\
+32	&	0.851		&	0.674		&	0.859		B	& \textbf{	0.900	}		& \textbf{	0.754	}	&	0.868			&	0.826		D	& \textbf{	0.763	}	B	&	0.023		&	0.062		&	0.020	B	& \textbf{	0.012	}				\\
+64	& \textbf{	0.800	}	&	0.608		&	0.697			& \textbf{	0.824	}	B	& \textbf{	0.808	}	&	0.880			& \textbf{	0.861	}	B	& \textbf{	0.823	}	B	&	0.033		&	0.078		&	0.056		& \textbf{	0.027	}				\\
+128	&	0.735		&	0.582		&	0.613			& \textbf{	0.745	}		& \textbf{	0.841	}	&	0.888			&	0.878		D	&	0.865		O	&	0.047		&	0.084		&	0.075		& \textbf{	0.043	}				\\ \hline
+\multicolumn{13}{|c|}{ZDT2}																																													\\ \hline
+8	&	0.832		& \textbf{	0.895	}	&	0.869			&	Equiv. D			& \textbf{	0.849	}	& \textbf{	0.886	}	B	&	0.853		D	&	Equiv. D			&	0.023		& \textbf{	0.006	}	&	0.013		&	Equiv. D					\\
+16	&	0.831		&	0.833	B	& \textbf{	0.884	}		&	Equiv. O			& \textbf{	0.810	}	&	1.001			& \textbf{	0.802	}	B	&	Equiv. O			&	0.023		&	0.022	B	& \textbf{	0.009	}	&	Equiv. O					\\
+32	&	0.800		&	0.628		&	0.800		B	& \textbf{	0.817	}		& \textbf{	0.848	}	&	0.974			&	0.983		D	&	0.908			&	0.031		&	0.082		&	0.032	B	& \textbf{	0.027	}				\\
+64	& \textbf{	0.729	}	&	0.491		&	0.623			&	0.716			& \textbf{	0.909	}	&	0.967			&	0.979		D	& \textbf{	0.997	}	BD	& \textbf{	0.052	}	&	0.121		&	0.084		& \textbf{	0.055	}	B			\\
+128	& \textbf{	0.630	}	&	0.441		&	0.500			& \textbf{	0.614	}	B	& \textbf{	0.957	}	&	0.989			&	0.978		D	& \textbf{	0.994	}	BO	& \textbf{	0.080	}	&	0.136		&	0.119		& \textbf{	0.085	}	B			\\ \hline
+\multicolumn{13}{|c|}{ZDT3}																																													\\ \hline
+8	&	0.917		& \textbf{	0.971	}	&	0.960			&	Equiv. D			& \textbf{	0.843	}	& \textbf{	0.854	}	B	&	0.868		D	&	Equiv. D			&	0.009		& \textbf{	0.001	}	&	0.004		&	Equiv. D					\\
+16	&	0.911		&	0.876	B	& \textbf{	0.963	}		&	Equiv. O			& \textbf{	0.864	}	&	0.899		B	& \textbf{	0.837	}	B	&	Equiv. O			&	0.010		&	0.014		& \textbf{	0.003	}	&	Equiv. O					\\
+32	&	0.884		&	0.710		&	0.883		B	& \textbf{	0.931	}		& \textbf{	0.856	}	& \textbf{	0.870	}	B	& \textbf{	0.842	}	B	& \textbf{	0.842	}	BDO	&	0.013		&	0.032		&	0.013	B	& \textbf{	0.008	}				\\
+64	&	0.828		&	0.645		&	0.728			& \textbf{	0.854	}		& \textbf{	0.878	}	& \textbf{	0.896	}	B	& \textbf{	0.871	}	BD	& \textbf{	0.873	}	BDO	& \textbf{	0.019	}	&	0.040		&	0.030		& \textbf{	0.016	}	B			\\
+128	& \textbf{	0.770	}	&	0.620		&	0.651			& \textbf{	0.773	}	B	& \textbf{	0.887	}	& \textbf{	0.901	}	B	& \textbf{	0.890	}	BD	& \textbf{	0.885	}	BDO	& \textbf{	0.026	}	&	0.043		&	0.039		& \textbf{	0.025	}	B			\\ \hline
+\multicolumn{13}{|c|}{ZDT6}																																													\\ \hline
+8	&	0.271		& \textbf{	0.398	}	&	0.323			&	Equiv. D			& \textbf{	0.982	}	& \textbf{	0.982	}	B	&	0.994			&	Equiv. D			&	0.171		& \textbf{	0.115	}	&	0.149		&	Equiv. D					\\
+16	&	0.275		&	0.295	B	& \textbf{	0.354	}		&	Equiv. O			& \textbf{	0.981	}	& \textbf{	0.970	}	B	&	1.006			&	Equiv. O			&	0.170		&	0.161	B	& \textbf{	0.136	}	&	Equiv. O					\\
+32	&	0.239		&	0.123		&	0.240			& \textbf{	0.254	}		& \textbf{	0.989	}	& \textbf{	0.991	}	B	& \textbf{	0.982	}	BD	& \textbf{	0.999	}	BD	&	0.186		&	0.235		&	0.185	B	& \textbf{	0.179	}				\\
+64	& \textbf{	0.184	}	&	0.068		&	0.125			& \textbf{	0.178	}	B	& \textbf{	0.985	}	& \textbf{	0.982	}	B	& \textbf{	0.992	}	B	& \textbf{	0.995	}	BO	& \textbf{	0.209	}	&	0.259		&	0.235		&	0.212					\\
+128	& \textbf{	0.128	}	&	0.051		&	0.071			& \textbf{	0.124	}	B	& \textbf{	0.991	}	& \textbf{	0.992	}	B	& \textbf{	0.988	}	BD	&	1.003			& \textbf{	0.233	}	&	0.266		&	0.257		& \textbf{	0.235	}	B			\\ \hline
+
+\end{tabular}
+}
+\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
+\label{tab:results512}
+\end{table*}
 
 %At a first glance results show that dividing the chromosome produces
 %an improvement in all the quality indicators in all the
