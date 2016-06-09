@@ -324,6 +324,93 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 \label{tab:results512}
 \end{table*}
 
+
+
+
+
+
+\begin{table*}
+\centering
+\resizebox{12cm}{!}{
+\begin{tabular}{|c||c|c|c|c||c|c|c|c||}
+\hline
+	&	\multicolumn{4}{|c|}{Sols}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
+
+\#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A				\\ \hline
+\multicolumn{9}{|c|}{ZDT1}		NONE			TRUE			FALSE				FALSEVARIABLE																			\\ \hline
+8	&	182.700		&	128.500		&	158.167			&	Equiv. D			&	397.367		&	776.967			&	603.667			&	Equiv. D				\\
+16	&	132.567		&	43.633		&	76.167			&	Equiv. O			&	567.933		&	908.467			&	838.000			&	Equiv. O				\\
+32	&	102.200		&	37.533		&	34.133	D		&	52.033			&	731.067		&	959.067			&	938.167			&	917.000				\\
+64	&	81.100		&	46.267		&	26.300			&	30.167		O	&	846.733		&	978.733			&	972.567			&	927.133	B			\\
+128	&	77.167		&	57.767		&	35.767			&	29.167		O	&	923.133		&	984.767			&	984.233	D		&	967.933				\\ \hline
+\multicolumn{9}{|c|}{ZDT2}																															\\ \hline
+8	&	122.700		&	91.633		&	108.833	BD		&	Equiv. D			&	398.167		&	772.000			&	605.100			&	Equiv. D				\\
+16	&	94.867		&	28.033		&	62.467			&	Equiv. O			&	574.567		&	908.433			&	840.900			&	Equiv. O				\\
+32	&	56.633		&	11.433		&	19.467	D		&	31.567			&	735.867		&	960.167			&	939.200			&	904.900				\\
+64	&	33.467		&	10.267		&	9.367	D		&	19.067			&	849.900		&	978.600			&	972.167			&	929.800	B			\\
+128	&	22.833		&	12.633		&	7.800			&	13.967		D	&	929.433		&	984.567			&	984.233	D		&	971.700				\\ \hline
+\multicolumn{9}{|c|}{ZDT3}																															\\ \hline
+8	&	212.900		&	129.233		&	171.367			&	Equiv. D			&	398.633		&	776.000			&	603.333			&	Equiv. D				\\
+16	&	176.133		&	43.567		&	90.100			&	Equiv. O			&	573.033		&	908.667			&	838.000			&	Equiv. O				\\
+32	&	121.500		&	42.800		&	33.200			&	56.900			&	733.233		&	959.000			&	937.967			&	918.833				\\
+64	&	96.500		&	54.267		&	34.900			&	37.800		O	&	849.200		&	977.167			&	972.200			&	933.167				\\
+128	&	76.700		&	62.200		&	41.767			&	33.867		D	&	924.000		&	984.733			&	984.367	D		&	966.433				\\ \hline
+\multicolumn{9}{|c|}{ZDT6}																															\\ \hline
+8	&	42.233		&	28.633		&	35.967	BD		&	Equiv. D			&	396.900		&	773.400			&	603.533			&	Equiv. D				\\
+16	&	43.733		&	7.733		&	18.967			&	Equiv. O			&	568.200		&	908.900			&	836.033			&	Equiv. O				\\
+32	&	35.533		&	8.033		&	8.633	D		&	16.233		DO	&	735.700		&	958.900			&	938.600			&	926.167				\\
+64	&	22.600		&	10.700		&	7.500	D		&	7.533		DO	&	850.267		&	978.067			&	972.467			&	940.267				\\
+128	&	18.133		&	15.000	B	&	9.067			&	11.367		D	&	927.233		&	984.667			&	983.933	D		&	969.433				\\ \hline
+\end{tabular}
+}
+\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
+\label{tab:sols512}
+\end{table*}
+
+
+
+
+
+\begin{table*}
+\centering
+\resizebox{12cm}{!}{
+\begin{tabular}{|c||c|c|c|c||c|c|c|c||}
+\hline
+	&	\multicolumn{4}{|c|}{Sols}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
+%\multicolumn{13}{|c|}{2048 dimensions}																															\\ \hline
+\#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A				\\ \hline
+\multicolumn{9}{|c|}{ZDT1}		NONE			TRUE			FALSE				FALSEVARIABLE																			\\ \hline
+8	&	137.733		&	47.167		&	119.933	B		&	Equiv. D			&	175.067		&	225.667			&	207.933			&	Equiv. D				\\
+16	&	92.633		&	38.233		&	47.533	D		&	Equiv. O			&	204.867		&	238.533			&	232.900			&	Equiv. O				\\
+32	&	56.167		&	41.167		&	28.667			&	32.567	O		&	225.433		&	243.833			&	242.533			&	242.000	O			\\
+64	&	50.900		&	49.667	B	&	35.600			&	25.367			&	236.500		&	245.967			&	245.700			&	244.033	D			\\
+128	&	45.767		&	64.933		&	44.167	B		&	31.867			&	242.800		&	247.000			&	247.000	D		&	245.733				\\ \hline
+\multicolumn{9}{|c|}{ZDT2}																															\\ \hline
+8	&	64.267		&	22.733		&	56.867	B		&	Equiv. D			&	175.633		&	226.000			&	208.100			&	Equiv. D				\\
+16	&	52.300		&	10.733		&	20.067	D		&	Equiv. O			&	205.033		&	238.867			&	233.100			&	Equiv. O				\\
+32	&	34.400		&	10.367		&	10.433	D		&	17.900	O		&	225.600		&	244.267			&	242.633			&	242.000	O			\\
+64	&	24.600		&	10.900		&	9.267	D		&	12.867	DO		&	236.700		&	246.000			&	245.767			&	244.033	D			\\
+128	&	18.667		&	17.833	B	&	10.367			&	12.933	O		&	243.367		&	247.000			&	247.000	d		&	245.833				\\ \hline
+\multicolumn{9}{|c|}{ZDT3}																															\\ \hline
+8	&	163.767		&	83.367		&	119.467			&	Equiv. D			&	176.533		&	226.400			&	207.700			&	Equiv. D				\\
+16	&	108.467		&	49.433		&	47.700	D		&	Equiv. O			&	205.333		&	238.467			&	232.933			&	Equiv. O				\\
+32	&	72.133		&	44.333		&	31.833			&	36.533	O		&	225.100		&	243.900			&	242.433			&	242.000	O			\\
+64	&	54.867		&	57.600	B	&	40.633			&	29.300			&	236.333		&	245.933			&	245.733			&	244.000	D			\\
+128	&	50.600		&	72.133		&	49.033	B		&	34.933			&	243.200		&	247.000			&	247.000	D		&	245.833				\\ \hline
+\multicolumn{9}{|c|}{ZDT6}																															\\ \hline
+8	&	22.133		&	13.833		&	14.433	D		&	Equiv. D			&	175.733		&	226.100			&	207.767			&	Equiv. D				\\
+16	&	20.767		&	15.867		&	13.300	D		&	Equiv. O			&	205.033		&	238.433			&	232.933			&	Equiv. O				\\
+32	&	22.600		&	10.700		&	10.033	D		&	11.967	DO		&	225.833		&	243.667			&	242.500			&	242.000	O			\\
+64	&	19.033		&	11.267		&	10.533	D		&	10.567	DO		&	236.433		&	245.900			&	245.833			&	244.000	D			\\
+128	&	15.800		&	24.500		&	11.600			&	12.233	DO		&	243.800		&	247.000			&	247.000	D		&	245.533				\\ \hline
+\end{tabular}
+}
+\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
+\label{tab:sols2048}
+\end{table*}
+
+
+
 %At a first glance results show that dividing the chromosome produces
 %an improvement in all the quality indicators in all the
 %configurations, with respect to the baseline. Also, results show that
