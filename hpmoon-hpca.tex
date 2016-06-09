@@ -242,12 +242,12 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 %
 %
 
-%Different metrics, explained in the previous section, have been used to calculate the quality of the obtained PFs in each configuration. As some of the metrics require a reference point to be calculated (such as HV), the point (1,9) has been chosen as reference, as none of the generated PFs in all runs are dominated by it. Metrics are then normalized with respect to that point. A Kruskall-Wallis significance test has been performed to the metrics of all runs of the configurations, as the Kolmogorov-Smirnov test detected non-normal distributions. The average results for each configuration are shown in Table \ref{tab:results}.
+Different metrics, explained in the previous section, have been used to calculate the quality of the obtained PFs in each configuration. As some of the metrics require a reference point to be calculated (such as HV), the point (1,9) has been chosen as reference, as none of the generated PFs in all runs are dominated by it. Metrics are then normalized with respect to that point. A Kruskall-Wallis significance test has been performed to the metrics of all runs of the configurations, as the Kolmogorov-Smirnov test detected non-normal distributions. The average results for each configuration are shown in Table \ref{tab:results512} (for 512 dimensions) and \ref{tab:results2048} (for 2048).
 
 
 \begin{table*}
 \centering
-\resizebox{12cm}{!}{
+\resizebox{14cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||c|c|c|c||}
 \hline
 	&	\multicolumn{4}{|c|}{HV}													&	\multicolumn{4}{|c|}{Spread}														&	\multicolumn{4}{|c|}{IGD}														\\ \hline
@@ -280,14 +280,15 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 
 \end{tabular}
 }
-\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
+\caption{Quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold.}
 \label{tab:results512}
 \end{table*}
 
 
+
 \begin{table*}
 \centering
-\resizebox{12cm}{!}{
+\resizebox{16cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||c|c|c|c||}
 \hline
 	&	\multicolumn{4}{|c|}{HV}													&	\multicolumn{4}{|c|}{Spread}														&	\multicolumn{4}{|c|}{IGD}														\\ \hline
@@ -320,8 +321,8 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 
 \end{tabular}
 }
-\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
-\label{tab:results512}
+\caption{Quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold.}
+\label{tab:results2048}
 \end{table*}
 
 
@@ -334,10 +335,10 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 \resizebox{12cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||}
 \hline
-	&	\multicolumn{4}{|c|}{Sols}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
+	&	\multicolumn{4}{|c|}{Average solutions per island}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
 
 \#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A				\\ \hline
-\multicolumn{9}{|c|}{ZDT1}		NONE			TRUE			FALSE				FALSEVARIABLE																			\\ \hline
+\multicolumn{9}{|c|}{ZDT1}																				\\ \hline
 8	&	182.700		&	128.500		&	158.167			&	Equiv. D			&	397.367		&	776.967			&	603.667			&	Equiv. D				\\
 16	&	132.567		&	43.633		&	76.167			&	Equiv. O			&	567.933		&	908.467			&	838.000			&	Equiv. O				\\
 32	&	102.200		&	37.533		&	34.133	D		&	52.033			&	731.067		&	959.067			&	938.167			&	917.000				\\
@@ -363,7 +364,7 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 128	&	18.133		&	15.000	B	&	9.067			&	11.367		D	&	927.233		&	984.667			&	983.933	D		&	969.433				\\ \hline
 \end{tabular}
 }
-\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
+\caption{Average number of generations and average number of solutions per island, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
 \label{tab:sols512}
 \end{table*}
 
@@ -376,10 +377,10 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 \resizebox{12cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||}
 \hline
-	&	\multicolumn{4}{|c|}{Sols}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
+	&	\multicolumn{4}{|c|}{Average solutions per island}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
 %\multicolumn{13}{|c|}{2048 dimensions}																															\\ \hline
 \#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A				\\ \hline
-\multicolumn{9}{|c|}{ZDT1}		NONE			TRUE			FALSE				FALSEVARIABLE																			\\ \hline
+\multicolumn{9}{|c|}{ZDT1}																					\\ \hline
 8	&	137.733		&	47.167		&	119.933	B		&	Equiv. D			&	175.067		&	225.667			&	207.933			&	Equiv. D				\\
 16	&	92.633		&	38.233		&	47.533	D		&	Equiv. O			&	204.867		&	238.533			&	232.900			&	Equiv. O				\\
 32	&	56.167		&	41.167		&	28.667			&	32.567	O		&	225.433		&	243.833			&	242.533			&	242.000	O			\\
@@ -405,39 +406,40 @@ task will be addressed in future works. %Pablo: no sé si decir esto
 128	&	15.800		&	24.500		&	11.600			&	12.233	DO		&	243.800		&	247.000			&	247.000	D		&	245.533				\\ \hline
 \end{tabular}
 }
-\caption{Métricas de calidad obtenidas después de 30 ejecuciones por configuración, para los cuatro métodos comparados: baseline (B), disjunto (D), solapado (S) y solapado adaptativo (A). Los acrónimos junto a los valores indican que no hay diferencia significativa con respecto a ese método para ese valor. Los mejores valores están marcados en negrita.}
+\caption{Average number of generations and average number of solutions per island, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
 \label{tab:sols2048}
 \end{table*}
 
 
+Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values significantly equal than the obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply this methods. This contradicts the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoon}, where the overlapping methods obtained best results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes requires more time than the time saved during the crossover and migration.
 
-%At a first glance results show that dividing the chromosome produces
-%an improvement in all the quality indicators in all the
-%configurations, with respect to the baseline. Also, results show that
-%all the quality indicators lowers when the number of islands is
-%increased, as the subpopulations are smaller. This is consistent with
-%the claim by Durillo in \citep{Dorronsoro13superlinear}, who found that
-%cooperative coevolutionary MOEAs work better on bigger populations
-%(more than 100 individuals). Paying attention to the disjoint and
-%overlapping methods, only when using 8 islands the disjoint method
-%always attain better metrics, and even more times with the 2048 chromosome
-%length. This can be explained because only 1/8 of the individual is
-%changed in each island, while in the overlapping, 3/8 of the island
-%may be more similar to the baseline configuration. Therefore, there exist some kind
-%of limit point where one method will be preferable to another,
-%depending the number of islands, population size and length. 
-%
-%This can be explained also comparing the number of generations and
-%average solutions per island. Table \ref{tab:gens} shows these values
-%obtained in each method. It is clear that in the same amount of time,
-%the disjoint and overlapping method needs more generations than the
-%baseline. This is even clearer with $L=$2048, where almost 10 times
-%the number of generations is attained, and therefore, more migrations
-%and crossovers/mutations can be achieved. Surprisingly, the average
+However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the adaptive version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods.
+
+
+
+Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, depending the number of islands, population size and length.
+
+This can be explained comparing the number non-dominated solutions in each island and the average number of generations (Table \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome lengths, increasing the number of islands implies more generations with all the methods (logically, as there are less individuals in each island). But also, the co-evolutionary methods approach to the number of generations with the baseline when increasing the number of islands. However, with $L=2048$ the migration time is enough big to almost not improve the number of generations with respect to the baseline, even in the lower number of islands, as it happens with $L=512$. Therefore, more generations do not necessarily improve the solution of the global PF, but focusing in different elements of the chromosome. As indicated previously, every island is unaware of the other islands PFs, and they are trying to optimize their solutions independently... %TENGO QUE COMENTAR MAS LOS RESULTADOS Y ENTENDERLO TODO Y JUSTIFICARLO FINAMENTE
+
+Finally, as happened in \citep{Garcia16hpmoon}, results show that all the quality indicators lowers when the number of islands is increased, as the subpopulations are smaller. This is consistent with the claim by Durillo in \citep{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
+
+
+
+%Surprisingly, the average
 %number of solutions of PFs per island in the baseline configuration is significantly
 %higher in some configurations (mostly with 128 islands), but their
 %combination in the final PF never attains higher values than Disjoint
 %and Overlapping methods. 
+
+
+%configurations, with respect to the baseline.  Paying attention to the disjoint and
+%overlapping methods, only when using 8 islands the disjoint method
+%always attain better metrics, and even more times with the 2048 chromosome
+%length. This can be explained because only 1/8 of the individual is
+%changed in each island, while in the overlapping, 3/8 of the island
+%may be more similar to the baseline configuration. 
+%
+
 
 
 
