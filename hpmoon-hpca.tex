@@ -3,7 +3,7 @@
 \documentclass[Afour,sageh,times]{sagej}
 
 
-\usepackage{moreverb,url}
+\usepackage{moreverb,url,color}
 
 \usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
@@ -56,7 +56,7 @@ islands (subpopulations) to the length of the chromosome (number of decision var
 Different approaches have been used to parallelize Evolutionary Algorithms (EAs), as each individual can be considered as an independient unit \citep{Alba13parallel}. Classic methods, such as the global parallel EAs (Master-Slave), or the spatially structured algorithms (Island model or Cellular EAs) have been applied successfully in the past \citep{Folino03cellular,Alba02Parallelism}.  In the case of Multi-Objective Evolutionary Algorithms (MOEAs), these approaches \citep{Luna15Survey} need to deal with a whole solution set called Pareto Front (PFs). This imply to use different distribution and sharing mechanisms, as there exist a tension between the speedup achievable from parallelization and the need to globally recombine results to accurately identify the PF \citep{Branke04Parallelizingcone}.
 
 
-The application of MOEAs to solve real-world problems have gained attention in the last years \citep{Luna15Survey,Mukhopadhyay14Survey}. These kind of problems require a high number of variables, meaning that the EAs need to deal with large individuals and spent significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional problems \citep{Gong15models}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
+The application of MOEAs to solve real-world problems have gained attention in the last years \citep{Luna15Survey,Mukhopadhyay14Survey}. These kind of problems require a high number of variables, meaning that the EAs need to deal with large individuals and spent significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional problems \citep{Gong15models,Tonda12cooperative}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
 alternatives. In \citep{Dorronsoro13superlinear}, a distributed coevolutionary island model was used.  Although in both previous works significant speedups were attained, only a low number of nodes were used (8). However, when increasing the number of islands, the division of each section of the chromosome becomes smaller, and the scalability may be affected by obtaining lower quality solutions in the same amount of time.
 
 In our preliminary work in \citep{Garcia16hpmoon} we tried to demonstrate that using overlapped sections of the chromosome in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time when the number of islands increases. We discovered that the most adequate overlapping size may vary depending on a relation between the number of islands and the individual size. Moreover, the experiments were conducted in a mono-processor and synchronous island model. This motivates us to continue this research line, but this time, proposing a new method to automatically adapt the size of the overlapped sections, but also, performing all the experiments in a real cluster with up to 128 nodes, with extra number of islands.
@@ -65,8 +65,8 @@ In our preliminary work in \citep{Garcia16hpmoon} we tried to demonstrate that u
 The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to the baseline, disjoint and partly overlapped methods. To demonstrate this, a new overlapping islands scheme has been compared with a baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a coevolutionary disjoint section approach, and a fixed-size overlapped method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
 
 The rest of the paper is organized as follows: after a background in parallelization in MOEAs, 
-the compared algorithms and the used methodology (Section \ref{sec:met}) are presented. 
-Then, the results of the experiments are shown (Section \ref{sec:res}), followed by conclusions and suggestions for future work lines.
+the compared algorithms and the used methodology (Section 3) are presented. %PABLO: no puedo usar \ref{sec:met} porque la plantilla de esta revista no lo coge :/
+Then, the results of the experiments are shown (Section 4), followed by conclusions and suggestions for future work lines.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -135,13 +135,13 @@ This section describes the quality indicators used and the methods compared. The
 \end{figure}
 
 
-These metrics have been used extensively, especially in some of the papers presented previously in Section \ref{sec:soa}.
+These metrics have been used extensively, especially in some of the papers presented previously in Section 2.
 
 %% --------------------------------------------------------------
 
 \subsection{Baseline algorithm}
 
-This algorithm is a regular NSGA-II algorithm distributed along a number $P$ of islands. After a fixed number of generations, one individual is migrated to another random island. At the end of the run, all PFs of all islands are aggregated in a new one to compute the quality measures. This method as been chosen as it do not require synchronization of the global PF every certain number of generations, as other methods described in Section \ref{sec:soa}, and because it can TERMINAAAAAA
+This algorithm is a regular NSGA-II algorithm distributed along a number $P$ of islands. After a fixed number of generations, one individual is migrated to another random island. At the end of the run, all PFs of all islands are aggregated in a new one to compute the quality measures. This method as been chosen as it do not require synchronization of the global PF every certain number of generations, as other methods described in Section 2, and because it can {\color{red} QUE MAS SE PUEDE PONER AQUI PARA JUSTIFICARLO?}
 %% some justification on why this was chosen - JJ PABLO: Added 
 %
 %% And some liaison to next subsection - JJ
@@ -179,7 +179,7 @@ As in the previous method, the sections to address are overlapped, but instead u
 \begin{figure*}
 \centering
 \includegraphics[width=12cm]{islandNoDisjoint.jpg}
-\caption{NOTA: ESTA FIGURA TIENE QUE ACTUALIZARSE CON LA ADAPTATIVA!!!!! Adaptive overlapping algorithm: every island $p$ modifies the  $p+c$,
+\caption{{\color{red} NOTA: ESTA FIGURA TIENE QUE ACTUALIZARSE CON LA ADAPTATIVA!!!!!} Adaptive overlapping algorithm: every island $p$ modifies the  $p+c$,
   $p_{th}$ and $p-c$  components (in grey) of the individuals. $c$ is calculated depending on the number of islands.}
   \label{fig:adaptive}
 \end{figure*}
