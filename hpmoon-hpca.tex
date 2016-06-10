@@ -105,73 +105,53 @@ We will describe how we have tested our approach in the next Section.
 %
 \section{Methodology and experimental setup}
 \label{sec:met}
-%This section describes the quality indicators used and the methods
-%compared. The chosen quality indicators,
-%are:
-%
-%\begin{itemize}
-%\item Hypervolume (HV): measures the area formed by all non-dominated solutions found with, respect to a reference point. Higher values imply better %quality of the PF.
-%\item Inverted Generational distance (IGD): calculates the distance of the obtained set of solutions to the optimal PF. Therefore, this metric requires %the optimal PF found in the literature, or the theoretical one. In this metric, the lower the better. %Pablo: theoretical?
-%\item Spread (S): Measures the spread between solutions, taking into account the euclidean distance between consecutive solutions. As in previous %metric, the lower value, the better, as it implies solutions distributed along all the PF.
-%\end{itemize}
-%
-%These metrics have been used extensively, especially in some of the papers
-%presented previously in Section \ref{sec:soa}.
-%
-%
+
+This section describes the quality indicators used and the methods compared. The chosen quality indicators, are:
+
+\begin{itemize}
+\item Hypervolume (HV): measures the area formed by all non-dominated solutions found with, respect to a reference point. Higher values imply better quality of the PF.
+\item Inverted Generational distance (IGD): calculates the distance of the obtained set of solutions to the optimal PF. Therefore, this metric requires the optimal PF found in the literature, or the theoretical one. In this metric, the lower the better. %Pablo: theoretical?
+\item Spread (S): Measures the spread between solutions, taking into account the euclidean distance between consecutive solutions. As in previous metric, the lower value, the better, as it implies solutions distributed along all the PF.
+\end{itemize}
+
+These metrics have been used extensively, especially in some of the papers presented previously in Section \ref{sec:soa}.
+
 %% --------------------------------------------------------------
-%
-%\subsection{Baseline algorithm}
-%
-%This algorithm is a regular NSGA-II algorithm distributed along a
-%number $P$ of islands. After a fixed number of generations, one
-%individual is migrated to another random island. At the end of the
-%run, all PFs of all islands are aggregated in a new one to compute the
-%quality measures.
-%% some justification on why this was chosen - JJ
+
+\subsection{Baseline algorithm}
+
+This algorithm is a regular NSGA-II algorithm distributed along a number $P$ of islands. After a fixed number of generations, one individual is migrated to another random island. At the end of the run, all PFs of all islands are aggregated in a new one to compute the quality measures. This method as been chosen as it do not require synchronization of the global PF every certain number of generations, as other methods described in Section \ref{sec:soa}, and because it can TERMINAAAAAA
+%% some justification on why this was chosen - JJ PABLO: Added 
 %
 %% And some liaison to next subsection - JJ
-%
-%\subsection{Coevolutionary algorithms compared}
-%Two different coevolutionary methods have also been used. In both
-%methods, each island only performs crossover and mutation in specific sections of the
-%individuals.
-%
-%As in the baseline, every 
-%certain number of generations, an individual is migrated to another
-%random island.  In the new island, this individual will be considered as one of the others in the island, crossed and
-%mutated in the same way, depending of the island identifier. Note that, on the
-%contrary of other works such as the ones described
-%\citep{Talbi08Parallel} all the islands deal with complete chromosomes
-%for fitness calculation, so our approach can deal with no decomposable
-%problems. 
-%
-%\subsubsection{Coevolution with disjoint islands} 
-%In this approach, each individual of size $L$ is split into $P$ chunks
-%of size $L/P$. Every island $p$ only performs crossover and mutation
-%on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint} describes this approach.  
-%
-%\begin{figure}
-%\includegraphics[width=12cm]{islandDisjoint.jpg}
-%\caption{Disjoint algorithm: every island $p$ only modifies the $p_{th}$ components (in grey) of the individuals.}
-%\label{fig:disjoint}
-%\end{figure}
-%
-%\subsubsection{Coevolution with overlapping islands}
-%This approach is similar to the previous one, but every island also
-%uses the $p+1$ and $p-1$ (module size) chunks of the individual for
-%crossover and migration. Therefore, some kind of overlapping of the
-%crossed and mutated parts exists between islands. Figure
-%\ref{fig:overlapping} shows the affected parts of the individuals in
-%each island. 
-%
-% 
-%\begin{figure}
-%\includegraphics[width=12cm]{islandNoDisjoint.jpg}
-%\caption{Overlapping algorithm: every island $p$ modifies the  $p+1$,
-  %$p_{th}$ and $p-1$  components (in grey) of the individuals.}
-%\label{fig:overlapping}
-%\end{figure}
+This method will be compared to different coevolutionary approaches, that are similar to the baseline, with the exception on the decision space to explore in each island.
+\subsection{Coevolutionary algorithms compared}
+Three different coevolutionary methods have also been used. In all these methods, each island only performs crossover and mutation in specific sections of the individuals.
+
+As in the baseline, every certain number of generations, an individual is migrated to another random island.  In the new island, this individual will be considered as one of the others in the island, crossed and mutated in the same way, depending of the island identifier. Note that, on the contrary of other works such as the ones described by \cite{Talbi08Parallel} all the islands deal with complete chromosomes for fitness calculation, so our approach can deal with no decomposable problems. 
+
+\subsubsection{Coevolution with disjoint islands} 
+In this approach, each individual of size $L$ is split into $P$ chunks of size $L/P$. Every island $p$ only performs crossover and mutation on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint} describes this approach.  
+
+\begin{figure*}
+\includegraphics[width=12cm]{islandDisjoint.jpg}
+\caption{Disjoint algorithm: every island $p$ only modifies the $p_{th}$ components (in grey) of the individuals.}
+\label{fig:disjoint}
+\end{figure*}
+
+\subsubsection{Coevolution with overlapping islands}
+This approach is similar to the previous one, but every island also uses the $p+1$ and $p-1$ (module size) chunks of the individual for crossover and migration. Therefore, some kind of overlapping of the crossed and mutated parts exists between islands. Figure \ref{fig:overlapping} shows the affected parts of the individuals in
+each island. 
+
+\begin{figure*}
+\includegraphics[width=12cm]{islandNoDisjoint.jpg}
+\caption{Overlapping algorithm: every island $p$ modifies the  $p+1$,
+  $p_{th}$ and $p-1$  components (in grey) of the individuals.}
+  \label{fig:overlapping}
+\end{figure*}
+
+\subsubsection{Adaptive coevolution with overlapping islands} 
+As in the previous method, the sections to address are overlapped, but instead using one extra section on each side of the $p$ section ($p+1$ and $p-1$), it uses $c$ fragments on each side ($p+c$ y $p-c$), being $c$ a value depending on the number of islands. The results shown in \citep{Garcia16evostar} have been used as a base to calculate $c$. In that work, the overlapped method ($c=1$) obtained better results when the number of islands were >8. Therefore, we have used the formula $c=round(0.2*P-1)/2$ to calculate the extra sections to overlap. %TODO TERMINA Y PONER MAS EJEMPLOS Y DECIR QUE ESTA ES UNA PRIMERA APROXIMACION
 
 % --------------------------------------------------------------
 
@@ -181,26 +161,15 @@ We will describe how we have tested our approach in the next Section.
 \section{Experiments and Results}
 \label{sec:res}
 
-%The three approaches have been run with two different 
-%chromosome lengths ($L$): 512 and 2048. Different number of
-%islands ($P$) have also been compared: 8, 32 and 128. This maximum number
-%of islands have also been  used in previous work in the literature
-%\citep{Martens13asynchronous}. The crossover and mutation chosen, SBX
-%and polynomial, have been used previously by other authors in
-%\citep{Durillo08masterslave}. 
+The four approaches have been run with two different chromosome lengths ($L$): 512 and 2048. Different number of islands ($P$) have also been compared: 8, 32 and 128. This maximum number of islands have also been  used in previous work in the literature \citep{Martens13asynchronous}. The crossover and mutation chosen, SBX and polynomial, have been used previously by other authors in \citep{Durillo08masterslave}. 
 
-%ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely
-%used in this area
-%\citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. The
-%optimal PF distribution used for comparison has 1000
-%solutions \footnote{Optimal PFs are available at:
-%  \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.}. 
+ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. The optimal PF distribution used for comparison has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.}. 
 
 
 
 
 
-%The termination criterion used is the execution time: 25 seconds for dimension 512 and 100 (four times more) for 2048. We have used the time instead the number of evaluations firstly because our hypothesis argue that the time saved in crossover in mutation can be spent on improving the sub-populations and more operations and migrations can be achieved. Also, we are using different number of islands (with different sub-population sizes) that could lead to different execution times, so it would be difficult to compare different times and quality solutions at the same time.
+The termination criterion used is the execution time: 25 seconds for dimension 512 and 100 (four times more) for 2048. We have used the time instead the number of evaluations firstly because our hypothesis argue that the time saved in crossover in mutation can be spent on improving the sub-populations and more operations and migrations can be achieved. Also, we are using different number of islands (with different sub-population sizes) that could lead to different execution times, so it would be difficult to compare different times and quality solutions at the same time.
 
 \begin{table*}
 \begin{center}
@@ -321,7 +290,7 @@ Different metrics, explained in the previous section, have been used to calculat
 
 \end{tabular}
 }
-\caption{Quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold.}
+\caption{Quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold.}
 \label{tab:results2048}
 \end{table*}
 
@@ -410,16 +379,14 @@ Different metrics, explained in the previous section, have been used to calculat
 \label{tab:sols2048}
 \end{table*}
 
+%DESCRIPTION OF THE RESULTS
+Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values better or significantly equal than the obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply these methods. This contradicts the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoon}, where the overlapping method obtained best results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes requires more time than the time saved during the crossover and migration.
 
-Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values significantly equal than the obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply this methods. This contradicts the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoon}, where the overlapping methods obtained best results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes requires more time than the time saved during the crossover and migration.
-
-However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the adaptive version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods.
+However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the adaptive version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods. Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, depending the number of islands, population size and length.
 
 
-
-Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, depending the number of islands, population size and length.
-
-This can be explained comparing the number non-dominated solutions in each island and the average number of generations (Table \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome lengths, increasing the number of islands implies more generations with all the methods (logically, as there are less individuals in each island). But also, the co-evolutionary methods approach to the number of generations with the baseline when increasing the number of islands. However, with $L=2048$ the migration time is enough big to almost not improve the number of generations with respect to the baseline, even in the lower number of islands, as it happens with $L=512$. Therefore, more generations do not necessarily improve the solution of the global PF, but focusing in different elements of the chromosome. As indicated previously, every island is unaware of the other islands PFs, and they are trying to optimize their solutions independently... %TENGO QUE COMENTAR MAS LOS RESULTADOS Y ENTENDERLO TODO Y JUSTIFICARLO FINAMENTE
+%EXPLANATION OF THE RESULTS
+This can be explained comparing the number non-dominated solutions in each island and the average number of generations (Table \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome lengths, increasing the number of islands implies more generations with all the methods (logically, as there are less individuals in each island). But also, the co-evolutionary methods approach to the number of generations with the baseline when increasing the number of islands. However, with $L=2048$ the migration time is enough big to almost not improve the number of generations with respect to the baseline, even in the lower number of islands, as it happens with $L=512$. Therefore, more generations do not necessarily improve the solution of the global PF, but focusing in different elements of the chromosome. As indicated previously, every island is unaware of the other islands PFs, and they are trying to optimize their solutions independently. With respect to the average number of solution in each island, there is a clear difference in number with the baseline with $L=512$, where this value is in the most of the cases, less than a half. The number of non-dominated solutions also improves a better Spread indicator, where the baseline almost always obtains better values %TENGO QUE COMENTAR MAS LOS RESULTADOS Y ENTENDERLO TODO Y JUSTIFICARLO FINAMENTE
 
 Finally, as happened in \citep{Garcia16hpmoon}, results show that all the quality indicators lowers when the number of islands is increased, as the subpopulations are smaller. This is consistent with the claim by Durillo in \citep{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
@@ -478,6 +445,8 @@ Finally, as happened in \citep{Garcia16hpmoon}, results show that all the qualit
 \begin{acks}
 Acknowledgements
 \end{acks}
+
+TIN2014-56494-C4-3-P y TIN2015-67020-P (Ministerio de Economía y Competitividad), PROY-PP2015-06 (Plan Propio 2015 UGR),  y MSTR (PRY142/14, Fundación Pública Andaluza Centro de Estudios Andaluces en la IX Convocatoria de Proyectos de Investigación).
 
 \bibliographystyle{SageH}
 
