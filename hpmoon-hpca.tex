@@ -18,7 +18,7 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \title{Parallel Multi-objective optimization using co-evolutionary islands and search space overlapping}
 
-\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
+\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, \\Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
 
 \affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
 
@@ -31,8 +31,21 @@ Universidad de Granada,
 \email{pablogarcia@ugr.es}
 
 \begin{abstract}
-This paper...
+Multi-objective optimization methods have gained interest in the last years because the performance they can achieve solving real-world problems. These kind of problems usually require a high-dimensional decision space, and multi-objective Evolutionary Algorithms have been successfully used in the past. Due to the large computational cost these algorithms require, different parallelization and distribution methods have been proposed, with different parallel and distributed computer architectures to cope with them. One of the most extended methods are the distributed co-evolutionary evolutionary algorithms, where each processor only deals with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables.  
+
+In this paper, a new method to automatically adapt the overlapping sections of the individuals have been compared to other collaborative evolutionary methods.
+Different number of islands, chromosome sizes and problems have been used. The analysis of the obtained experimental results, by using different 
+metrics, shows that coevolutionary approaches can provide statistically significant improvements with respect to the base algorithm, being the method to automatically adapt the overlapping size the one to obtain better performance during the same execution time. Results also show that the relation of the number of 
+islands (subpopulations) to the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables.
 \end{abstract}
+
+
+
+
+
+
+
+
 
 \keywords{Multi-objective algorithms, NSGA-II, Island model, distributed evolutionary algorithms}
 
@@ -46,10 +59,10 @@ Different approaches have been used to parallelize Evolutionary Algorithms (EAs)
 The application of MOEAs to solve real-world problems have gained attention in the last years \citep{Luna15Survey,Mukhopadhyay14Survey}. These kind of problems require a high number of variables, meaning that the EAs need to deal with large individuals and spent significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional problems \citep{Gong15models}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
 alternatives. In \citep{Dorronsoro13superlinear}, a distributed coevolutionary island model was used.  Although in both previous works significant speedups were attained, only a low number of nodes were used (8). However, when increasing the number of islands, the division of each section of the chromosome becomes smaller, and the scalability may be affected by obtaining lower quality solutions in the same amount of time.
 
-In \citep{Garcia16hpmoon} we tried to demonstrate that using overlapped sections of the chromosome in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time when the number of islands increases. We discovered that the most adequate overlapping size chosen varies depending on a relation between the number of islands and the indidivual size. Moreover, the experiments were conducted in a mono-processor and synchronous island model. This motivates us to continue this research line, but this time, proposing a new method to automatically adapt the size of the overlapped sections, but also, performing all the experiments in a real cluster with up to 128 nodes, with extra number of islands.
+In our preliminary work in \citep{Garcia16hpmoon} we tried to demonstrate that using overlapped sections of the chromosome in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time when the number of islands increases. We discovered that the most adequate overlapping size may vary depending on a relation between the number of islands and the individual size. Moreover, the experiments were conducted in a mono-processor and synchronous island model. This motivates us to continue this research line, but this time, proposing a new method to automatically adapt the size of the overlapped sections, but also, performing all the experiments in a real cluster with up to 128 nodes, with extra number of islands.
 
 
-The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to disjoint and partly overlaped methods. To demonstrate this, a new overlapping islands scheme has been compared with a baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a coevolutionary disjoint section approach, and a fixed-size overlapped method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
+The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to the baseline, disjoint and partly overlapped methods. To demonstrate this, a new overlapping islands scheme has been compared with a baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a coevolutionary disjoint section approach, and a fixed-size overlapped method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
 
 The rest of the paper is organized as follows: after a background in parallelization in MOEAs, 
 the compared algorithms and the used methodology (Section \ref{sec:met}) are presented. 
@@ -63,16 +76,16 @@ Then, the results of the experiments are shown (Section \ref{sec:res}), followed
 
 Since the early 2000s, the distributed and parallel Evolutionary Algorithms have been used, mostly to take the most from systems such as clusters or grids \citep{Talbi08Parallel}. But in the case of MOEAs, the distribution and parallelization is not as direct as in single-objective EAs. This is because in different steps of the algorithm a whole set of dependent solutions, the Pareto Front, should be managed as a whole, spending time in gather all individuals from the different process or islands.
 
-To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example, Durillo et al. \citep{Durillo08masterslave} compared different master-slave approaches TODO DESCRIBIR MEJOR ESTE TRABAJO. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computation power. TODO Y ESTE
+To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example,  \cite{Durillo08masterslave} compared different master-slave approaches TODO DESCRIBIR MEJOR ESTE TRABAJO. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computation power. TODO Y ESTE
 
-The work by Deb in 2003 was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of solutions was divided in the islands using a transformation of coordinates. Their authors concluded that dividing the search space is a good idea, but achieve this is not trivial. Other approaches for dividing the search space include objective separation in different processors \citep{Xiao03specialized}, or divide in two populations: one for elite and other search \citep{Wang09parallel}. Martens, in \citep{Martens13asynchronous} generated a Barabasi-Albert network as the island topology, and selection based on migrating individuals from a not-crowded area and acceptance based on diversity. 
+The work by \cite{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of solutions was divided in the islands using a transformation of coordinates. Their authors concluded that dividing the search space is a good idea, but achieve this is not trivial. Other approaches for dividing the search space include objective separation in different processors \citep{Xiao03specialized}, or divide in two populations: one for elite and other search \citep{Wang09parallel}. Martens, in \citep{Martens13asynchronous} generated a Barabasi-Albert network as the island topology, and selection based on migrating individuals from a not-crowded area and acceptance based on diversity. 
 
 
 More similar approaches to the one presented here were studied in the
-next two works, also using cooperative coevolution for high-dimensional problems. Dorronsoro et al. in
-\citep{Dorronsoro13superlinear} obtained super-linear performance
+next two works, also using cooperative coevolution for high-dimensional problems. 
+\cite{Dorronsoro13superlinear} obtained super-linear performance
 in several instances using cooperative coevolution, focusing each island on a portion of the chromosome. However, in some instances the parallel version 
-improved the sequential version.  Kimovski et al. \citep{Kimovski15Parallel} proposed a
+improved the sequential version.  \cite{Kimovski15Parallel} proposed a
 master-slave method that splits the population into several processors,
 each one running in parallel a MOEA that only affects some portion of
 the individuals. After a certain number of generations, the master
@@ -109,10 +122,18 @@ We will describe how we have tested our approach in the next Section.
 This section describes the quality indicators used and the methods compared. The chosen quality indicators, are:
 
 \begin{itemize}
-\item Hypervolume (HV): measures the area formed by all non-dominated solutions found with, respect to a reference point. Higher values imply better quality of the PF.
+\item Hypervolume (HV): measures the area formed by all non-dominated solutions found with, respect to a reference point. Higher values imply better quality of the PF. Figure \ref{fig:hypervolume} clarifies how the hypervolume is calculated.
 \item Inverted Generational distance (IGD): calculates the distance of the obtained set of solutions to the optimal PF. Therefore, this metric requires the optimal PF found in the literature, or the theoretical one. In this metric, the lower the better. %Pablo: theoretical?
 \item Spread (S): Measures the spread between solutions, taking into account the euclidean distance between consecutive solutions. As in previous metric, the lower value, the better, as it implies solutions distributed along all the PF.
 \end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics[width=6cm]{hypervolume.pdf}
+\caption{Hypervolume calculation. Areas from Pareto Front solutions (black points) to a reference point (white point) are added.}
+\label{fig:hypervolume}
+\end{figure}
+
 
 These metrics have been used extensively, especially in some of the papers presented previously in Section \ref{sec:soa}.
 
@@ -130,29 +151,38 @@ Three different coevolutionary methods have also been used. In all these methods
 
 As in the baseline, every certain number of generations, an individual is migrated to another random island.  In the new island, this individual will be considered as one of the others in the island, crossed and mutated in the same way, depending of the island identifier. Note that, on the contrary of other works such as the ones described by \cite{Talbi08Parallel} all the islands deal with complete chromosomes for fitness calculation, so our approach can deal with no decomposable problems. 
 
-\subsubsection{Coevolution with disjoint islands} 
+\subsubsection{Coevolution with disjoint islands (D)} 
 In this approach, each individual of size $L$ is split into $P$ chunks of size $L/P$. Every island $p$ only performs crossover and mutation on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint} describes this approach.  
 
 \begin{figure*}
+\centering
 \includegraphics[width=12cm]{islandDisjoint.jpg}
 \caption{Disjoint algorithm: every island $p$ only modifies the $p_{th}$ components (in grey) of the individuals.}
 \label{fig:disjoint}
 \end{figure*}
 
-\subsubsection{Coevolution with overlapping islands}
+\subsubsection{Coevolution with overlapping islands (O)}
 This approach is similar to the previous one, but every island also uses the $p+1$ and $p-1$ (module size) chunks of the individual for crossover and migration. Therefore, some kind of overlapping of the crossed and mutated parts exists between islands. Figure \ref{fig:overlapping} shows the affected parts of the individuals in
 each island. 
 
 \begin{figure*}
+\centering
 \includegraphics[width=12cm]{islandNoDisjoint.jpg}
 \caption{Overlapping algorithm: every island $p$ modifies the  $p+1$,
   $p_{th}$ and $p-1$  components (in grey) of the individuals.}
   \label{fig:overlapping}
 \end{figure*}
 
-\subsubsection{Adaptive coevolution with overlapping islands} 
-As in the previous method, the sections to address are overlapped, but instead using one extra section on each side of the $p$ section ($p+1$ and $p-1$), it uses $c$ fragments on each side ($p+c$ y $p-c$), being $c$ a value depending on the number of islands. The results shown in \citep{Garcia16evostar} have been used as a base to calculate $c$. In that work, the overlapped method ($c=1$) obtained better results when the number of islands were >8. Therefore, we have used the formula $c=round(0.2*P-1)/2$ to calculate the extra sections to overlap. %TODO TERMINA Y PONER MAS EJEMPLOS Y DECIR QUE ESTA ES UNA PRIMERA APROXIMACION
+\subsubsection{Adaptive coevolution with overlapping islands (A)} 
+As in the previous method, the sections to address are overlapped, but instead using one extra section on each side of the $p$ section ($p+1$ and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$), being $c$ a value depending on the number of islands. As a first approach to automatically calculate this value the results shown in \citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that work, the overlapped method ($c=1$) obtained better results when the number of islands were >8. Therefore, we have used the formula $c=round(0.2*P-1)/2$ to calculate the extra sections to overlap. Therefore, when $P=8$ then $c=0$ (equivalent to D), when $P=16$ then $c=1$ (equivalent to O), and so on. Figure \ref{fig:adaptive}
 
+\begin{figure*}
+\centering
+\includegraphics[width=12cm]{islandNoDisjoint.jpg}
+\caption{NOTA: ESTA FIGURA TIENE QUE ACTUALIZARSE CON LA ADAPTATIVA!!!!! Adaptive overlapping algorithm: every island $p$ modifies the  $p+c$,
+  $p_{th}$ and $p-c$  components (in grey) of the individuals. $c$ is calculated depending on the number of islands.}
+  \label{fig:adaptive}
+\end{figure*}
 % --------------------------------------------------------------
 
 
@@ -161,7 +191,7 @@ As in the previous method, the sections to address are overlapped, but instead u
 \section{Experiments and Results}
 \label{sec:res}
 
-The four approaches have been run with two different chromosome lengths ($L$): 512 and 2048. Different number of islands ($P$) have also been compared: 8, 32 and 128. This maximum number of islands have also been  used in previous work in the literature \citep{Martens13asynchronous}. The crossover and mutation chosen, SBX and polynomial, have been used previously by other authors in \citep{Durillo08masterslave}. 
+The four approaches have been run with two different chromosome lengths ($L$): 512 and 2048. Different number of islands ($P$) have also been compared: 8, 16, 32, 64 and 128. This maximum number of islands have also been  used in previous work in the literature \citep{Martens13asynchronous}. The crossover and mutation chosen, SBX and polynomial, have been used previously by other authors in \citep{Durillo08masterslave}. 
 
 ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. The optimal PF distribution used for comparison has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.}. 
 
@@ -176,7 +206,7 @@ The termination criterion used is the execution time: 25 seconds for dimension 5
 \begin{tabular}{|c|c|}
 \hline
 {\em Parameter Name} & {\em Value} \\ \hline
-Number of islands ($P$) & 8, 32 and 128 \\ \hline
+Number of islands ($P$) & 8, 16, 32, 64 and 128 \\ \hline
 Chromosome size ($L$) & 512 and 2048 \\ \hline
 Execution time (s) & 25 (for 512) and 100 (for 2048) \\ \hline \hline
 Global population size ($N$) & 1024 \\ \hline
@@ -202,14 +232,8 @@ LGPL V3 License
 \footnote{\url{https://https://github.com/hpmoon/hpmoon-islands}}. The
 island model has been executed synchronously, using the ECJ Internal
 Island Model, in a CentOS 5.4 machine with Intel(R) Xeon(R) CPU E5520
-@2.27GHz, 16 GB RAM, with Java Version 1.6.0\_16. As in this paper we
-only focus on the behaviour of our model in a single machine scenario
-(the islands share the same memory and processor), the migration time
-will not be as important factor as in a real distributed system. This
-task will be addressed in future works. %Pablo: no sé si decir esto
-                                %aquí% 
-%
-%
+@2.27GHz, 16 GB RAM, with Java Version 1.6.0\_16.
+
 
 Different metrics, explained in the previous section, have been used to calculate the quality of the obtained PFs in each configuration. As some of the metrics require a reference point to be calculated (such as HV), the point (1,9) has been chosen as reference, as none of the generated PFs in all runs are dominated by it. Metrics are then normalized with respect to that point. A Kruskall-Wallis significance test has been performed to the metrics of all runs of the configurations, as the Kolmogorov-Smirnov test detected non-normal distributions. The average results for each configuration are shown in Table \ref{tab:results512} (for 512 dimensions) and \ref{tab:results2048} (for 2048).
 
@@ -388,7 +412,7 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 %EXPLANATION OF THE RESULTS
 This can be explained comparing the number non-dominated solutions in each island and the average number of generations (Table \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome lengths, increasing the number of islands implies more generations with all the methods (logically, as there are less individuals in each island). But also, the co-evolutionary methods approach to the number of generations with the baseline when increasing the number of islands. However, with $L=2048$ the migration time is enough big to almost not improve the number of generations with respect to the baseline, even in the lower number of islands, as it happens with $L=512$. Therefore, more generations do not necessarily improve the solution of the global PF, but focusing in different elements of the chromosome. As indicated previously, every island is unaware of the other islands PFs, and they are trying to optimize their solutions independently. With respect to the average number of solution in each island, there is a clear difference in number with the baseline with $L=512$, where this value is in the most of the cases, less than a half. The number of non-dominated solutions also improves a better Spread indicator, where the baseline almost always obtains better values %TENGO QUE COMENTAR MAS LOS RESULTADOS Y ENTENDERLO TODO Y JUSTIFICARLO FINAMENTE
 
-Finally, as happened in \citep{Garcia16hpmoon}, results show that all the quality indicators lowers when the number of islands is increased, as the subpopulations are smaller. This is consistent with the claim by Durillo in \citep{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
+Finally, as happened in \citep{Garcia16hpmoon}, results show that all the quality indicators lowers when the number of islands is increased, as the subpopulations are smaller. This is consistent with the claim by \cite{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
 
 
@@ -412,33 +436,12 @@ Finally, as happened in \citep{Garcia16hpmoon}, results show that all the qualit
 
 \section{Conclusions}
 
-%High-performance problems that require a large number of decision
-%variables can leverage the division of the decision space that parallel
-%and distributed algorithms imply. This can be done in dMOEAs by dividing the
-%chromosome into different parts, each one modified by a different
-%island. This paper compares a baseline distributed NSGA-II with two
-%different strategies to separate the chromosome (disjoint or overlapping
-%parts), using a high number of islands. Results show that these 
-%methods can achieve better quality metrics
-%than the baseline in the same amount of time. This can be explained 
-%because of the time reduction in crossover and mutation in the chromosomes,
-%producing a higher number of generations and more modifications of the 
-%solutions of the PF in each sub-population, and therefore improving
-%quality of the global PF.%
+High-performance problems that require a large number of decision variables can leverage the division of the decision space that parallel and distributed algorithms imply. This can be done in dMOEAs by dividing the chromosome into different parts, each one modified by a different island. This paper compares a baseline distributed NSGA-II with three different strategies to separate the chromosome (disjoint or overlapping parts), using a high number of islands. Results show that these methods can achieve better quality metrics than the baseline in the same amount of time, with larger chromosome lengths.
 
-%Results also show that when increasing the number of islands, the overlapping 
-%method significantly improves the results with respect to the disjoint method.
-%Therefore, the relation between the number of islands used, the global population size,
-%and the length of the chromosome may be a key factor to decide if using the 
-%overlapping method or the disjoint one. Studying this factor with more types 
-%of problems, and new configurations of population size and chromosome lengths will be addressed in the future.%
+Results also show that when increasing the number of islands, the adaptive overlapping method significantly improves the results with respect to the disjoint and overlapped methods. However, this is only apparent with larger chromosome sizes. Therefore, the length of the chromosome is also a key factor to take into account in adaptive methods, and not only the number of islands. Studying this factor with more types of problems, and new configurations of population size and chromosome lengths will be addressed in the future.%
 %
 
-%Also, distributed implementations in several systems (such as a GRID or cluster) with more different
-%quantities of islands/processors, will be used to perform a scalability study of the different
-%methods, being the transmission time between islands a relevant issue to
-%address. New benchmarks and real problems will also be  used to validate
-%our approach. 
+Also, more distributed implementations in several systems (such as a GPUs or heterogeneous clusters) with more different quantities of islands/processors, will be used to perform a scalability study of the different methods, being the transmission time between islands a relevant issue to address. New benchmarks and real problems will also be  used to validate this approach. 
 
 
 
@@ -446,7 +449,7 @@ Finally, as happened in \citep{Garcia16hpmoon}, results show that all the qualit
 Acknowledgements
 \end{acks}
 
-TIN2014-56494-C4-3-P y TIN2015-67020-P (Ministerio de Economía y Competitividad), PROY-PP2015-06 (Plan Propio 2015 UGR),  y MSTR (PRY142/14, Fundación Pública Andaluza Centro de Estudios Andaluces en la IX Convocatoria de Proyectos de Investigación).
+TIN2014-56494-C4-3-P y TIN2015-67020-P (Ministerio de Economía y Competitividad), PROY-PP2015-06 (Plan Propio 2015 UGR),  y MSTR (PRY142/14, Fundaci\'on P\'ublica Andaluza Centro de Estudios Andaluces en la IX Convocatoria de Proyectos de Investigaci\'on).
 
 \bibliographystyle{SageH}
 
