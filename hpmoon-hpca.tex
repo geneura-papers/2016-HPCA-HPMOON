@@ -21,7 +21,7 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 %\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, \\Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
 \author{ANONYMOUS FOR BLIND REVIEW \affilnum{1}}
 \affiliation{\affilnum{1} ANONYMOUS FOR BLIND REVIEW}
-\affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
+%\affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
 
 %\corrauth{Pablo Garc\'ia-S\'anchez,
 %ETS. Ingenier\'ias en Inform\'atica y Telecomunicaci\'on and CITIC-UGR,
@@ -419,7 +419,7 @@ Different metrics, explained in the previous section, have been used to calculat
 %DESCRIPTION OF THE RESULTS
 Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values better or significantly equal than the obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply these methods. This contradicts the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoonANONYMOUS}, where the overlapping method obtained better results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes requires more time than the time saved during the crossover and migration.
 
-However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the adaptive version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods. Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, depending the number of islands, population size and length.
+However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the adaptive version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods. Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, besides depending on the number of islands and population size.
 
 
 %EXPLANATION OF THE RESULTS
