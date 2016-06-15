@@ -1,6 +1,7 @@
 % sage_latex_guidelines.tex V1.01, 11 June 2015
 
-\documentclass[Afour,sagev,times]{sagej}
+%\documentclass[Afour,sagev,times]{sagej}
+\documentclass[Crown,sagev,times,doublespace]{sagej}
 
 
 \usepackage{moreverb,url,color}
@@ -13,21 +14,25 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \begin{document}
 
-\runninghead{Garc\'ia-S\'anchez et al.}
-
+%\runninghead{Garc\'ia-S\'anchez et al.}
+\runninghead{anonymous}
 \title{Parallel Multi-objective optimization using co-evolutionary islands and search space overlapping}
 
-\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, \\Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
+%\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, \\Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
+\author{ANONYMOUS FOR BLIND REVIEW \affilnum{1}}
+\affiliation{\affilnum{1} ANONYMOUS FOR BLIND REVIEW}
+%\affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
 
-\affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
+%\corrauth{Pablo Garc\'ia-S\'anchez,
+%ETS. Ingenier\'ias en Inform\'atica y Telecomunicaci\'on and CITIC-UGR,
+%C/Periodista Daniel Saucedo s/n,
+%Universidad de Granada,
+%18071, Granada, Spain.}
 
-\corrauth{Pablo Garc\'ia-S\'anchez,
-ETS. Ingenierías en Inform\'atica y Telecomunicaci\'on and CITIC-UGR,
-C/Periodista Daniel Saucedo s/n,
-Universidad de Granada,
-18071, Granada, Spain.}
+\corrauth{ANONYMOUS FOR BLIND REVIEW.}
 
-\email{pablogarcia@ugr.es}
+%\email{pablogarcia@ugr.es}
+\email{anonymous}
 
 \begin{abstract}
 Multi-objective optimization methods have gained interest in the last years because the performance they can achieve solving real-world problems. Many of these problems usually require a high-dimensional decision space, and multi-objective Evolutionary Algorithms have been successfully used in the past. Due to the large computational cost these algorithms require, different parallelization and distribution methods have been proposed, with different parallel and distributed computer architectures to cope with them. One of the most extended methods are the distributed co-evolutionary evolutionary algorithms, where each processor only deals with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables.  
@@ -46,7 +51,7 @@ islands (subpopulations) to the length of the chromosome (number of decision var
 
 
 
-\keywords{Multi-objective algorithms, NSGA-II, Island model, distributed evolutionary algorithms}
+\keywords{Multi-objective algorithms, NSGA-II, Island model, distributed evolutionary algorithms, coevolution}
 
 \maketitle
 
@@ -80,7 +85,7 @@ Multi-objective optimization problems (MOP) are those where several objectives h
 
 Since the early 2000s, the distributed and parallel Evolutionary Algorithms have been used, mostly to take the most from systems such as clusters or grids \citep{Talbi08Parallel}. But in the case of MOEAs, the distribution and parallelization is not as direct as in single-objective EAs. This is because in different steps of the algorithm a whole set of dependent solutions, the Pareto Front, should be managed as a whole, spending time in gathering all individuals from the different processors or islands.
 
-To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches {\color{red} TODO DESCRIBIR MEJOR ESTE TRABAJO}. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power {\color{red} TODO Y ESTE}.
+To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches: synchronous generational, asynchronous generational and asynchronous steady-state, being the latter the most promising option. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power.
 
 The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of solutions was divided into the islands using a transformation of coordinates. Their authors concluded that dividing the search space is a good idea, but achieve this is not trivial. Other approaches for dividing the search space include objective separation in different processors \citep{Xiao03specialized}, or divide in two populations: one for elite and other search \citep{Wang09parallel}. Martens, in \citep{Martens13asynchronous} generated a Barabasi-Albert network as the island topology, and selection based on migrating individuals from a not-crowded area and acceptance based on diversity. 
 
@@ -285,7 +290,7 @@ Different metrics, explained in the previous section, have been used to calculat
 
 \begin{table*}
 \centering
-\resizebox{16cm}{!}{
+\resizebox{13cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||c|c|c|c||}
 \hline
 	&	\multicolumn{4}{|c|}{HV}													&	\multicolumn{4}{|c|}{Spread}														&	\multicolumn{4}{|c|}{IGD}														\\ \hline
