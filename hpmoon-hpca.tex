@@ -36,9 +36,9 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 
 \begin{abstract}
-Multi-objective optimization methods have gained interest in the last years because the performance they can achieve solving real-world problems. Many of these problems usually require a high-dimensional decision space, and multi-objective Evolutionary Algorithms have been successfully used in the past. Due to the large computational cost these algorithms require, different parallelization and distribution methods have been proposed, with different parallel and distributed computer architectures to cope with them. One of the most extended methods are the distributed co-evolutionary evolutionary algorithms, where each processor only deals with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables.  
+Multi-objective optimization methods have gained interest in the last years because the performance they can achieve solving real-world problems. Many of these problems usually require a high-dimensional decision space, and multi-objective Evolutionary Algorithms have been successfully used in the past. Due to the large computational cost these algorithms require, different parallelization and distribution methods have been proposed, with different parallel and distributed computer architectures to cope with them. One of the most extended methods are the distributed co-evolutionary algorithms, where each processor only deals with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables.  
 
-In this paper, a new method to automatically adapt the overlapping sections of the individuals have been compared to other collaborative evolutionary methods.
+In this paper, a new method to automatically adapt the overlapping sections of the individuals has been compared to other collaborative evolutionary methods.
 Different number of islands, chromosome sizes and problems have been used. The analysis of the obtained experimental results, by using different 
 metrics, shows that coevolutionary approaches can provide statistically significant improvements with respect to the base algorithm, being the method to automatically adapt the overlapping size the one to obtain the best performance during the same execution time. Results also show that the relation of the number of 
 islands (subpopulations) to the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables.
@@ -454,7 +454,7 @@ High-performance problems that require a large number of decision variables can 
 Results also show that when increasing the number of islands, the adaptive overlapping method significantly improves the results with respect to the disjoint and overlapped methods. However, this is only apparent with larger chromosome sizes. Therefore, the length of the chromosome is also a key factor to take into account in adaptive methods, and not only the number of islands. Studying this factor with more types of problems, and new configurations of population size and chromosome lengths will be addressed in the future.%
 %
 
-Also, more distributed implementations in several systems (such as a GPUs or heterogeneous clusters) with more different quantities of islands/processors, will be used to perform a scalability study of the different methods, being the transmission time between islands a relevant issue to address. New benchmarks and real problems will also be  used to validate this approach. 
+Also, more distributed implementations in several systems (such as a GPUs or heterogeneous clusters) with more different quantities of islands/processors, will be used to perform a scalability study of the different methods, being the transmission time between islands a relevant issue to address. Finally, new benchmarks and real problems will also be  used to validate this approach. 
 
 
 
