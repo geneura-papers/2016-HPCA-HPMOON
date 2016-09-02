@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Introduction to \LaTeX{}}
+\author{Author's Name}
+
+\maketitle
+
+\section{Reviewer 1}
+
+
+
+\textbf{Although simple, and possibly not revolutionary, the paper is very nice: well written, well organized, clear and technically sound (except for the fact that, as I report below, only one benchmark problem has been used as test case, which is not enough).}
+
+We appreciate reviewer's comment. As it will be explained next, we have used a real problem to validate our approach.
+
+\textbf{I suggest the following modifications to further improve its quality:}
+
+\textbf{An intuition of the meaning of the term ``overlapping sections of individuals'' should be made clear(er) since the very beginning. For instance, in both the abstract and introduction this term is used but not defined, nor informally introduced. So, basically the true content of the paper becomes clear only with Figure 2 at page 7.}
+
+\textbf{Some choices of this paper deserves a deeper explanation. For instance: why did you use exactly that formula (at the beginning of page 7) to calculate the c value (extra sections to overlap). Why did you use exactly those measures of performance (HV, IGD and Spread) and not others? For instance, I think it would be appropriate to also report the obtained results on the different optimization criteria.}
+
+\textbf{The proposed method has been tested only on one benchmark (ZDT). Although the benchmark is well known in the community, I think this is not enough to demonstrate the generality of the approach. Other benchmarks of different nature, and possibly also real-life applications should be used as test cases.}
+
+\textbf{The conclusions section seems inappropriate for a journal paper, and needs to be deepened.}
+
+\section{Reviewer 2}
+
+\textbf{Authors propose a new method to choose the best overlapping ratio. Particularly, this work extends a previous work done by the authors in the scope of island-based parallel multi-objective algorithms.}
+
+\textbf{I think that, as is, the paper presents not too much novelty. If I am not wrong, the contribution is the equation used for setting the overlapping (and executing the algorithm in a cluster). In my opinion, there are many aspects and issues that should be addressed or fixed. For example:}
+
+\textbf{ 1.- The experimental section compares different strategies: among them and against a baseline NSGA-II. However, there are many different multi-objective algorithms in the literature (for example SPEA, MOEA/D), and also different flavors of them. I think that, at least in the scope of island-based models, the authors should demonstrate that their algorithm (or even strategy) is competitive compared to the state-of-the-art algorithms. I know that performing this kind of analysis is difficult, but otherwise does it has sense to use this strategy if the whole algorithm is not competitive?.}
+
+\textbf{ 2- This is a journal focused on high performance computing. I see no pseudo-codes of the algorithm, communication schemes between islands, and other detail that allow understanding the proposed algorithm. In addition, a performance analysis, speed-ups, communication-computation ratios, and so on would be welcome. Some of these aspects, for example the time required for migrating individuals is mentioned as a drawback of other approaches, but it is not discussed at all.}
+
+\textbf{ 3.- Why a distributed NSGA-II is chosen as the baseline? Would not be fairer to use the sequential version? Related to this, how have running times been assigned? 25/100 seconds for each process (island) independently of the number of islands? If this is the way, this is not a fair comparison, as we are using more global cpu time (more machines) as the number of islands increases. May be I have not understand this correctly.}
+
+\textbf{ I understand that an island-based model is designed for dealing with large problems, which cannot be executed in one computer. In the experimental section, ZDT functions are used, up to 2048 variables, and execution times up to 100 seconds. I would not say that this is a problem that requires HPC. I think that the advantages of this proposal should be tested on large artificial, or even better, real-world problems.}
+
+\textbf{ In addition, I miss some discussion about the relation between islands and diversity. Is this the main advantage of the proposal? Which is the migration ratio, how does this affect diversity and, hence, results?}
+
+\textbf{ Regarding the formula, which is supposed to be the main contribution, does it round or truncation (equation should be properly written)? How has it been calculated, has some regression model or similar technique been used? How does influence the size of the population (it is slower as the number of islands increases)? Why a fixed population is used throughout the experiments? Has it been set according to previous experiments?}
+
+\textbf{ I do not understand the sentence ``This can be explained because added migration latency... ''. I understand that both the previous model and the new one use synchronous migration and, therefore, I would say that this migration is done at the same steps of the execution. It should be better explained.}
+
+\textbf{ Authors claim that, for 2048, the best results for all the quality indicators are obtained by using overlapping. According to Table 3, the baseline approach shows clearly better Spread values, and it not that clear the A option to perform better.}
+
+\textbf{In summary, I think that the authors need to demonstrate that their strategy is valuable and that it can be helpful to improve the behavior of the algorithm, being competitive with state-of-the-art approaches.  As we are in the scope of HPC,  a large problem or problems should be used. In addition, many aspects of the paper should be explained more clearly.}
+
+
+
+\end{document}
