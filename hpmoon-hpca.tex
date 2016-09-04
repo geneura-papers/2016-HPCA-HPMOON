@@ -272,9 +272,9 @@ time: 25 seconds for dimension 512 and 100s (four times more) for
 because our hypothesis argues that the time saved in crossover and
 mutation can be spent on improving the sub-populations and more
 operations and migrations can be achieved. Also, we are using
-different number of islands (with different sub-population sizes) that
+different number of islands (with different sub-population sizes) and that
 could lead to different execution times, so it would be difficult to
-compare different times and quality solutions at the same time. 
+compare different times and quality of solutions at the same time. 
 
 \begin{table*}
 \begin{center}
@@ -309,10 +309,22 @@ LGPL V3 License
 The
 island model has been executed synchronously, using the ECJ Internal
 Island Model, in a CentOS 5.4 machine with Intel(R) Xeon(R) CPU E5520
-@2.27GHz, 16 GB RAM, with Java Version 1.6.0\_16.
+@2.27GHz, 16 GB RAM and Java Version 1.6.0\_16.
 
 
-Different metrics, explained in the previous section, have been used to calculate the quality of the obtained PFs in each configuration. As some of the metrics  (such as HV) require a reference point to be calculated, the point (1,9) has been chosen as reference, as none of the generated PFs in all runs are dominated by it. Metrics are then normalized with respect to that point. A Kruskall-Wallis significance test has been performed to the metrics of all runs of the configurations, as the Kolmogorov-Smirnov test detected non-normal distributions. The average results for each configuration are shown in Table \ref{tab:results512} (for 512 dimensions) and \ref{tab:results2048} (for 2048). As previously explained, when $P=8$ the results of A are equivalent to the obtained with D (because $c=0$), and when $P=16$ they are equivalent to O ($c=1$).
+Different metrics, explained in the previous section, have been used
+to calculate the quality of the obtained PFs in each configuration. As
+some of the metrics  (such as HV) require a reference point to be
+calculated, the point (1,9) has been chosen as reference, as none of
+the generated PFs in all runs are dominated by it. Metrics are then
+normalized with respect to that point. A Kruskall-Wallis significance
+test has been performed to the metrics of all runs of the
+configurations, as the Kolmogorov-Smirnov test detected non-normal
+distributions. The average results for each configuration are shown in
+Table \ref{tab:results512} (for 512 dimensions) and
+\ref{tab:results2048} (for 2048). As previously explained, when $P=8$
+the results of A are equivalent to the obtained with D (because
+$c=0$), and when $P=16$ they are equivalent to O ($c=1$). 
 
 
 \begin{table*}
@@ -322,7 +334,7 @@ Different metrics, explained in the previous section, have been used to calculat
 \hline
 	&	\multicolumn{4}{|c|}{HV}													&	\multicolumn{4}{|c|}{Spread}														&	\multicolumn{4}{|c|}{IGD}														\\ \hline
 %\multicolumn{13}{|c|}{2048 dimenOionO}																																													\\ \hline
-\#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A			&	B		&	D		&	O		&	A					\\ \hline
+\#Islands	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A			&	B		&	D		&	O		&	A					\\ \hline
 \multicolumn{13}{|c|}{ZDT1}																																													\\ \hline
 8	&	0.900		&	0.816		& \textbf{	0.926	}		&	Equiv. D			& \textbf{	0.729	}	&	1.041			&	0.898			&	Equiv. D			&	0.013		&	0.029		& \textbf{	0.007	}	&	Equiv. D					\\
 16	& \textbf{	0.880	}	&	0.675		&	0.839			&	Equiv. O			& \textbf{	0.721	}	&	0.897			&	0.983		D	&	Equiv. O			& \textbf{	0.017	}	&	0.062		&	0.025		&	Equiv. O					\\
@@ -513,12 +525,35 @@ Finally, as happened in \citep{Garcia16hpmoonANONYMOUS}, results show that all t
 
 \section{Conclusions}
 
-High-performance problems that require a large number of decision variables can leverage the division of the decision space that parallel and distributed algorithms imply. This can be done in dMOEAs by dividing the chromosome into different parts, each one modified by a different island. This paper compares a baseline distributed NSGA-II with three different strategies to separate the chromosome (disjoint or overlapping parts), using a high number of islands. Results show that these methods can achieve better quality metrics than the baseline in the same amount of time, with larger chromosome lengths.
+High-performance problems % problems are not high-performance. They
+                          % _require_ high performance
+ that require a large number of decision variables can leverage the
+ division of the decision space that parallel and distributed
+ algorithms imply. This can be done in dMOEAs by dividing the
+ chromosome into different parts, each one modified by a different
+ island. This paper compares a baseline distributed NSGA-II with three
+ different strategies to separate the chromosome (disjoint or
+ overlapping parts), using a high number of islands. Results show that
+ these methods can achieve better quality metrics than the baseline in
+ the same amount of time, with larger chromosome lengths. 
 
-Results also show that when increasing the number of islands, the adaptive overlapping method significantly improves the results with respect to the disjoint and overlapped methods. However, this is only apparent with larger chromosome sizes. Therefore, the length of the chromosome is also a key factor to take into account in adaptive methods, and not only the number of islands. Studying this factor with more types of problems, and new configurations of population size and chromosome lengths will be addressed in the future.%
-%
+Results also show that when increasing the number of islands, the
+adaptive overlapping method significantly improves the results with
+respect to the disjoint and overlapped methods. However, this is only
+apparent with larger chromosome sizes. Therefore, the length of the
+chromosome is also a key factor to take into account in adaptive
+methods, and not only the number of islands. Studying this factor with
+more types of problems, and new configurations of population size and
+chromosome lengths will be addressed in the future.% 
+% More discussion should be added. Why is adaptive better? Is the high
+% performance really needed? - JJ
 
-Also, more distributed implementations in several systems (such as a GPUs or heterogeneous clusters) with more different quantities of islands/processors, will be used to perform a scalability study of the different methods, being the transmission time between islands a relevant issue to address. Finally, new benchmarks and real problems will also be  used to validate this approach. 
+Also, more distributed implementations in several systems (such as a
+GPUs or heterogeneous clusters) with different amounts of
+islands/processors, will be used to perform a scalability study of the
+different methods, being the transmission time between islands a
+relevant issue to address. Finally, new benchmarks and real problems
+will also be  used to validate this approach.  
 
 
 
