@@ -146,7 +146,32 @@ is readily paralellizable and, in the sense of giving the
 responsibility of different parts of the search space to different
 modules, is similar to the one presented in this paper.
 
-In our previous work \citep{Garcia16hpmoonANONYMOUS} we used some of the previous ideas to compare two co-evolutionary dMOEAs. The first one divided the chromosome in $P$ sections, being $P$ the number of islands. Every island $p$ only performed the mutation and crossover in that part ($p_{th}$) of the chromosome, while the fitness was calculated using the whole individual. After a certain number of generations, individuals were migrated randomly to other islands. The performance metrics were calculated at the end of the run. The second method, coevolution with overlapping islands, used the $p_{th-1}$ and $p_{th+1}$ sections of each chromosome, besides the $p_{th}$ part. During the same amount of time both methods obtained better results than a baseline algorithm that dealt with the whole chromosome in each island for crossover and mutation. We discovered that the performance using one or another method depends on the number of sections of the individuals and the number of islands used. This motivates us to find a new adaptive method to select this number of sections of the chromosome to use, depending on the number of islands. Moreover, previous experiments were performed on a single processor synchronous island model with a limited number of islands (8, 32 and 128). In this paper,  8, 16, 32, 64 and 128 islands have been used, and this time, the experiments have been run on a real cluster. Therefore, at the same time we are proposing an adaptive method to divide the individual search space, we are validating the previous methods.
+% ¿Se podría mencionar por algún lado el trabajo en algoritmos de
+% hormigas paralelos de Antonio? - JJ
+In our previous work \citep{Garcia16hpmoonANONYMOUS} we used some of
+the aforementioned ideas to compare two co-evolutionary dMOEAs. The first
+one divided the chromosome in $P$ sections, being $P$ the number of
+islands. Every island $p$ only performed the mutation and crossover in
+that part ($p_{th}$) of the chromosome, while the fitness was
+calculated using the whole individual. After a certain number of
+generations, individuals were migrated randomly to other islands. The
+performance metrics were calculated at the end of the run. The second
+method, coevolution with overlapping islands, used the $p_{th-1}$ and
+$p_{th+1}$ sections of each chromosome, besides the $p_{th}$
+part. During the same amount of time both methods obtained better
+results than a baseline algorithm that dealt with the whole chromosome
+in each island for crossover and mutation. We discovered that the
+performance using one or another method depends on the number of
+sections of the individuals and the number of islands used. This
+motivates us to find a new adaptive method to select this number of
+sections of the chromosome to use, depending on the number of
+islands. Moreover, previous experiments were performed on a single
+processor synchronous island model with a limited number of islands
+(8, 32 and 128). In this paper,  8, 16, 32, 64 and 128 islands have
+been used, and this time, the experiments have been run on a real
+cluster. Therefore, at the same time we are proposing an adaptive
+method to divide the individual search space, we are validating the
+previous methods. 
 
 
 We will describe how we have tested our approach in the next Section.
@@ -241,7 +266,15 @@ ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely
 
 
 
-Termination criterion used has been the running time: 25 seconds for dimension 512 and 100 (four times more) for 2048. We have used the time instead the number of evaluations firstly because our hypothesis argue that the time saved in crossover and mutation can be spent on improving the sub-populations and more operations and migrations can be achieved. Also, we are using different number of islands (with different sub-population sizes) that could lead to different execution times, so it would be difficult to compare different times and quality solutions at the same time.
+The criterion used for terminating an experiment has been the running
+time: 25 seconds for dimension 512 and 100s (four times more) for
+2048. We have used time instead of the number of evaluations firstly
+because our hypothesis argues that the time saved in crossover and
+mutation can be spent on improving the sub-populations and more
+operations and migrations can be achieved. Also, we are using
+different number of islands (with different sub-population sizes) that
+could lead to different execution times, so it would be difficult to
+compare different times and quality solutions at the same time. 
 
 \begin{table*}
 \begin{center}
