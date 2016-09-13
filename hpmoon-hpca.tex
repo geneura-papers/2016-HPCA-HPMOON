@@ -18,9 +18,9 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 %\runninghead{Garc\'ia-S\'anchez et al.}
 \runninghead{anonymous}
-\title{Parallel Multi-objective optimization using co-evolutionary
+\title{Parallel multi-objective optimization using co-evolutionary
   islands and search space overlapping}
-% Why are you mixing caps and non-caps? - JJ
+% Why are you mixing caps and non-caps? - JJ Pablo: fixed
 
 %\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, \\Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
 \author{ANONYMOUS FOR BLIND REVIEW \affilnum{1}}
@@ -236,46 +236,49 @@ As in the previous method, the sections to address are overlapped, but instead u
 \end{figure*}
 % --------------------------------------------------------------
 
-\textcolor{red}{Pseudo-code of the proposed algorithms is described in Figure \ref{fig:pseudo}.}
+\textcolor{red}{Pseudo-code of the proposed algorithms is described in Algorithm \ref{fig:pseudo}.}
 
 \begin{algorithm}[htb]
 
 \begin{algorithmic}
-\STATE FOR EACH ISLAND
+\STATE \textit{//In each island $i$}
 \STATE population $\gets$ initialisePopulation()
+\STATE \textit{//Select which part modify in this island $i$}
+\STATE section $\gets$ getComponentsToModify($i$)
 \WHILE {stopping criterion not met}
-    \STATE parents $\gets$ selection(population)
-    \FOR each 2 chromosome in parents
-    	\STATE children  $\gets$ parents
-
-    \STATE offspring $\gets$ recombination(parents)
-    \STATE offspring $\gets$ mutation(offspring)
-    \STATE O $\gets$ offspring.size {\em //O is also equal to the number of parents selected}
+    \STATE parents $\gets$ nsgaSelection(population)
+    \FORALL{each 2 chromosome in parents}
+    	\STATE \textit{//Crossovers only the part for island $i$}
+    	\STATE children  $\gets$ crossover(parents,section)
+    	\STATE offspring $\gets$ offspring + children
+    \ENDFOR
+    \FORALL{chromosome in offspring}
+    	\IF {mutationProb $>$ random()}
+    		\STATE \textit{//Mutates only the part for island $i$}
+    		\STATE chromosome $\gets$ mutation(chromosome,section)
+    		\STATE offspring $\gets$ chromosome + offspring
+    	\ENDIF
+    \ENDFOR
     \STATE population $\gets$ population + offspring
     
+
     \IF {time to migrate}
-      \STATE migrants $\gets$ selectMigrants(population)
+      \STATE migrants $\gets$ binaryTournament(population)
+      \STATE remoteBuffer $\gets$ getRandomIslandBuffer()
       \STATE remoteBuffer.send(migrants)
     \ENDIF
 
     \IF {localBuffer.size $\neq$ zero}
       \STATE immigrants $\gets$ localBuffer.read()
-      \STATE I $\gets$ immigrants.size()
       \STATE population $\gets$ population + immigrants
     \ENDIF
-    
-    \IF {localBuffer.size $\neq$ zero}
-      \STATE population $\gets$ population + localBuffer.read()
-    \ENDIF
-    \STATE population $\gets$ population - population.getTheWorst(O + I)
 \ENDWHILE
 
-\STATE SEND FRONT TO SERVER
-\STATE RETURN NEW FRONT CO ALL ISLANDS
-
+\STATE sendIslandParetoFrontToServer()
+\STATE \textit{Final Pareto Front from all islands is returned by the server}
 \end{algorithmic}
 
-\caption{Pseudo-code of the used EA: a distributed NSGA-II algorithm }
+\caption{Pseudo-code of the used EA in every island: a distributed NSGA-II algorithm }
 \label{alg:EA}
 \end{algorithm}
 
