@@ -5,6 +5,8 @@
 
 
 \usepackage{moreverb,url,color}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
 \newcommand\BibTeX{{\rmfamily B\kern-.05em \textsc{i\kern-.025em b}\kern-.08em
@@ -234,6 +236,50 @@ As in the previous method, the sections to address are overlapped, but instead u
 \end{figure*}
 % --------------------------------------------------------------
 
+\textcolor{red}{Pseudo-code of the proposed algorithms is described in Figure \ref{fig:pseudo}.}
+
+\begin{algorithm}[htb]
+
+\begin{algorithmic}
+\STATE FOR EACH ISLAND
+\STATE population $\gets$ initialisePopulation()
+\WHILE {stopping criterion not met}
+    \STATE parents $\gets$ selection(population)
+    \FOR each 2 chromosome in parents
+    	\STATE children  $\gets$ parents
+
+    \STATE offspring $\gets$ recombination(parents)
+    \STATE offspring $\gets$ mutation(offspring)
+    \STATE O $\gets$ offspring.size {\em //O is also equal to the number of parents selected}
+    \STATE population $\gets$ population + offspring
+    
+    \IF {time to migrate}
+      \STATE migrants $\gets$ selectMigrants(population)
+      \STATE remoteBuffer.send(migrants)
+    \ENDIF
+
+    \IF {localBuffer.size $\neq$ zero}
+      \STATE immigrants $\gets$ localBuffer.read()
+      \STATE I $\gets$ immigrants.size()
+      \STATE population $\gets$ population + immigrants
+    \ENDIF
+    
+    \IF {localBuffer.size $\neq$ zero}
+      \STATE population $\gets$ population + localBuffer.read()
+    \ENDIF
+    \STATE population $\gets$ population - population.getTheWorst(O + I)
+\ENDWHILE
+
+\STATE SEND FRONT TO SERVER
+\STATE RETURN NEW FRONT CO ALL ISLANDS
+
+\end{algorithmic}
+
+\caption{Pseudo-code of the used EA: a distributed NSGA-II algorithm }
+\label{alg:EA}
+\end{algorithm}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%  EXPERIMENTS AND RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -257,6 +303,10 @@ This section describes the quality indicators used and the experimental setup. T
 
 
 These metrics have been used extensively, especially in some of the papers presented in Section 2.
+
+\subsection{Benchmark problems}
+\textcolor{red}{The first part of the experiments...}
+
 
 The previously described four approaches have been run with two different chromosome lengths ($L$): 512 and 2048. Different number of islands ($P$) have also been compared: 8, 16, 32, 64 and 128. This maximum number of islands have also been  used in previous work in the literature \citep{Martens13asynchronous}. The crossover and mutation chosen, SBX and polynomial, have also been  used previously by other authors in \citep{Durillo08masterslave}. 
 
@@ -503,7 +553,8 @@ This can be explained comparing the number of non-dominated solutions in each is
 
 Finally, as happened in \citep{Garcia16hpmoonANONYMOUS}, results show that all the quality indicators decrease when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
-
+\subsection{Real problem}
+\textcolor{red}{A real problem has also been used.}
 
 %Surprisingly, the average
 %number of solutions of PFs per island in the baseline configuration is significantly
