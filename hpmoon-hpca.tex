@@ -556,8 +556,39 @@ This can be explained comparing the number of non-dominated solutions in each is
 
 Finally, as happened in \citep{Garcia16hpmoonANONYMOUS}, results show that all the quality indicators decrease when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
-\subsection{Real problem}
-\textcolor{red}{A real problem has also been used.}
+\subsection{Real problem benchmark: Unsupervised Feature Selection}
+\textcolor{red}{A real problem has also been used to BLABLABLA. In this case, the problem used to solve is the unsupervised feature selection. A dataset formed by EEG signals from Brain Computer Interface (BCI) is used as a benchmark \cite{Kimovski15Parallel}, due to the required high computational cost and chromosome length. Individuals in this case are binary vectors indicating if a specific feature is selected or not. To evaluate a set of features different clustering validation indexes (CVIs) can be used.}
+
+\textcolor{red}{In this case, the two objectives to compare the three methods are the inter-cluster separation ($f1$) and the intra-cluster separation ($f2$). To obtain this measures, and after applying the projection to the dataset, a method based in the one presented  \cite{Kimovski15Parallel} is applied. Starting with a random value of the projection, the distance to the closer one is stored, and so on. After ordering these distances from lower to higher, we consider the intra-cluster distance ($f1$) as the one in the position 1/4 of the list, while the inter-cluster ($f2$) distance is in the position 3/4. The intra-cluster distance objective needs to be minimized, while the inter-cluster is maximized. Figure \ref{fig:cvis} explains this method using a extremely simplified example. Note that the goal of this paper is not obtain better CVI values than other methods, but to study the different overlapping schemes in parallel MOEAs.}
+
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{clusterCVI.pdf}
+\caption{\textcolor{red}{Method to calculate the two objectives for the Feature Selection problem. Starting from a random $d$ point of the projection of the features, the distance to the closer point is calculated iteratively. After ordering these distances, the one in the position 1/4 (a) is considered the intra-cluster distance, while the one in position 3/4 (b) is considered the inter-cluster one.}}
+\label{fig:cvis}
+\end{figure}
+
+
+\textcolor{red}{The Dataset used is ... Due to the high computational cost required for the fitness function, the running time for each run has been set to 4 hours, with two generations before sending the individual to another random island. Table \ref{tab:parametersBCI} summarizes the specific parameters for this experiment (the rest of the parameters are the same than the previous experiment, shown in Table \ref{tab:parameters} ). As there is no optimal PF known for this problem, we have used the paretos obtained from all runs to obtain the optimal PF to apply the IGD quality metric.}
+
+\textcolor{red}{
+\begin{table*}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+{\em Parameter Name} & {\em Value} \\ \hline
+Number of islands ($P$) & 8, 32 and 128 \\ \hline
+Chromosome size ($L$) & 3600 \\ \hline
+Crossover type & One-point \\ \hline
+Mutation  type & flip\\ \hline
+Generations between migration & 2 \\ \hline
+Runs per configuration & 10 \\ \hline
+\end{tabular}
+\caption{\textcolor{red}{Parameters and operators used in the experiments for Feature Selection problem (the rest of the parameters are the ones described in Table \ref{tab:parameters}).}}
+\label{tab:parametersBCI}
+\end{center}
+\end{table*}
+}
 
 %Surprisingly, the average
 %number of solutions of PFs per island in the baseline configuration is significantly
