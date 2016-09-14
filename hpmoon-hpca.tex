@@ -245,17 +245,27 @@ As in the previous method, the sections to address are overlapped, but instead u
 \STATE population $\gets$ initialisePopulation()
 \STATE \textit{//Select which part modify in this island $i$}
 \STATE section $\gets$ getComponentsToModify($i$)
+\IF {type = Baseline}
+	\STATE $c=P/2$
+\ELSIF {type = Disjoint}
+	\STATE $c=0$
+\ELSIF {type = Overlapping}
+	\STATE $c=1$
+\ELSIF {type = Adaptive}
+	\STATE $c=round(0.2*P-1)/2$
+\ENDIF
+
 \WHILE {stopping criterion not met}
     \STATE parents $\gets$ nsgaSelection(population)
     \FORALL{each 2 chromosome in parents}
-    	\STATE \textit{//Crossovers only the part for island $i$}
-    	\STATE children  $\gets$ crossover(parents,section)
+    	\STATE \textit{//Crossovers only the part for island $i$ (c components left and right)}
+    	\STATE children  $\gets$ crossover(parentA[i-c:i+c],parentB[i-c:i+c])
     	\STATE offspring $\gets$ offspring + children
     \ENDFOR
     \FORALL{chromosome in offspring}
     	\IF {mutationProb $>$ random()}
     		\STATE \textit{//Mutates only the part for island $i$}
-    		\STATE chromosome $\gets$ mutation(chromosome,section)
+    		\STATE chromosome $\gets$ mutation(chromosome[i-c:i+c])
     		\STATE offspring $\gets$ chromosome + offspring
     	\ENDIF
     \ENDFOR
