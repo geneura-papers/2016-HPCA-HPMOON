@@ -1,30 +1,7 @@
-% sage_latex_guidelines.tex V1.01, 11 June 2015
-
-%\documentclass[Afour,sagev,times]{sagej}
-\documentclass[Crown,sagev,times,doublespace]{sagej}
 
 
-\usepackage{moreverb,url,color}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
-\newcommand\BibTeX{{\rmfamily B\kern-.05em \textsc{i\kern-.025em b}\kern-.08em
-T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
-\def\volumeyear{2016}
-
-\begin{document}
-
-%\runninghead{Garc\'ia-S\'anchez et al.}
-\runninghead{anonymous}
-\title{Parallel multi-objective optimization using co-evolutionary
-  islands and search space overlapping}
-% Why are you mixing caps and non-caps? - JJ Pablo: fixed
-
-%\author{Pablo Garc\'ia-S\'anchez, Julio Ortega, Jes\'us Gonz\'alez, \\Pedro Angel Castillo and Juan Juli\'an Merelo\affilnum{1}}
-\author{ANONYMOUS FOR BLIND REVIEW \affilnum{1}}
-\affiliation{\affilnum{1} ANONYMOUS FOR BLIND REVIEW}
 %\affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
 
 %\corrauth{Pablo Garc\'ia-S\'anchez,
@@ -33,22 +10,43 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 %Universidad de Granada,
 %18071, Granada, Spain.}
 
-%\corrauth{ANONYMOUS FOR BLIND REVIEW.}
+\documentclass[preprint]{elsarticle}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage{moreverb,url,color}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{url}
+\usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
-%\email{pablogarcia@ugr.es}
-\email{anonymous}
+\begin{document}
+
+\begin{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Parallel multi-objective optimization using co-evolutionary
+  islands and search space overlapping}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{P. Garc\'ia-S\'anchez$^1$, J. Ortega$^2$, J. Gonz\'alez$^2$, P. A. Castillo$^2$ and J.J. Merelo$^2$}
+\ead{pablo.garciasanchez@uca.es, \{jortega, jgonzalez, pacv, jmerelo\}@ugr.es}
+\address{
+$^1$ Department of Computer Science and Engineering. ESI. University of C\'adiz, Spain\\
+$^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CITIC. University of Granada, Spain\\
+}
 
 
 \begin{abstract}
 Multi-objective optimization methods have gained interest in the last
 years because the performance they can achieve solving real-world
 problems. 
-% You can safely supress the sentence above - JJ
 Many of these problems usually require a high-dimensional
 decision space, and multi-objective Evolutionary Algorithms have been
-% random capitalization strikes back - JJ
 successfully used in the past. 
-% Another useless sentence - JJ
 Due to the large computational cost
 these algorithms require, different parallelization and distribution
 methods have been proposed, with different parallel and distributed
@@ -78,16 +76,15 @@ efficient alternative to distribute the decision variables.n
 \end{abstract}
 
 
+\begin{keyword}
+Multi-objective algorithms \sep NSGA-II \sep Island model \sep distributed evolutionary algorithms \sep coevolution
+\end{keyword}
+
+\end{frontmatter}
 
 
 
 
-
-
-
-\keywords{Multi-objective algorithms, NSGA-II, Island model, distributed evolutionary algorithms, coevolution}
-
-\maketitle
 
 \section{Introduction}
 
@@ -103,8 +100,8 @@ In our preliminary work in \citep{Garcia16hpmoonANONYMOUS} we tried to demonstra
 The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to the baseline, disjoint and partly overlapped methods. To demonstrate this, a new overlapping islands scheme has been compared with a baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a coevolutionary disjoint section approach, and a fixed-size overlapped method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
 
 The rest of the paper is organized as follows: after a background in parallelization in MOEAs, 
-the compared algorithms and the used methodology are presented. %PABLO: no puedo usar \ref{sec:met} porque la plantilla de esta revista no lo coge :/ (y además no tienen número)
-Then, the results of the experiments are shown, followed by conclusions and suggestions for future work lines.
+the compared algorithms and the used methodology are presented in Section \ref{sec:coevo}. %PABLO: no puedo usar \ref{sec:met} porque la plantilla de esta revista no lo coge :/ (y además no tienen número)
+Then, the results of the experiments are shown (Section \ref{sec:res}), followed by conclusions and suggestions for future work lines.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -236,7 +233,7 @@ As in the previous method, the sections to address are overlapped, but instead u
 \end{figure*}
 % --------------------------------------------------------------
 
-\textcolor{red}{Pseudo-code of the proposed algorithms is described in Algorithm \ref{fig:pseudo}.}
+Pseudo-code of the proposed algorithms is described in Algorithm \ref{fig:pseudo}.
 
 \begin{algorithm}[htb]
 
@@ -317,8 +314,7 @@ This section describes the quality indicators used and the experimental setup. T
 
 These metrics have been used extensively, especially in some of the papers presented in Section 2.
 
-\subsection{Benchmark problems}
-\textcolor{red}{The first part of the experiments...}
+%\subsection{Benchmark problems}
 
 
 The previously described four approaches have been run with two different chromosome lengths ($L$): 512 and 2048. Different number of islands ($P$) have also been compared: 8, 16, 32, 64 and 128. This maximum number of islands have also been  used in previous work in the literature \citep{Martens13asynchronous}. The crossover and mutation chosen, SBX and polynomial, have also been  used previously by other authors in \citep{Durillo08masterslave}. 
@@ -566,54 +562,43 @@ This can be explained comparing the number of non-dominated solutions in each is
 
 Finally, as happened in \citep{Garcia16hpmoonANONYMOUS}, results show that all the quality indicators decrease when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
-\subsection{Real problem benchmark: Unsupervised Feature Selection}
-\textcolor{red}{A real problem has also been used to BLABLABLA. In this case, the problem used to solve is the unsupervised feature selection. A dataset formed by EEG signals from Brain Computer Interface (BCI) is used as a benchmark \cite{Kimovski15Parallel}, due to the required high computational cost and chromosome length. Individuals in this case are binary vectors indicating if a specific feature is selected or not. To evaluate a set of features different clustering validation indexes (CVIs) can be used.}
 
-\textcolor{red}{In this case, the two objectives to compare the three methods are the inter-cluster separation ($f1$) and the intra-cluster separation ($f2$). To obtain this measures, and after applying the projection to the dataset, a method based in the one presented  \cite{Kimovski15Parallel} is applied. Starting with a random value of the projection, the distance to the closer one is stored, and so on. After ordering these distances from lower to higher, we consider the intra-cluster distance ($f1$) as the one in the position 1/4 of the list, while the inter-cluster ($f2$) distance is in the position 3/4. The intra-cluster distance objective needs to be minimized, while the inter-cluster is maximized. Figure \ref{fig:cvis} explains this method using a extremely simplified example. Note that the goal of this paper is not obtain better CVI values than other methods, but to study the different overlapping schemes in parallel MOEAs.}
+%%%%REAL PROBLEM
+%\subsection{Real problem benchmark: Unsupervised Feature Selection}
+%\textcolor{red}{A real problem has also been used to BLABLABLA. In this case, the problem used to solve is the unsupervised feature selection. A dataset formed by EEG signals from Brain Computer Interface (BCI) is used as a benchmark \cite{Kimovski15Parallel}, due to the required high computational cost and chromosome length. Individuals in this case are binary vectors indicating if a specific feature is selected or not. To evaluate a set of features different clustering validation indexes (CVIs) can be used.}
 
-\begin{figure}
-\centering
-\includegraphics[width=10cm]{clusterCVI.pdf}
-\caption{\textcolor{red}{Method to calculate the two objectives for the Feature Selection problem. Starting from a random $d$ point of the projection of the features, the distance to the closer point is calculated iteratively. After ordering these distances, the one in the position 1/4 (a) is considered the intra-cluster distance, while the one in position 3/4 (b) is considered the inter-cluster one.}}
-\label{fig:cvis}
-\end{figure}
+%\textcolor{red}{In this case, the two objectives to compare the three methods are the inter-cluster separation ($f1$) and the intra-cluster separation ($f2$). To obtain this measures, and after applying the projection to the dataset, a method based in the one presented  \cite{Kimovski15Parallel} is applied. Starting with a random value of the projection, the distance to the closer one is stored, and so on. After ordering these distances from lower to higher, we consider the intra-cluster distance ($f1$) as the one in the position 1/4 of the list, while the inter-cluster ($f2$) distance is in the position 3/4. The intra-cluster distance objective needs to be minimized, while the inter-cluster is maximized. Figure \ref{fig:cvis} explains this method using a extremely simplified example. Note that the goal of this paper is not obtain better CVI values than other methods, but to study the different overlapping schemes in parallel MOEAs.}
 
-
-\textcolor{red}{The Dataset used is ... Due to the high computational cost required for the fitness function, the running time for each run has been set to 4 hours, with two generations before sending the individual to another random island. Table \ref{tab:parametersBCI} summarizes the specific parameters for this experiment (the rest of the parameters are the same than the previous experiment, shown in Table \ref{tab:parameters} ). As there is no optimal PF known for this problem, we have used the paretos obtained from all runs to obtain the optimal PF to apply the IGD quality metric.}
-
-\textcolor{red}{
-\begin{table*}
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline
-{\em Parameter Name} & {\em Value} \\ \hline
-Number of islands ($P$) & 8, 32 and 128 \\ \hline
-Chromosome size ($L$) & 3600 \\ \hline
-Crossover type & One-point \\ \hline
-Mutation  type & flip\\ \hline
-Generations between migration & 2 \\ \hline
-Runs per configuration & 10 \\ \hline
-\end{tabular}
-\caption{\textcolor{red}{Parameters and operators used in the experiments for Feature Selection problem (the rest of the parameters are the ones described in Table \ref{tab:parameters}).}}
-\label{tab:parametersBCI}
-\end{center}
-\end{table*}
-}
-
-%Surprisingly, the average
-%number of solutions of PFs per island in the baseline configuration is significantly
-%higher in some configurations (mostly with 128 islands), but their
-%combination in the final PF never attains higher values than Disjoint
-%and Overlapping methods. 
+%\begin{figure}
+%\centering
+%\includegraphics[width=10cm]{clusterCVI.pdf}
+%\caption{\textcolor{red}{Method to calculate the two objectives for the Feature Selection problem. Starting from a random $d$ point of the projection of the features, the distance to the closer point is calculated iteratively. After ordering these distances, the one in the position 1/4 (a) is considered the intra-cluster distance, while the one in position 3/4 (b) is considered the inter-cluster one.}}
+%\label{fig:cvis}
+%\end{figure}
 
 
-%configurations, with respect to the baseline.  Paying attention to the disjoint and
-%overlapping methods, only when using 8 islands the disjoint method
-%always attain better metrics, and even more times with the 2048 chromosome
-%length. This can be explained because only 1/8 of the individual is
-%changed in each island, while in the overlapping, 3/8 of the island
-%may be more similar to the baseline configuration. 
-%
+%\textcolor{red}{The Dataset used is ... Due to the high computational cost required for the fitness function, the running time for each run has been set to 4 hours, with two generations before sending the individual to another random island. Table \ref{tab:parametersBCI} summarizes the specific parameters for this experiment (the rest of the parameters are the same than the previous experiment, shown in Table \ref{tab:parameters} ). As there is no optimal PF known for this problem, we have used the paretos obtained from all runs to obtain the optimal PF to apply the IGD quality metric.}
+
+%\textcolor{red}{
+%\begin{table*}
+%\begin{center}
+%\begin{tabular}{|c|c|}
+%\hline
+%{\em Parameter Name} & {\em Value} \\ \hline
+%Number of islands ($P$) & 8, 32 and 128 \\ \hline
+%Chromosome size ($L$) & 3600 \\ \hline
+%Crossover type & One-point \\ \hline
+%Mutation  type & flip\\ \hline
+%Generations between migration & 2 \\ \hline
+%Runs per configuration & 10 \\ \hline
+%\end{tabular}
+%\caption{\textcolor{red}{Parameters and operators used in the experiments for Feature Selection problem (the rest of the parameters are the ones described in Table \ref{tab:parameters}).}}
+%\label{tab:parametersBCI}
+%\end{center}
+%\end{table*}
+%}
+
+
 
 
 
@@ -652,14 +637,14 @@ will also be  used to validate this approach.
 
 
 
-\begin{acks}
+\section*{Acknowledgements}
 ANONYMOUS
 %This work has been partially funded by projects TIN2014-56494-C4-3-P y TIN2015-67020-P (Spanish Ministry of Economy and Competitivity), PROY-PP2015-06 (Plan Propio 2015 UGR),  and  MSTR (PRY142/14, Fundaci\'on P\'ublica Andaluza Centro de Estudios Andaluces en la IX Convocatoria de Proyectos de Investigaci\'on).
-\end{acks}
 
 
 
-\bibliographystyle{SageV}
+
+\bibliographystyle{elsarticle-num}
 
 \bibliography{hpmoon-hpca}
 %\begin{thebibliography}{99}
