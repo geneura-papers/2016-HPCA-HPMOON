@@ -1,0 +1,5 @@
+A study on methods to overlap the search space in distributed multi-objective evolutionary algorithms is carried out
+A new adaptive overlapping mechanism is presented
+Different combinations of number of islands, genome sizes, benchmarks and methods are used, comparing different quality metrics
+Results are validated in a real system
+All overlapping schemes outperform the baseline, being the adaptive method the one that obtains the best performance
