@@ -47,7 +47,7 @@ In this paper, a new method to automatically adapt the overlapping sections of t
 
 
 \begin{keyword}
-Multi-objective algorithms \sep NSGA-II \sep Island model \sep distributed evolutionary algorithms \sep coevolution
+Multi-objective algorithms \sep coevolution \sep NSGA-II  \sep distributed evolutionary algorithms \sep Island model
 \end{keyword}
 
 \end{frontmatter}
@@ -336,9 +336,9 @@ LGPL V3 License
 \footnote{\url{https://github.com/hpmoon/hpmoon-islands}}. 
 %\footnote{\url{https://ANONYMOUS-REPOSITORY}}. 
 The
-island model has been executed synchronously, using the ECJ Internal
-Island Model, in a CentOS 5.4 machine with Intel(R) Xeon(R) CPU E5520
-@2.27GHz, 16 GB RAM and Java Version 1.6.0\_16.
+island model has been executed asynchronously, using the ECJ distributed inter-population exchange
+ model, in a cluster of 16 nodes, each one with 16 Intel(R) Xeon(R) CPU E5520
+@2.27GHz processors, 16 GB RAM, Broadcom NetXtreme II BCM5716 1000Base-T (C0) PCI Express network cards, CentOS 6.8 and Java Version 1.8.0\_80. Islands have been first distributed among the nodes. That means that, for example, the run of 8 islands requires 8 different nodes, instead of the usage of the 8 processors of a single node.
 
 
 Different metrics, explained in the previous section, have been used
@@ -522,7 +522,7 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$).
 \end{table*}
 
 %DESCRIPTION OF THE RESULTS
-Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values better or significantly equal than the obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply these methods. This contradicts the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoon}, where the overlapping method obtained better results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes requires more time than the time saved during the crossover and migration.
+Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values better or significantly equal than the obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply these methods. This contradicts the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoon}, where the overlapping method obtained better results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes of the cluster requires more time than the time saved during the crossover and migration. This was not a problem in the mono-processor version, where the individuals shared the same memory space.
 
 However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the adaptive version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods. Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, besides depending on the number of islands and population size.
 
