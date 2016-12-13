@@ -192,7 +192,7 @@ each island.
 \end{figure*}
 
 \subsection{Adaptive coevolution with overlapping islands (A)} 
-As in the previous method, the sections to address are overlapped, but instead using one extra section on each side of the $p$ section ($p+1$ and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$), being $c$ a value depending on the number of islands. As a first approach to automatically calculate this value the results shown in \citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that work, the overlapped method ($c=1$) obtained better results when the number of islands were $>$8. So, we have used the formula $c=round(0.2*P-1)/2$ to calculate the extra sections to overlap. Therefore, when $P=8$ then $c=0$ (equivalent to D), when $P=16$ then $c=1$ (equivalent to O), and so on. Figure \ref{fig:adaptive} explains this method.
+As in the previous method, the sections to address are overlapped, but instead using one extra section on each side of the $p$ section ($p+1$ and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$), being $c$ a value depending on the number of islands. As a first approach to automatically calculate this value the results shown in \citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that work, the overlapped method ($c=1$) obtained better results when the number of islands were $>$8. On the contrary, when the number of islands is small, no overlapping is necessary. So, we have used this knowledge to create the formula $c=round(0.2*P-1)/2$ to calculate the extra sections to overlap. Therefore, when $P=8$ then $c=0$ (equivalent to D), when $P=16$ then $c=1$ (equivalent to O), and so on. Figure \ref{fig:adaptive} explains this method.
 
 \begin{figure*}
 \centering
@@ -282,7 +282,7 @@ This section describes the quality indicators used and the experimental setup. T
 \end{figure}
 
 
-These metrics have been used extensively, especially in some of the papers presented in Section 2.
+We have chosen those metrics because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}.
 
 %\subsection{Benchmark problems}
 
