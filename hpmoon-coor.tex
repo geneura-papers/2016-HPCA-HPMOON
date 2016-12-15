@@ -67,11 +67,11 @@ alternatives. In \citep{Dorronsoro13superlinear}, a distributed coevolutionary i
 In our preliminary work in \citep{Garcia16hpmoon} we tried to demonstrate that, instead focus every island in a disjoint subset of the chromosome, the usage of overlapped (shared) sections of the chromosome in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time when the number of islands increases. We discovered that the most adequate overlapping size may vary depending on a relation between the number of islands and the individual size. Moreover, the experiments were conducted in a mono-processor and synchronous island model. This motivates us to continue this research line, but this time, proposing a new method to automatically adapt the size of the overlapped sections, but also, performing all the experiments in a real cluster with up to 128 nodes, with extra number of islands.
 
 
-The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to the baseline, disjoint and partly overlapped methods. To demonstrate this, a new overlapping islands scheme has been compared with a baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a coevolutionary disjoint section approach, and a fixed-size overlapped method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
+The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to the baseline, disjoint and partly overlapped methods. To demonstrate this, different overlapping islands schemes have been compared: a baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a coevolutionary disjoint section approach version of it, a fixed-size overlapped version and our new adaptive method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
 
-The rest of the paper is organized as follows: after a background in parallelization in MOEAs, 
-the compared algorithms and the used methodology are presented in Section \ref{sec:coevo}. %PABLO: no puedo usar \ref{sec:met} porque la plantilla de esta revista no lo coge :/ (y además no tienen número)
-Then, the results of the experiments are shown (Section \ref{sec:res}), followed by conclusions and suggestions for future work lines.
+The rest of the paper is organized as follows: after the State of the Art in distributed and coevolutionary MOEAs, 
+the used methodology and the compared algorithms are described in Section \ref{sec:coevo}. 
+Then, the results of the experiments are presented (Section \ref{sec:res}), Finally, the conclusions and future work are discussed.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,35 +88,28 @@ Since the early 2000s, the distributed and parallel Evolutionary Algorithms have
 
 To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches: synchronous generational, asynchronous generational and asynchronous steady-state, being the latter the most promising option. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power.
 
-The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of solutions was divided into the islands using a transformation of coordinates. Their authors concluded that dividing the search space is a good idea, but achieve this is not trivial. Other approaches for dividing the search space include objective separation in different processors \citep{Xiao03specialized}, or divide in two populations: one for elite and other search \citep{Wang09parallel}. Martens, in \citep{Martens13asynchronous} generated a Barabasi-Albert network as the island topology, and selection based on migrating individuals from a not-crowded area and acceptance based on diversity. 
+The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. Their authors concluded that dividing the search space is a good idea, although achieve this is not trivial. Dividing the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separation in processors by objective \citep{Xiao03specialized}. Other authors, such as Martens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
 
 
-More similar approaches to the one presented here were studied in the
-next two works, also using cooperative coevolution for high-dimensional problems. 
-Dorronsoro et al. \citep{Dorronsoro13superlinear} obtained super-linear performance
-in several instances using cooperative coevolution, focusing each island on a portion of the chromosome. However, in some instances the parallel version 
-improved the sequential version. Kimovski et al. \citep{Kimovski15Parallel} proposed a
-master-slave method that splits the population into several processors,
-each one running in parallel a MOEA that only affects some portion of
-the individuals. After a certain number of generations, the master
-process receives all the sub-populations to be combined. Different
-combination alternatives in this step are compared. Up to 8 processors
-were used in the experimental setup. Our approach in this paper does not
-broadcast all solutions to all islands for recombination, as previous
-works, but only one solution to a random island, needing less
-communication time. Besides, the maximum number of islands of
-Dorronsoro or Kimovsky approaches was 8, while in this paper we have
+
+Addressing high-dimensional problems with cooperative coevolution has also been studied in several works with approaches more similar to the one presented here.
+The approach to focus on a portion of the chromosome, as in our overlapped method, was firstly used in the work by Dorronsoro et al. \citep{Dorronsoro13superlinear}, obtaining super-linear performance
+in several instances. This approach has also been used by Kimovski et al. \citep{Kimovski15Parallel}, but using a
+master-slave method that splits the population into several processors. As in previous work, each node
+runs a parallel MOEA that only affects some portion of 
+the individuals and the master
+process receives all the sub-populations to be combined every certain number of generations. Up to 8 processors
+were used in the experimental setup, and several
+combination alternatives were compared. The main difference of our work with respect to previous works is that our approach does not 
+broadcast all solutions to all islands for recombination, but only one solution to a random island, needing less
+communication time. Moreover, Dorronsoro or Kimovsky approaches limited the maximum number of islands to 8, while in this paper we have
 used up to 128 islands. 
 
-Lately, some researchers \citep{cheng2015adaptive} have focused on
-working on solution space, dividing the Pareto front in different
-clusters in order to model it. This {\em divide and conquer} approach
-is readily paralellizable and, in the sense of giving the
-responsibility of different parts of the search space to different
-modules, is similar to the one presented in this paper.
+
+Giving the responsibility of different parts of the search space to different modules, has also been explored lately by some researchers. For example, some authors focus on the solution space modeling the PF by dividing it in different clusters, allowing an easily parallelizable {\em divide and conquer} approach \citep{cheng2015adaptive}. Even other types of metaheuristics, such as the Multi-Objective Ant Colony Optimization (MOACO), can rely on island models to divide the search space depending on the node to achieve better results \cite{Mora13Moacos}.
 
 % ¿Se podría mencionar por algún lado el trabajo en algoritmos de
-% hormigas paralelos de Antonio? - JJ
+% hormigas paralelos de Antonio? - JJ Fergu: DONE
 In our previous work \citep{Garcia16hpmoon} we used some of
 the aforementioned ideas to compare two co-evolutionary dMOEAs. The first
 one divided the chromosome in $P$ sections, being $P$ the number of
@@ -134,7 +127,7 @@ performance using one or another method depends on the number of
 sections of the individuals and the number of islands used. This
 motivates us to find a new adaptive method to select this number of
 sections of the chromosome to use, depending on the number of
-islands. Moreover, previous experiments were performed on a single
+islands. Besides, previous experiments were performed on a single
 processor synchronous island model with a limited number of islands
 (8, 32 and 128). In this paper,  8, 16, 32, 64 and 128 islands have
 been used, and this time, the experiments have been run on a real
@@ -167,7 +160,7 @@ Different coevolutionary alternatives can be devised to evolve the subpopulation
 %This method will be compared to different coevolutionary approaches that are similar to the baseline, with the exception on the decision space to explore in each island.
 %Three different coevolutionary methods have been used. In all these methods, each island only performs crossover and mutation in specific sections of the individuals.
 
-As in the baseline, every certain number of generations, an individual is migrated to another random island.  In the new island, this individual will be considered as one of the others in the island, crossed and mutated in the same way, depending on the island identifier. Note that, on the contrary of other works such as the ones described by Talbi et al. \citep{Talbi08Parallel} all the islands deal with complete chromosomes for fitness calculation, so our approach can deal with no decomposable problems. The proposed methods  are as follows:
+As in the baseline (B), an individual is migrated to another random island after a fixed number of generations. In the new island, this individual will be considered as one of the others in the island, crossed and mutated in the same way, depending on the island identifier. Note that, on the contrary of other works such as the ones described by Talbi et al. \citep{Talbi08Parallel} all the islands deal with complete chromosomes for fitness calculation, so our approach can deal with no decomposable problems. The proposed methods for our experimental section are as follows:
 
 \subsection{Coevolution with disjoint islands (D)} 
 In this approach, each individual of size $L$ is split into $P$ chunks of size $L/P$. Every island $p$ only performs crossover and mutation on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint} describes this approach.  
@@ -203,7 +196,7 @@ As in the previous method, the sections to address are overlapped, but instead u
 \end{figure*}
 % --------------------------------------------------------------
 
-Pseudo-code of the proposed algorithms is described in Algorithm \ref{fig:pseudo}.
+Pseudo-code of the proposed algorithms is described in Algorithm \ref{alg:EA}.
 
 \begin{algorithm}[htb]
 
@@ -310,19 +303,19 @@ compare different times and quality of solutions at the same time.
 \begin{tabular}{|c|c|}
 \hline
 {\em Parameter Name} & {\em Value} \\ \hline
-Number of islands ($P$) & 8, 16, 32, 64 and 128 \\ \hline
-Chromosome size ($L$) & 512 and 2048 \\ \hline
-Execution time (s) & 25 (for 512) and 100 (for 2048) \\ \hline \hline
 Global population size ($N$) & 1024 \\ \hline
 Selection type & Binary Tournament Selection \\ \hline
 Replacement type & Generational \\ \hline 
 Crossover type & SBX \\ \hline
 Mutation  type & Polynomial\\ \hline
 Mutation probability & 1/$L$ \\ \hline
-Generations between migration & 5 \\ \hline
 Individuals per migration & 1 \\ \hline
+Generations between migration & 5 \\ \hline
 Selection for migration & Binary Tournament\\ \hline
-Runs per configuration & 30 \\ \hline
+Runs per configuration & 30 \\ \hline \hline
+Number of islands ($P$) & 8, 16, 32, 64 and 128 \\ \hline
+Chromosome size ($L$) & 512 and 2048 \\ \hline
+Execution time (s) & 25 (for 512) and 100 (for 2048) \\ \hline \hline
 \end{tabular}
 \caption{Parameters and operators used in the experiments.}
 \label{tab:parameters}
