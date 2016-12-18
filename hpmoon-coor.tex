@@ -26,6 +26,7 @@
 \title{Parallel multi-objective optimization using co-evolutionary
   islands with overlapping search space}
 % New title suggestion
+% Should coevolutionary go somewhere? Are they coevolutionary? - jj
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -111,9 +112,9 @@ results to accurately identify the PF
 
 The application of MOEAs to solve real-world problems have gained attention in the last years \citep{Luna15Survey,Mukhopadhyay14Survey,Chavez15MO,Hidalgo16residualstress}. These kind of problems requires a high number of variables, meaning that the EAs need to deal with large individuals and spent significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional problems \citep{Gong15models,Tonda12cooperative}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
 alternatives. In \citep{Dorronsoro13superlinear}, a distributed
-coevolutionary island model was used.  Although in both previous works
+coevolutionary island model was used.  Although in both papers
 significant speedups were attained, only a low number of nodes were
-used (8). However, when increasing the number of islands, the division
+employed (8). However, when the number of islands is increased, the division
 of each section of the chromosome becomes smaller, and the scalability
 may be affected by obtaining lower quality solutions in the same
 amount of time. 
@@ -133,7 +134,7 @@ a new method that automatically adapts the size of the overlapped
 sections. In order to test the validity of the method we have made
 tests in a real cluster
 with up to 128 nodes, with extra number of islands. % We have to
-                                % enphatize what is actually done. Is
+                                % emphasize what is actually done. Is
                                 % this an addition to the old paper,
                                 % or a complete rewrite? - JJ
 
@@ -267,7 +268,14 @@ We will describe how we have tested our approach in the next Section.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  METHODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{Coevolutionary algorithms compared}
+\section{Coevolutionary algorithms compared} % This should be called
+                                % methodology. The object of the
+                                % section is to explain the
+                                % methodology used to test the
+                                % problem, in order to do that we have
+                                % tested different versions that prove
+                                % that our methodology works for the
+                                % precise reasons we think it works- JJ
 \label{sec:coevo}
 
 In this paper we analyse several coevolutionary algorithms we have
@@ -303,10 +311,25 @@ individuals.
 %This method will be compared to different coevolutionary approaches that are similar to the baseline, with the exception on the decision space to explore in each island.
 %Three different coevolutionary methods have been used. In all these methods, each island only performs crossover and mutation in specific sections of the individuals.
 
-As in the baseline (B), an individual is migrated to another random island after a fixed number of generations. In the new island, this individual will be considered as one of the others in the island, crossed and mutated in the same way, depending on the island identifier. Note that, on the contrary of other works such as the ones described by Talbi et al. \citep{Talbi08Parallel} all the islands deal with complete chromosomes for fitness calculation, so our approach can deal with no decomposable problems. The proposed methods for our experimental section are as follows:
+As in the baseline (B), an individual is migrated to another random
+island after a fixed number of generations. In the new island, this
+individual will be considered as one of the others in the island,
+crossed and mutated in the same way, depending on the island
+identifier. Note that, differently from other works such as the ones
+described by Talbi et al. \citep{Talbi08Parallel} all the islands deal
+with complete chromosomes for fitness calculation, so our approach can
+deal with no decomposable problems. %Don't understand what you say
+                                %here. What you are saying is that our
+                                %approach can't deal with decomposable
+                                %problems, actually. - JJ
+
+The methods we have tested are presented in the next subsections. 
 
 \subsection{Coevolution with disjoint islands (D)} 
-In this approach, each individual of size $L$ is split into $P$ chunks of size $L/P$. Every island $p$ only performs crossover and mutation on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint} describes this approach.  
+In this approach, each individual of size $L$ is split into $P$ chunks
+of size $L/P$. Every island $p$ only performs crossover and mutation
+on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint}
+describes this approach.   
 %
 \begin{figure*}[h!tb]
 \centering
@@ -331,7 +354,9 @@ each island.
 As in the previous method, the sections to address are overlapped, but
 instead using one extra section on each side of the $p$ section ($p+1$
 and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$),
-being $c$ a value depending on the number of islands. As a first
+being $c$ a value depending on the number of islands.
+% That's not adaptive. It's simply variable - JJ
+As a first
 approach to automatically calculate this value the results shown in
 \citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that
 work, the overlapped method ($c=1$) obtained better results when the
