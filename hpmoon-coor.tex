@@ -83,7 +83,17 @@ Multi-objective algorithms \sep coevolution \sep NSGA-II  \sep distributed evolu
 
 %Introduction should start in the same way as the abstract. And
 %starting with something that is not really applicable here, talking
-%about general parallel evolutionary algorithms, is even worse - JJ
+%about general parallel evolutionary algorithms, is even worse.
+% Right way (IMNSHO)
+% 1. Multiobjective problems are
+% 2. They usually require a good amount of computation → parallel
+% distributed
+% 3. One way to solve them is to use MOEAs _because_ they can be
+% easily parallelized
+% 4. But the easy paralellization is not necessarily efficient.
+% 5. We have proposed the HPMOON (or whatever) technique to improve
+% it. In paper (whatever) we proved that (whatever)
+% 6. In this paper we will be proving whatever - JJ
 Different approaches have been used to parallelize Evolutionary
 Algorithms (EAs), as each individual can be considered as an
 independent unit \citep{Alba13parallel}. Classic methods, such as the
@@ -92,7 +102,7 @@ algorithms (Island model or Cellular EAs) have been applied
 successfully in the past \citep{Folino03cellular,Alba02Parallelism}.
 In the case of Multi-Objective Evolutionary Algorithms (MOEAs), these
 approaches \citep{Luna15Survey} need to deal with a whole solution set
-called Pareto Front (PFs). This imply to use different distribution
+called Pareto Front (PF). This imply to use different distribution
 and sharing mechanisms, as there exist a tension between the speedup
 achievable from parallelization and the need to globally recombine the
 results to accurately identify the PF
@@ -180,6 +190,9 @@ referenced MOEAs \citep{Dorronsoro13superlinear} is the {\em
 the individuals, and divided into different ranks (based on the
 dominance) to be selected for the next generations. 
 
+% Parallel multiobjective optimization is the theme. And there are
+% papers that do that. Please include them in the state of the art:
+% dennis2003parallel (added to bibliography). 
 
 Since the early 2000s distributed and parallel Evolutionary
 Algorithms have been used mostly to leverage systems such
