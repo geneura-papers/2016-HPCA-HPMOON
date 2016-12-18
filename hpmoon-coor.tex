@@ -206,12 +206,18 @@ algorithm a whole set of dependent solutions, the Pareto Front, should
 be managed as a whole, spending time in gathering all individuals from
 the different processors or islands. 
 
-To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches: synchronous generational, asynchronous generational and asynchronous steady-state, being the latter the most promising option. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power.
+To solve this issue, some authors have proposed using Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches: synchronous generational, asynchronous generational and asynchronous steady-state, being the latter the most promising option. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power.
 
+%This is an improvement over the previous? What is the relationship?
 The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. Their authors concluded that dividing the search space is a good idea, although achieve this is not trivial. Dividing the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separation in processors by objective \citep{Xiao03specialized}. Other authors, such as Martens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
 
-Addressing high-dimensional problems with cooperative coevolution has also been studied in several works with approaches more similar to the one presented here.
-The approach to focus on a portion of the chromosome, as in our overlapped method, was firstly used in the work by Dorronsoro et al. \citep{Dorronsoro13superlinear}, obtaining super-linear performance
+% Is this really cooperative coevolution? - JJ
+Addressing high-dimensional problems with cooperative coevolution has
+also been studied in several works with approaches closer to the one
+presented here. The approach to focus on a portion of the chromosome,
+as in our overlapped method, was firstly used in the work by
+Dorronsoro et al. \citep{Dorronsoro13superlinear}, obtaining
+super-linear performance 
 in several instances. This approach has also been used by Kimovski et al. \citep{Kimovski15Parallel}, but using a
 master-slave method that splits the population into several processors. As in previous work, each node
 runs a parallel MOEA that only affects some portion of 
