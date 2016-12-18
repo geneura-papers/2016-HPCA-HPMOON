@@ -38,9 +38,34 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 
 
 \begin{abstract}
-Multi-objective optimization methods have gained interest in the last years because the performance they can achieve solving real-world problems. Many of these problems usually require a high-dimensional decision space, and multi-objective Evolutionary Algorithms have been successfully used in the past. Due to the large computational cost these algorithms require, different parallelization and distribution methods have been proposed, with different parallel and distributed computer architectures to cope with them. One of the most extended methods are the distributed co-evolutionary algorithms, where each processor deals only with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables. These subsets are usually disjoint sets.
-
-In our previous work we demonstrated that extending the length of these subsets, and therefore, sharing some search space between islands, implies an improvement in the results. In this paper, a new method to automatically adapt the size of the overlapping, or shared, sections of the individuals has been compared to other collaborative evolutionary techniques. Different number of islands, chromosome sizes and problems have been used. The analysis of the obtained experimental results, by using different metrics, shows that coevolutionary approaches can provide statistically significant improvements with respect to the base algorithm, being the method to automatically adapt the overlapping size the one to obtain the best performance during the same execution time. Results also show that the relation of the number of islands (subpopulations) to the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables.
+  % First, state the problem!!!! - JJ
+Multi-objective optimization methods have gained interest in the last
+years because of the performance they can achieve solving real-world
+problems. Many of these problems usually require a high-dimensional
+decision space, and multi-objective Evolutionary Algorithms have been
+successfully used in the past. Due to the large computational cost
+these algorithms require, different parallelization and distribution
+methods have been proposed, with different parallel and distributed
+computer architectures to cope with them. One of the most extended
+methods are the distributed co-evolutionary algorithms, where each
+processor deals only with a part of the decision space, that is, the
+individuals belonging to the same sub-population (island) explore the
+same subset of decision variables. These subsets are usually disjoint
+sets. We have previously proved that extending the length of these
+subsets, and therefore, sharing some search space between islands,
+implies an improvement in the results. In this paper, a new method to
+automatically adapt the size of the overlapping, or shared, sections
+of the individuals has been compared to other collaborative
+evolutionary techniques. Different number of islands, chromosome sizes
+and problems have been used. The analysis of the obtained experimental
+results, by using different metrics, shows that coevolutionary
+approaches can provide statistically significant improvements with
+respect to the base algorithm, being the method to automatically adapt
+the overlapping size the one to obtain the best performance during the
+same execution time. Results also show that the relation of the number
+of islands (subpopulations) to the length of the chromosome (number of
+decision variables) is also a relevant factor to determine the most
+efficient alternative to distribute the decision variables. 
 \end{abstract}
 
 
@@ -56,16 +81,73 @@ Multi-objective algorithms \sep coevolution \sep NSGA-II  \sep distributed evolu
 
 \section{Introduction}
 
-Different approaches have been used to parallelize Evolutionary Algorithms (EAs), as each individual can be considered as an independent unit \citep{Alba13parallel}. Classic methods, such as the global parallel EAs (Master-Slave), or the spatially structured algorithms (Island model or Cellular EAs) have been applied successfully in the past \citep{Folino03cellular,Alba02Parallelism}.  In the case of Multi-Objective Evolutionary Algorithms (MOEAs), these approaches \citep{Luna15Survey} need to deal with a whole solution set called Pareto Front (PFs). This imply to use different distribution and sharing mechanisms, as there exist a tension between the speedup achievable from parallelization and the need to globally recombine the results to accurately identify the PF \citep{Branke04Parallelizingcone}.
+%Introduction should start in the same way as the abstract. And
+%starting with something that is not really applicable here, talking
+%about general parallel evolutionary algorithms, is even worse - JJ
+Different approaches have been used to parallelize Evolutionary
+Algorithms (EAs), as each individual can be considered as an
+independent unit \citep{Alba13parallel}. Classic methods, such as the
+global parallel EAs (Master-Slave), or the spatially structured
+algorithms (Island model or Cellular EAs) have been applied
+successfully in the past \citep{Folino03cellular,Alba02Parallelism}.
+In the case of Multi-Objective Evolutionary Algorithms (MOEAs), these
+approaches \citep{Luna15Survey} need to deal with a whole solution set
+called Pareto Front (PFs). This imply to use different distribution
+and sharing mechanisms, as there exist a tension between the speedup
+achievable from parallelization and the need to globally recombine the
+results to accurately identify the PF
+\citep{Branke04Parallelizingcone}. 
 
 
 The application of MOEAs to solve real-world problems have gained attention in the last years \citep{Luna15Survey,Mukhopadhyay14Survey,Chavez15MO,Hidalgo16residualstress}. These kind of problems requires a high number of variables, meaning that the EAs need to deal with large individuals and spent significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional problems \citep{Gong15models,Tonda12cooperative}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
-alternatives. In \citep{Dorronsoro13superlinear}, a distributed coevolutionary island model was used.  Although in both previous works significant speedups were attained, only a low number of nodes were used (8). However, when increasing the number of islands, the division of each section of the chromosome becomes smaller, and the scalability may be affected by obtaining lower quality solutions in the same amount of time.
+alternatives. In \citep{Dorronsoro13superlinear}, a distributed
+coevolutionary island model was used.  Although in both previous works
+significant speedups were attained, only a low number of nodes were
+used (8). However, when increasing the number of islands, the division
+of each section of the chromosome becomes smaller, and the scalability
+may be affected by obtaining lower quality solutions in the same
+amount of time. 
 
-In our preliminary work in \citep{Garcia16hpmoon} we tried to demonstrate that, instead focus every island in a disjoint subset of the chromosome, the usage of overlapped (shared) sections of the chromosome in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time when the number of islands increases. We discovered that the most adequate overlapping size may vary depending on a relation between the number of islands and the individual size. Moreover, the experiments were conducted in a mono-processor and synchronous island model. This motivates us to continue this research line, but this time, proposing a new method to automatically adapt the size of the overlapped sections, but also, performing all the experiments in a real cluster with up to 128 nodes, with extra number of islands.
+In our preliminary work \citep{Garcia16hpmoon} we tried to demonstrate
+% tried to or actually did it? What did we prove? 
+that,  instead of making every island focus in a disjoint subset of the
+chromosome, the usage of overlapped (shared) sections of the
+chromosome in a coevolutionary multi-objective island-based algorithm
+can improve the quality of the solutions in the same computing time
+when the number of islands increases. We discovered that the most
+adequate overlapping size may vary depending on a relation between the
+number of islands and the individual size. Moreover, the experiments
+were conducted in a mono-processor and synchronous island model. This
+motivates us to continue this research line; in this paper we propose
+a new method that automatically adapts the size of the overlapped
+sections. In order to test the validity of the method we have made
+tests in a real cluster
+with up to 128 nodes, with extra number of islands. % We have to
+                                % enphatize what is actually done. Is
+                                % this an addition to the old paper,
+                                % or a complete rewrite? - JJ
 
 
-The hypothesis of this paper is that using overlapped sections of the chromosome, calculated depending the number of islands to use, in a coevolutionary multi-objective island-based algorithm can improve the quality of the solutions in the same computing time with respect to the baseline, disjoint and partly overlapped methods. To demonstrate this, different overlapping islands schemes have been compared: a baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a coevolutionary disjoint section approach version of it, a fixed-size overlapped version and our new adaptive method. Different benchmarks problems and different large number of islands have been used. Results show that this new technique can improve different quality indicators in the same amount of time when the problem size is large. 
+The hypothesis of this paper is that using overlapped sections of the
+chromosome, calculated depending the number of islands to use, in a
+coevolutionary multi-objective island-based algorithm can improve the
+quality of the solutions in the same computing time with respect to
+the baseline, disjoint and partly overlapped methods. %That was the
+                                %hypothesis of the previous
+                                %paper. This paper has a new
+                                %hypothesis, right? - JJ
+In order to prove this claim, our new adaptive method has been
+compared different overlapping islands schemes have been compared: a
+baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a
+coevolutionary disjoint section approach version of it and a
+fixed-size overlapped version. %What was done in the previous paper?
+                               %Are we re-using the results in that
+                               %paper? - JJ
+Different benchmark problems and different large number of islands
+have been used. Results show that this new technique can improve
+different quality indicators in the same amount of time when the
+problem size is large.  % Shouldn't this start with "We are trying to
+                        % prove..." - JJ
 
 The rest of the paper is organized as follows: after the State of the Art in distributed and coevolutionary MOEAs, 
 the used methodology and the compared algorithms are described in Section \ref{sec:coevo}. 
@@ -87,8 +169,6 @@ Since the early 2000s, the distributed and parallel Evolutionary Algorithms have
 To solve this issue, some authors have proposed the usage of Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches: synchronous generational, asynchronous generational and asynchronous steady-state, being the latter the most promising option. The method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power.
 
 The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. Their authors concluded that dividing the search space is a good idea, although achieve this is not trivial. Dividing the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separation in processors by objective \citep{Xiao03specialized}. Other authors, such as Martens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
-
-
 
 Addressing high-dimensional problems with cooperative coevolution has also been studied in several works with approaches more similar to the one presented here.
 The approach to focus on a portion of the chromosome, as in our overlapped method, was firstly used in the work by Dorronsoro et al. \citep{Dorronsoro13superlinear}, obtaining super-linear performance
@@ -162,8 +242,8 @@ As in the baseline (B), an individual is migrated to another random island after
 
 \subsection{Coevolution with disjoint islands (D)} 
 In this approach, each individual of size $L$ is split into $P$ chunks of size $L/P$. Every island $p$ only performs crossover and mutation on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint} describes this approach.  
-
-\begin{figure*}
+%
+\begin{figure*}[h!tb]
 \centering
 \includegraphics[width=12cm]{islandDisjoint.jpg}
 \caption{Disjoint algorithm: every island $p$ only modifies the $p_{th}$ components (in grey) of the individuals.}
@@ -174,7 +254,7 @@ In this approach, each individual of size $L$ is split into $P$ chunks of size $
 This approach is similar to the previous one, but every island also uses the $p+1$ and $p-1$ (module size) chunks of the individual for crossover and migration. Therefore, some kind of overlapping of the crossed and mutated parts exists between islands. Figure \ref{fig:overlapping} shows the affected parts of the individuals in
 each island. 
 
-\begin{figure*}
+\begin{figure*}[h!tb]
 \centering
 \includegraphics[width=12cm]{islandNoDisjoint.jpg}
 \caption{Overlapping algorithm: every island $p$ modifies the  $p+1$,
@@ -183,9 +263,21 @@ each island.
 \end{figure*}
 
 \subsection{Adaptive coevolution with overlapping islands (A)} 
-As in the previous method, the sections to address are overlapped, but instead using one extra section on each side of the $p$ section ($p+1$ and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$), being $c$ a value depending on the number of islands. As a first approach to automatically calculate this value the results shown in \citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that work, the overlapped method ($c=1$) obtained better results when the number of islands were $>$8. On the contrary, when the number of islands is small, no overlapping is necessary. So, we have used this knowledge to create the formula $c=round(0.2*P-1)/2$ to calculate the extra sections to overlap. Therefore, when $P=8$ then $c=0$ (equivalent to D), when $P=16$ then $c=1$ (equivalent to O), and so on. Figure \ref{fig:adaptive} explains this method.
+As in the previous method, the sections to address are overlapped, but
+instead using one extra section on each side of the $p$ section ($p+1$
+and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$),
+being $c$ a value depending on the number of islands. As a first
+approach to automatically calculate this value the results shown in
+\citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that
+work, the overlapped method ($c=1$) obtained better results when the
+number of islands were $>$8. On the contrary, when the number of
+islands is small, no overlapping is necessary. So, we have used this
+knowledge to create the formula $c=round(0.2*P-1)/2$ to calculate the
+extra sections to overlap. Therefore, when $P=8$ then $c=0$
+(equivalent to D), when $P=16$ then $c=1$ (equivalent to O), and so
+on. Figure \ref{fig:adaptive} explains this method. 
 
-\begin{figure*}
+\begin{figure*}[h!tb]
 \centering
 \includegraphics[width=12cm]{islandAdaptive.jpg}
 \caption{Adaptive overlapping algorithm: every island $p$ modifies the  $p+c$,
