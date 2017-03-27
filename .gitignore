@@ -4,3 +4,7 @@
 *.out
 *.log
 *.aux
+*.dvi
+*.spl
+auto/
+*.pdf
