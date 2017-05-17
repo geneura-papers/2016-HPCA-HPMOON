@@ -23,10 +23,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Parallel multi-objective optimization using co-evolutionary
-  islands with overlapping search space}
+\title{Parallel multi-objective optimization using selective operation application
+  islands}
 % New title suggestion
 % Should coevolutionary go somewhere? Are they coevolutionary? - jj
+% PABLO: Renaming again to avoid using the coevolutionary and cooperative
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -53,17 +54,21 @@ One of the most extended
 methods are the distributed co-evolutionary algorithms, where each
 processor deals only with a part of the decision space, that is, the
 individuals belonging to the same sub-population (island) explore the
-same subset of decision variables. These subsets are usually disjoint
-sets. We have previously proved that extending the length of these
-subsets, and therefore, sharing some search space between islands,
-implies an improvement in the results. 
+same subset of decision variables. However, these methods only works with decomposable problems.
+
+A similar idea is presented here to deal with un-decomposable problems: 
+instead of sharing parts of individuals, each processor applies the variation 
+operators to a specific subset of the whole individual. We have previously proved 
+that extending the length of these subsets, and therefore, sharing some search 
+space between islands, implies an improvement in the results.
+
 
 In this paper, a new method to
 automatically adapt the size of the overlapping, or shared, sections
 of the individuals has been compared to other collaborative
 evolutionary techniques. Different number of islands, chromosome sizes
 and problems have been used. The analysis of the obtained experimental
-results, by using different metrics, shows that coevolutionary
+results, by using different metrics, shows that selective operation application
 approaches can provide statistically significant improvements with
 respect to the base algorithm, being the method to automatically adapt
 the overlapping size the one to obtain the best performance during the
@@ -75,7 +80,7 @@ efficient alternative to distribute the decision variables.
 
 
 \begin{keyword}
-Multi-objective algorithms \sep coevolution \sep NSGA-II  \sep distributed evolutionary algorithms \sep Island model
+Multi-objective algorithms \sep NSGA-II  \sep distributed evolutionary algorithms \sep Island model
 \end{keyword}
 
 \end{frontmatter}
