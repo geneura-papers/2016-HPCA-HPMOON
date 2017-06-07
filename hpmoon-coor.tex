@@ -26,8 +26,8 @@
 \title{Parallel multi-objective optimization using selective operation application
   islands}
 % New title suggestion
-% Should coevolutionary go somewhere? Are they coevolutionary? - jj
-% PABLO: Renaming again to avoid using the coevolutionary and cooperative
+% Should co-evolutionary go somewhere? Are they co-evolutionary? - jj
+% PABLO: Renaming again to avoid using the co-evolutionary and cooperative
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -56,7 +56,7 @@ processor deals only with a part of the decision space, that is, the
 individuals belonging to the same sub-population (island) explore the
 same subset of decision variables. However, these methods only works with decomposable problems.
 
-A similar idea is presented here to deal with un-decomposable problems: 
+A similar idea is presented here to deal with un-decomposable problems, the selective operation application:
 instead of sharing parts of individuals, each processor applies the variation 
 operators to a specific subset of the whole individual. We have previously proved 
 that extending the length of these subsets, and therefore, sharing some search 
@@ -142,7 +142,7 @@ results to accurately identify the PF
 
 MOPs usually require a high number of variables, meaning that the MOEAs need to deal with large individuals and spent significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional problems \citep{Gong15models,Tonda12cooperative}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
 alternatives. In \citep{Dorronsoro13superlinear}, a distributed
-coevolutionary island model was used.  Although in both papers
+co-evolutionary island model was used.  Although in both papers
 significant speedups were attained, only a low number of nodes were
 employed (8). However, when the number of islands is increased, the division
 of each section of the chromosome becomes smaller, and the scalability
@@ -157,13 +157,14 @@ amount of time.
 
 
 
-
+A similar approach used to solve this kind of problems is the {\em selective operation application}. In this case, each island deals with the whole chromosome, but only focuses in a fragment of it in the crossover and mutation phase, using the whole chromosome for fitness calculation. This allows to deal with un-decomposable problems.
 In our preliminary work \citep{Garcia16hpmoon} we proved
 % tried to or actually did it? What did we prove? FERGU: Done
-that,  instead of making every island focus in a disjoint subset of the
+that applying the variation operators only over specific sections of the whole chromosome improves the quality of the solutions in the same computing time in a multi-objective island-based algorithm.
+Moreover, instead of making every island focus in a disjoint subset of the
 chromosome, the usage of overlapped (shared) sections of the
-chromosome in a coevolutionary multi-objective island-based algorithm
-can improve the quality of the solutions in the same computing time
+chromosome 
+can improve the quality of the solutions 
 when the number of islands increases. We discovered that the most
 adequate overlapping size may vary depending on a relation between the
 number of islands and the individual size. However, the experiments
@@ -180,8 +181,8 @@ sections depending on the number of islands to use, comparing it with the previo
 %6 IN THIS PAPER WE WILL BE PROVING
 
 The hypothesis of this paper is that using overlapped sections of the
-chromosome, calculated depending the number of islands to use, in a
-coevolutionary multi-objective island-based algorithm, in a real computational environment, can improve the
+chromosome for the selective operation application, calculated depending the number of islands to use, in a
+multi-objective island-based algorithm, in a real computational environment, can improve the
 quality of the solutions in the same computing time with respect to
 the baseline, disjoint and partly overlapped methods. %That was the
                                 %hypothesis of the previous
@@ -190,7 +191,7 @@ the baseline, disjoint and partly overlapped methods. %That was the
 In order to prove this claim, our new adaptive method has been
 compared against different overlapping islands schemes: a
 baseline version of a distributed NSGA-II \citep{Deb00NSGAII}, a
-coevolutionary disjoint section approach version of it and a
+selective operation application version with disjoint sections and a
 fixed-size overlapped version. %What was done in the previous paper?
                                %Are we re-using the results in that
                                %paper? - JJ FERGU: explained before that we are showing new results.
@@ -200,8 +201,8 @@ different quality indicators in the same amount of time when the
 problem size is large.  % Shouldn't this start with "We are trying to
                         % prove..." - JJ FERGU: Already writed in previous paragraph
 
-The rest of the paper is organized as follows: after the State of the Art in distributed and coevolutionary MOEAs, 
-the used methodology and the compared algorithms are described in Section \ref{sec:coevo}. 
+The rest of the paper is organized as follows: after the State of the Art in distributed and co-evolutionary MOEAs, 
+the used methodology and the compared algorithms are described in Section \ref{sec:co-evo}. 
 Then, the results of the experiments are presented (Section \ref{sec:res}), Finally, the conclusions and future work are discussed.
 
 
@@ -233,8 +234,8 @@ To solve this issue, some authors have proposed using Master-Slave approaches. F
 %This is an improvement over the previous? What is the relationship? FERGU: linked
 Other kind of approaches have also been explored. The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. Their authors concluded that dividing the search space is a good idea, although achieve this is not trivial. Dividing the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separation in processors by objective \citep{Xiao03specialized}. Other authors, such as Martens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
 
-% Is this really cooperative coevolution? - JJ FERGU: You mean the Dorronsoro one? The title says it
-Addressing high-dimensional problems with cooperative coevolution has
+% Is this really cooperative co-evolution? - JJ FERGU: You mean the Dorronsoro one? The title says it
+Addressing high-dimensional problems with cooperative co-evolution has
 also been studied in several works with approaches closer to the one
 presented here. The approach to focus on a portion of the chromosome,
 as in our overlapped method, was firstly used in the work by
@@ -262,14 +263,14 @@ island models to divide the search space depending on the node to
 achieve better results \cite{Mora13Moacos}. 
 
 In our previous work \citep{Garcia16hpmoon} we used some of
-the aforementioned ideas to compare two co-evolutionary dMOEAs. The first
+the aforementioned ideas to compare two different dMOEAs. The first
 one divided the chromosome in $P$ sections, being $P$ the number of
 islands. Every island $p$ only performed the mutation and crossover in
-that part ($p_{th}$) of the chromosome, while the fitness was
+that part ($p_{th}$) of the chromosome (the selective operation application), while the fitness was
 calculated using the whole individual. After a certain number of
 generations, individuals were migrated randomly to other islands. The
 performance metrics were calculated at the end of the run. The second
-method, coevolution with overlapping islands, used the $p_{th-1}$ and
+method, selective operation application with overlapping islands, used the $p_{th-1}$ and
 $p_{th+1}$ sections of each chromosome, besides the $p_{th}$
 part. During the same amount of time both methods obtained better
 results than a baseline algorithm that dealt with the whole chromosome
@@ -304,12 +305,12 @@ We will describe how we have tested our approach in the next Section.
                                 % tested different versions that prove
                                 % that our methodology works for the
                                 % precise reasons we think it works- JJ FERGU: Done, and explained
-\label{sec:coevo}
+\label{sec:co-evo}
 
 The objective of this section is to explain the methodology we have followed to
 compare the different versions of the overlapping schemes.
 
-In this paper we analyse several coevolutionary algorithms we have
+In this paper we analyse several selective operation application algorithms we have
 implemented by using a parallel multi-objective baseline algorithm (B)
 as a basis for comparisons. Our proposed methods %methods or method?
                                 %Which methods? - JJ
@@ -327,7 +328,7 @@ thus avoiding to synchronize the global Pareto Front (PF) every
 certain number of generations as other methods described in Section 2
 do. At the end of the run, the Pareto Fronts of all islands are
 aggregated into a new one, and the quality measures are evaluated. 
-Different coevolutionary alternatives can be devised to evolve the
+Different  selective operation application alternatives can be devised to evolve the
 subpopulations according to the decision space to be explored by each
 islands. Here we will consider three methods in which each island only
 performs crossover and mutation in specific sections of the
@@ -339,8 +340,8 @@ individuals.
 %% some justification on why this was chosen - JJ PABLO: Added 
 %
 %% And some liaison to next subsection - JJ
-%This method will be compared to different coevolutionary approaches that are similar to the baseline, with the exception on the decision space to explore in each island.
-%Three different coevolutionary methods have been used. In all these methods, each island only performs crossover and mutation in specific sections of the individuals.
+%This method will be compared to different co-evolutionary approaches that are similar to the baseline, with the exception on the decision space to explore in each island.
+%Three different co-evolutionary methods have been used. In all these methods, each island only performs crossover and mutation in specific sections of the individuals.
 
 As in the baseline (B), an individual is migrated to another random
 island after a fixed number of generations. In the new island, this
@@ -356,7 +357,7 @@ deal with decomposable and no decomposable problems. %Don't understand what you 
 
 The methods we have tested are presented in the next subsections. 
 
-\subsection{Coevolution with disjoint islands (D)} 
+\subsection{Selective operation application with disjoint islands (D)} 
 In this approach, each individual of size $L$ is split into $P$ chunks
 of size $L/P$. Every island $p$ only performs crossover and mutation
 on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint}
@@ -369,7 +370,7 @@ describes this approach.
 \label{fig:disjoint}
 \end{figure*}
 
-\subsection{Coevolution with overlapping islands (O)}
+\subsection{Selective operation application with overlapping islands (O)}
 This approach is similar to the previous one, but every island also uses the $p+1$ and $p-1$ (module size) chunks of the individual for crossover and migration. Therefore, some kind of overlapping of the crossed and mutated parts exists between islands. Figure \ref{fig:overlapping} shows the affected parts of the individuals in
 each island. 
 
@@ -381,7 +382,7 @@ each island.
   \label{fig:overlapping}
 \end{figure*}
 
-\subsection{Adaptive coevolution with overlapping islands (A)} 
+\subsection{Adaptive selective operation application with overlapping islands (A)} 
 As in the previous method, the sections to address are overlapped, but
 instead using one extra section on each side of the $p$ section ($p+1$
 and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$),
@@ -739,9 +740,9 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 
 
 %EXPLANATION OF THE RESULTS
-This can be explained comparing the number of non-dominated solutions in each island and the average number of generations (Table \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome lengths, increasing the number of islands implies more generations with all the methods (logically, as there are less individuals in each island). But also, the co-evolutionary methods approach to the number of generations with the baseline when increasing the number of islands. However, with $L=2048$ the migration time is enough big to almost not improve the number of generations with respect to the baseline, even in the lower number of islands, as it happens with $L=512$. Therefore, more generations do not necessarily improve the solution of the global PF, but focusing on different elements of the chromosome. As indicated previously, every island is unaware of the other islands PFs, and they are trying to optimize their solutions independently. With respect to the average number of solutions in each island, there is a clear difference in number with the baseline with $L=512$, where this value is in the most of the cases, less than a half. The number of non-dominated solutions also improves a better Spread indicator, where the baseline almost always obtains better values %TENGO QUE COMENTAR MAS LOS RESULTADOS Y ENTENDERLO TODO Y JUSTIFICARLO FINAMENTE
+This can be explained comparing the number of non-dominated solutions in each island and the average number of generations (Table \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome lengths, increasing the number of islands implies more generations with all the methods (logically, as there are less individuals in each island). But also, the selective operation application methods approach to the number of generations with the baseline when increasing the number of islands. However, with $L=2048$ the migration time is enough big to almost not improve the number of generations with respect to the baseline, even in the lower number of islands, as it happens with $L=512$. Therefore, more generations do not necessarily improve the solution of the global PF, but focusing on different elements of the chromosome. As indicated previously, every island is unaware of the other islands PFs, and they are trying to optimize their solutions independently. With respect to the average number of solutions in each island, there is a clear difference in number with the baseline with $L=512$, where this value is in the most of the cases, less than a half. The number of non-dominated solutions also improves a better Spread indicator, where the baseline almost always obtains better values %TENGO QUE COMENTAR MAS LOS RESULTADOS Y ENTENDERLO TODO Y JUSTIFICARLO FINAMENTE
 
-Finally, as happened in \citep{Garcia16hpmoon}, results show that all the quality indicators decrease when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative coevolutionary MOEAs work better on bigger populations (more than 100 individuals).
+Finally, as happened in \citep{Garcia16hpmoon}, results show that all the quality indicators decrease when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
 
 %%%%REAL PROBLEM
@@ -786,11 +787,11 @@ Finally, as happened in \citep{Garcia16hpmoon}, results show that all the qualit
 
 \section{Conclusions}
 
-High-performance problems % problems are not high-performance. They
-                          % _require_ high performance
- that require a large number of decision variables can leverage the
+Problems that require high-performance % problems are not high-performance. They
+                          % _require_ high performance Fergu: done
+ and deal with a large number of decision variables can leverage the
  division of the decision space that parallel and distributed
- algorithms imply. This can be done in dMOEAs by dividing the
+ algorithms imply. This can be done in dMOEAs by selective operation application, that is, dividing the
  chromosome into different parts, each one modified by a different
  island. This paper compares a baseline distributed NSGA-II with three
  different strategies to separate the chromosome (disjoint or
