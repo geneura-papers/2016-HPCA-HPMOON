@@ -742,9 +742,32 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 
 
 %EXPLANATION OF THE RESULTS
-This can be explained comparing the number of non-dominated solutions in each island and the average number of generations (Table \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome lengths, increasing the number of islands implies more generations with all the methods (logically, as there are less individuals in each island). But also, the selective operation application methods approach to the number of generations with the baseline when increasing the number of islands. However, with $L=2048$ the migration time is enough big to almost not improve the number of generations with respect to the baseline, even in the lower number of islands, as it happens with $L=512$. Therefore, more generations do not necessarily improve the solution of the global PF, but focusing on different elements of the chromosome. As indicated previously, every island is unaware of the other islands PFs, and they are trying to optimize their solutions independently. With respect to the average number of solutions in each island, there is a clear difference in number with the baseline with $L=512$, where this value is in the most of the cases, less than a half. The number of non-dominated solutions also improves a better Spread indicator, where the baseline almost always obtains better values %TENGO QUE COMENTAR MAS LOS RESULTADOS Y ENTENDERLO TODO Y JUSTIFICARLO FINAMENTE
+This can be explained comparing the number of non-dominated solutions
+in each island and the average number of generations (Table
+\ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome
+lengths, increasing the number of islands implies more generations
+with all the methods (logically, as there are less individuals in each
+island). But also, the selective operation application methods
+approach to the number of generations with the baseline when
+increasing the number of islands. However, with $L=2048$ the migration
+time is enough big to almost not improve the number of generations
+with respect to the baseline, even in the lower number of islands, as
+it happens with $L=512$. Therefore, more generations do not
+necessarily improve the solution of the global PF, but focusing on
+different elements of the chromosome. As indicated previously, every
+island is unaware of the other islands PFs, and they are trying to
+optimize their solutions independently. With respect to the average
+number of solutions in each island, there is a clear difference in
+number with the baseline with $L=512$, where this value is in the most
+of the cases, less than a half. The number of non-dominated solutions
+also improves a better Spread indicator, where the baseline almost
+always obtains better values. %TENGO QUE COMENTAR MAS LOS RESULTADOS Y
+                              %ENTENDERLO TODO Y JUSTIFICARLO
+                              %FINAMENTE
+%Almost always no es muy preciso - JJ
 
-Finally, as happened in \citep{Garcia16hpmoon}, results show that all the quality indicators decrease when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).
+Finally, as was already observed in \citep{Garcia16hpmoon}, results
+show that all the quality indicators decrease in value when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
 
 %%%%REAL PROBLEM
@@ -811,6 +834,9 @@ more types of problems, and new configurations of population size and
 chromosome lengths will be addressed in the future.% 
 % More discussion should be added. Why is adaptive better? Is the high
 % performance really needed? - JJ
+% STILL more discussion should be needed. For instance, the last
+% paragraph of results begs an explanation of the influence of diversity on
+% results - JJ
 
 Also, more distributed implementations in several systems (such as a
 GPUs or heterogeneous clusters) with different amounts of
