@@ -366,7 +366,7 @@ The methods we have tested are presented in the next subsections.
 In this approach, each individual of size $L$ is split into $P$ chunks
 of size $L/P$. Every island $p$ only performs crossover and mutation
 on the $p_{th}$ part of the individuals. Figure \ref{fig:disjoint}
-describes this approach.   
+describes this approach.
 %
 \begin{figure*}[h!tb]
 \centering
@@ -492,7 +492,7 @@ This subsection describes the quality indicators used and the experimental setup
 \end{figure}
 
 
-We have chosen those metrics because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}.
+We have chosen those metrics because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}. Mathematical formulation of these metrics can be seen in \cite{Dorronsoro13superlinear}.
 
 %\subsection{Benchmark problems}
 
@@ -506,7 +506,7 @@ chosen, SBX and polynomial, have also been  used previously by other
 authors in \citep{Durillo08masterslave}.  % SBX is first mentioned
                                 % here. Has to explain - JJ
 
-ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. The optimal PF distribution used for comparison has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.}. 
+ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This benchmark includes several functions, with different features that are representative of real world optimization problems. Mathematical formulation of each function is available in \citep{zdt2000a}.  The optimal PF distribution used for comparison has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.}. 
 
 
 
@@ -514,13 +514,13 @@ ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely
 
 The criterion used for terminating an experiment has been the running
 time: 25 seconds for dimension 512 and 100s (four times more) for
-2048. We have used time instead of the number of evaluations firstly
+2048. According to Alba and Luque \cite{EVALUATIONPARALLEL}, other stop criteria such as the number of evaluations required to attain a solution, may be misleading depending on the studied scenario. In our case we have used time instead of the number of evaluations firstly
 because our hypothesis argues that the time saved in crossover and
 mutation can be spent on improving the sub-populations and more
 operations and migrations can be achieved. Also, we are using
 different number of islands (with different sub-population sizes) and that
 could lead to different execution times, so it would be difficult to
-compare different times and quality of solutions at the same time.
+compare different times and quality of solutions at the same time. The number of generations between migrations has been set to 5, as this number is usually repeated in the literature \cite{Deb03distributed,Martens13asynchronous}.
  The whole parameter set is summarized in Table \ref{tab:parameters}.
 
 \begin{table*}
@@ -548,7 +548,7 @@ Execution time (s) & 25 (for 512) and 100 (for 2048) \\ \hline \hline
 \end{table*}
 
 The ECJ framework \citep{ECJ} has been used to run the
-experiments. Specific operators have been developed as new modules for
+experiments, including its own random number generation implementation. Specific operators have been developed as new modules for
 ECJ, and they can be downloaded from our GitHub repository under a
 LGPL V3 License
 \footnote{\url{https://github.com/hpmoon/hpmoon-islands}}. 
@@ -574,7 +574,7 @@ distributions. The average results for each configuration are shown in
 Table \ref{tab:results512} (for 512 dimensions) and
 \ref{tab:results2048} (for 2048). As previously explained, when $P=8$
 the results of A are equivalent to the obtained with D (because
-$c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv.} in tables.
+$c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv-} in tables. For example, Equiv-D in an HV cell  means that the HV of A is the same than the one in D column, because the behaviour of this configuration is the same than executing D.
 
 
 \begin{table*}
@@ -586,26 +586,26 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 %\multicolumn{13}{|c|}{2048 dimenOionO}																																													\\ \hline
 \#Islands	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A			&	B		&	D		&	O		&	A					\\ \hline
 \multicolumn{13}{|c|}{ZDT1}																																													\\ \hline
-8	&	0.900		&	0.816		& \textbf{	0.926	}		&	Equiv. D			& \textbf{	0.729	}	&	1.041			&	0.898			&	Equiv. D			&	0.013		&	0.029		& \textbf{	0.007	}	&	Equiv. D					\\
-16	& \textbf{	0.880	}	&	0.675		&	0.839			&	Equiv. O			& \textbf{	0.721	}	&	0.897			&	0.983		D	&	Equiv. O			& \textbf{	0.017	}	&	0.062		&	0.025		&	Equiv. O					\\
+8	&	0.900		&	0.816		& \textbf{	0.926	}		&	Equiv-D			& \textbf{	0.729	}	&	1.041			&	0.898			&	Equiv-D			&	0.013		&	0.029		& \textbf{	0.007	}	&	Equiv-D					\\
+16	& \textbf{	0.880	}	&	0.675		&	0.839			&	Equiv-O			& \textbf{	0.721	}	&	0.897			&	0.983		D	&	Equiv-O			& \textbf{	0.017	}	&	0.062		&	0.025		&	Equiv-O					\\
 32	& \textbf{	0.829	}	&	0.618		&	0.698			&	0.790			& \textbf{	0.763	}	&	0.879			&	0.886		D	&	0.913	DO		& \textbf{	0.027	}	&	0.076		&	0.056		&	0.036					\\
 64	& \textbf{	0.769	}	&	0.596		&	0.628			&	0.736			& \textbf{	0.820	}	&	0.897			&	0.872			&	0.890	DO		& \textbf{	0.040	}	&	0.080		&	0.071		&	0.047					\\
 128	& \textbf{	0.707	}	&	0.585		&	0.598			&	0.668			& \textbf{	0.850	}	&	0.956			&	0.883			&	0.910	O		& \textbf{	0.053	}	&	0.083		&	0.079		&	0.062					\\ \hline
 \multicolumn{13}{|c|}{ZDT2}																																													\\ \hline
-8	&	0.830		&	0.786		& \textbf{	0.851	}		&	Equiv. D			& \textbf{	0.866	}	&	0.996			&	0.987		D	&	Equiv. D			&	0.023		&	0.037		& \textbf{	0.017	}	&	Equiv. D					\\
-16	& \textbf{	0.810	}	&	0.601		&	0.776			&	Equiv. O			& \textbf{	0.916	}	&	0.990			&	1.005		D	&	Equiv. O			& \textbf{	0.029	}	&	0.091		&	0.040		&	Equiv. O					\\
+8	&	0.830		&	0.786		& \textbf{	0.851	}		&	Equiv-D			& \textbf{	0.866	}	&	0.996			&	0.987		D	&	Equiv-D			&	0.023		&	0.037		& \textbf{	0.017	}	&	Equiv-D					\\
+16	& \textbf{	0.810	}	&	0.601		&	0.776			&	Equiv-O			& \textbf{	0.916	}	&	0.990			&	1.005		D	&	Equiv-O			& \textbf{	0.029	}	&	0.091		&	0.040		&	Equiv-O					\\
 32	& \textbf{	0.756	}	&	0.498		&	0.617			&	0.682			& \textbf{	0.976	}	& \textbf{	0.976	}	B	& \textbf{	0.978	}	BD	&	1.054			& \textbf{	0.045	}	&	0.119		&	0.086		&	0.068					\\
 64	& \textbf{	0.668	}	&	0.451		&	0.504			&	0.601			&	1.002		& \textbf{	0.976	}		& \textbf{	0.974	}	D	&	1.025	B		& \textbf{	0.070	}	&	0.132		&	0.117		&	0.091					\\
 128	& \textbf{	0.576	}	&	0.434		&	0.452			&	0.526			&	1.002		&	1.023			& \textbf{	0.978	}		&	1.015	BD		& \textbf{	0.096	}	&	0.137		&	0.132		&	0.110					\\ \hline
 \multicolumn{13}{|c|}{ZDT3}																																													\\ \hline
-8	&	0.928		&	0.838		& \textbf{	0.951	}		&	Equiv. D			& \textbf{	0.869	}	&	1.028			&	0.983		D	&	Equiv. D			& \textbf{	0.008	}	&	0.018		&	0.005		&	Equiv. D					\\
-16	& \textbf{	0.903	}	&	0.715		&	0.870			&	Equiv. O			& \textbf{	0.846	}	&	0.899			&	0.960			&	Equiv. O			& \textbf{	0.011	}	&	0.032		&	0.014		&	Equiv. O					\\
+8	&	0.928		&	0.838		& \textbf{	0.951	}		&	Equiv-D			& \textbf{	0.869	}	&	1.028			&	0.983		D	&	Equiv-D			& \textbf{	0.008	}	&	0.018		&	0.005		&	Equiv-D					\\
+16	& \textbf{	0.903	}	&	0.715		&	0.870			&	Equiv-O			& \textbf{	0.846	}	&	0.899			&	0.960			&	Equiv-O			& \textbf{	0.011	}	&	0.032		&	0.014		&	Equiv-O					\\
 32	& \textbf{	0.857	}	&	0.655		&	0.737			&	0.824			& \textbf{	0.845	}	&	0.879			&	0.873		D	&	0.881	DO		& \textbf{	0.016	}	&	0.039		&	0.030		&	0.019					\\
 64	& \textbf{	0.796	}	&	0.632		&	0.662			&	0.761			& \textbf{	0.859	}	&	0.887			&	0.885		D	&	0.879	BDO		& \textbf{	0.023	}	&	0.042		&	0.038		&	0.027					\\
 128	& \textbf{	0.738	}	&	0.620		&	0.633			&	0.705			& \textbf{	0.882	}	&	0.968			& \textbf{	0.888	}	B	&	0.911			& \textbf{	0.029	}	&	0.044		&	0.042		&	0.033					\\ \hline
 \multicolumn{13}{|c|}{ZDT6}																																													\\ \hline
-8	&	0.268		&	0.223		& \textbf{	0.298	}		&	Equiv. D			& \textbf{	0.988	}	& \textbf{	0.972	}	B	& \textbf{	0.996	}	B	&	Equiv. D			& \textbf{	0.173	}	&	0.191		&	0.160		&	Equiv. D					\\
-16	& \textbf{	0.243	}	&	0.113		&	0.219			&	Equiv. O			& \textbf{	0.995	}	& \textbf{	0.987	}	B	& \textbf{	0.987	}	BD	&	Equiv. O			& \textbf{	0.184	}	&	0.240		&	0.193		&	Equiv. O					\\
+8	&	0.268		&	0.223		& \textbf{	0.298	}		&	Equiv-D			& \textbf{	0.988	}	& \textbf{	0.972	}	B	& \textbf{	0.996	}	B	&	Equiv-D			& \textbf{	0.173	}	&	0.191		&	0.160		&	Equiv-D					\\
+16	& \textbf{	0.243	}	&	0.113		&	0.219			&	Equiv-O			& \textbf{	0.995	}	& \textbf{	0.987	}	B	& \textbf{	0.987	}	BD	&	Equiv-O			& \textbf{	0.184	}	&	0.240		&	0.193		&	Equiv-O					\\
 32	& \textbf{	0.196	}	&	0.071		&	0.115			&	0.162			& \textbf{	0.998	}	& \textbf{	0.989	}	B	& \textbf{	0.988	}	BD	&	1.005	B		& \textbf{	0.204	}	&	0.257		&	0.238		&	0.220					\\
 64	& \textbf{	0.145	}	&	0.056		&	0.075			&	0.120			&	0.996		&	0.986		B	& \textbf{	0.983	}	D	&	0.998	B		& \textbf{	0.226	}	&	0.264		&	0.255		&	0.235					\\
 128	& \textbf{	0.104	}	&	0.049		&	0.055			&	0.084			&	0.993		&	1.007			& \textbf{	0.979	}		&	0.998	BD		& \textbf{	0.244	}	&	0.266		&	0.263		&	0.251					\\ \hline
@@ -627,26 +627,26 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 
 \#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A			&	B		&	D		&	O		&	A					\\ \hline
 \multicolumn{13}{|c|}{ZDT1}																																													\\ \hline
-8	&	0.891		& \textbf{	0.953	}	&	0.937			&	Equiv. D			& \textbf{	0.681	}	& \textbf{	0.635	}	B	&	0.661		D	&	Equiv. D			&	0.015		& \textbf{	0.002	}	&	0.005		&	Equiv. D					\\
-16	&	0.884		&	0.850		& \textbf{	0.942	}		&	Equiv. O			& \textbf{	0.705	}	&	0.908			& \textbf{	0.670	}	B	&	Equiv. O			&	0.016		&	0.022		& \textbf{	0.004	}	&	Equiv. O					\\
+8	&	0.891		& \textbf{	0.953	}	&	0.937			&	Equiv-D			& \textbf{	0.681	}	& \textbf{	0.635	}	B	&	0.661		D	&	Equiv-D			&	0.015		& \textbf{	0.002	}	&	0.005		&	Equiv-D					\\
+16	&	0.884		&	0.850		& \textbf{	0.942	}		&	Equiv-O			& \textbf{	0.705	}	&	0.908			& \textbf{	0.670	}	B	&	Equiv-O			&	0.016		&	0.022		& \textbf{	0.004	}	&	Equiv-O					\\
 32	&	0.851		&	0.674		&	0.859		B	& \textbf{	0.900	}		& \textbf{	0.754	}	&	0.868			&	0.826		D	& \textbf{	0.763	}	B	&	0.023		&	0.062		&	0.020	B	& \textbf{	0.012	}				\\
 64	& \textbf{	0.800	}	&	0.608		&	0.697			& \textbf{	0.824	}	B	& \textbf{	0.808	}	&	0.880			& \textbf{	0.861	}	B	& \textbf{	0.823	}	B	&	0.033		&	0.078		&	0.056		& \textbf{	0.027	}				\\
 128	&	0.735		&	0.582		&	0.613			& \textbf{	0.745	}		& \textbf{	0.841	}	&	0.888			&	0.878		D	&	0.865		O	&	0.047		&	0.084		&	0.075		& \textbf{	0.043	}				\\ \hline
 \multicolumn{13}{|c|}{ZDT2}																																													\\ \hline
-8	&	0.832		& \textbf{	0.895	}	&	0.869			&	Equiv. D			& \textbf{	0.849	}	& \textbf{	0.886	}	B	&	0.853		D	&	Equiv. D			&	0.023		& \textbf{	0.006	}	&	0.013		&	Equiv. D					\\
-16	&	0.831		&	0.833	B	& \textbf{	0.884	}		&	Equiv. O			& \textbf{	0.810	}	&	1.001			& \textbf{	0.802	}	B	&	Equiv. O			&	0.023		&	0.022	B	& \textbf{	0.009	}	&	Equiv. O					\\
+8	&	0.832		& \textbf{	0.895	}	&	0.869			&	Equiv-D			& \textbf{	0.849	}	& \textbf{	0.886	}	B	&	0.853		D	&	Equiv-D			&	0.023		& \textbf{	0.006	}	&	0.013		&	Equiv-D					\\
+16	&	0.831		&	0.833	B	& \textbf{	0.884	}		&	Equiv-O			& \textbf{	0.810	}	&	1.001			& \textbf{	0.802	}	B	&	Equiv-O			&	0.023		&	0.022	B	& \textbf{	0.009	}	&	Equiv-O					\\
 32	&	0.800		&	0.628		&	0.800		B	& \textbf{	0.817	}		& \textbf{	0.848	}	&	0.974			&	0.983		D	&	0.908			&	0.031		&	0.082		&	0.032	B	& \textbf{	0.027	}				\\
 64	& \textbf{	0.729	}	&	0.491		&	0.623			&	0.716			& \textbf{	0.909	}	&	0.967			&	0.979		D	& \textbf{	0.997	}	BD	& \textbf{	0.052	}	&	0.121		&	0.084		& \textbf{	0.055	}	B			\\
 128	& \textbf{	0.630	}	&	0.441		&	0.500			& \textbf{	0.614	}	B	& \textbf{	0.957	}	&	0.989			&	0.978		D	& \textbf{	0.994	}	BO	& \textbf{	0.080	}	&	0.136		&	0.119		& \textbf{	0.085	}	B			\\ \hline
 \multicolumn{13}{|c|}{ZDT3}																																													\\ \hline
-8	&	0.917		& \textbf{	0.971	}	&	0.960			&	Equiv. D			& \textbf{	0.843	}	& \textbf{	0.854	}	B	&	0.868		D	&	Equiv. D			&	0.009		& \textbf{	0.001	}	&	0.004		&	Equiv. D					\\
-16	&	0.911		&	0.876	B	& \textbf{	0.963	}		&	Equiv. O			& \textbf{	0.864	}	&	0.899		B	& \textbf{	0.837	}	B	&	Equiv. O			&	0.010		&	0.014		& \textbf{	0.003	}	&	Equiv. O					\\
+8	&	0.917		& \textbf{	0.971	}	&	0.960			&	Equiv-D			& \textbf{	0.843	}	& \textbf{	0.854	}	B	&	0.868		D	&	Equiv-D			&	0.009		& \textbf{	0.001	}	&	0.004		&	Equiv-D					\\
+16	&	0.911		&	0.876	B	& \textbf{	0.963	}		&	Equiv-O			& \textbf{	0.864	}	&	0.899		B	& \textbf{	0.837	}	B	&	Equiv-O			&	0.010		&	0.014		& \textbf{	0.003	}	&	Equiv-O					\\
 32	&	0.884		&	0.710		&	0.883		B	& \textbf{	0.931	}		& \textbf{	0.856	}	& \textbf{	0.870	}	B	& \textbf{	0.842	}	B	& \textbf{	0.842	}	BDO	&	0.013		&	0.032		&	0.013	B	& \textbf{	0.008	}				\\
 64	&	0.828		&	0.645		&	0.728			& \textbf{	0.854	}		& \textbf{	0.878	}	& \textbf{	0.896	}	B	& \textbf{	0.871	}	BD	& \textbf{	0.873	}	BDO	& \textbf{	0.019	}	&	0.040		&	0.030		& \textbf{	0.016	}	B			\\
 128	& \textbf{	0.770	}	&	0.620		&	0.651			& \textbf{	0.773	}	B	& \textbf{	0.887	}	& \textbf{	0.901	}	B	& \textbf{	0.890	}	BD	& \textbf{	0.885	}	BDO	& \textbf{	0.026	}	&	0.043		&	0.039		& \textbf{	0.025	}	B			\\ \hline
 \multicolumn{13}{|c|}{ZDT6}																																													\\ \hline
-8	&	0.271		& \textbf{	0.398	}	&	0.323			&	Equiv. D			& \textbf{	0.982	}	& \textbf{	0.982	}	B	&	0.994			&	Equiv. D			&	0.171		& \textbf{	0.115	}	&	0.149		&	Equiv. D					\\
-16	&	0.275		&	0.295	B	& \textbf{	0.354	}		&	Equiv. O			& \textbf{	0.981	}	& \textbf{	0.970	}	B	&	1.006			&	Equiv. O			&	0.170		&	0.161	B	& \textbf{	0.136	}	&	Equiv. O					\\
+8	&	0.271		& \textbf{	0.398	}	&	0.323			&	Equiv-D			& \textbf{	0.982	}	& \textbf{	0.982	}	B	&	0.994			&	Equiv-D			&	0.171		& \textbf{	0.115	}	&	0.149		&	Equiv-D					\\
+16	&	0.275		&	0.295	B	& \textbf{	0.354	}		&	Equiv-O			& \textbf{	0.981	}	& \textbf{	0.970	}	B	&	1.006			&	Equiv-O			&	0.170		&	0.161	B	& \textbf{	0.136	}	&	Equiv-O					\\
 32	&	0.239		&	0.123		&	0.240			& \textbf{	0.254	}		& \textbf{	0.989	}	& \textbf{	0.991	}	B	& \textbf{	0.982	}	BD	& \textbf{	0.999	}	BD	&	0.186		&	0.235		&	0.185	B	& \textbf{	0.179	}				\\
 64	& \textbf{	0.184	}	&	0.068		&	0.125			& \textbf{	0.178	}	B	& \textbf{	0.985	}	& \textbf{	0.982	}	B	& \textbf{	0.992	}	B	& \textbf{	0.995	}	BO	& \textbf{	0.209	}	&	0.259		&	0.235		&	0.212					\\
 128	& \textbf{	0.128	}	&	0.051		&	0.071			& \textbf{	0.124	}	B	& \textbf{	0.991	}	& \textbf{	0.992	}	B	& \textbf{	0.988	}	BD	&	1.003			& \textbf{	0.233	}	&	0.266		&	0.257		& \textbf{	0.235	}	B			\\ \hline
@@ -667,36 +667,36 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 \resizebox{12cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||}
 \hline
-	&	\multicolumn{4}{|c|}{Average solutions per island}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
+	&	\multicolumn{4}{|c|}{Average solutions per front}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
 
 \#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A				\\ \hline
 \multicolumn{9}{|c|}{ZDT1}																				\\ \hline
-8	&	182.700		&	128.500		&	158.167			&	Equiv. D			&	397.367		&	776.967			&	603.667			&	Equiv. D				\\
-16	&	132.567		&	43.633		&	76.167			&	Equiv. O			&	567.933		&	908.467			&	838.000			&	Equiv. O				\\
+8	&	182.700		&	128.500		&	158.167			&	Equiv-D			&	397.367		&	776.967			&	603.667			&	Equiv-D				\\
+16	&	132.567		&	43.633		&	76.167			&	Equiv-O			&	567.933		&	908.467			&	838.000			&	Equiv-O				\\
 32	&	102.200		&	37.533		&	34.133	D		&	52.033			&	731.067		&	959.067			&	938.167			&	917.000				\\
 64	&	81.100		&	46.267		&	26.300			&	30.167		O	&	846.733		&	978.733			&	972.567			&	927.133	B			\\
 128	&	77.167		&	57.767		&	35.767			&	29.167		O	&	923.133		&	984.767			&	984.233	D		&	967.933				\\ \hline
 \multicolumn{9}{|c|}{ZDT2}																															\\ \hline
-8	&	122.700		&	91.633		&	108.833	BD		&	Equiv. D			&	398.167		&	772.000			&	605.100			&	Equiv. D				\\
-16	&	94.867		&	28.033		&	62.467			&	Equiv. O			&	574.567		&	908.433			&	840.900			&	Equiv. O				\\
+8	&	122.700		&	91.633		&	108.833	BD		&	Equiv-D			&	398.167		&	772.000			&	605.100			&	Equiv-D				\\
+16	&	94.867		&	28.033		&	62.467			&	Equiv-O			&	574.567		&	908.433			&	840.900			&	Equiv-O				\\
 32	&	56.633		&	11.433		&	19.467	D		&	31.567			&	735.867		&	960.167			&	939.200			&	904.900				\\
 64	&	33.467		&	10.267		&	9.367	D		&	19.067			&	849.900		&	978.600			&	972.167			&	929.800	B			\\
 128	&	22.833		&	12.633		&	7.800			&	13.967		D	&	929.433		&	984.567			&	984.233	D		&	971.700				\\ \hline
 \multicolumn{9}{|c|}{ZDT3}																															\\ \hline
-8	&	212.900		&	129.233		&	171.367			&	Equiv. D			&	398.633		&	776.000			&	603.333			&	Equiv. D				\\
-16	&	176.133		&	43.567		&	90.100			&	Equiv. O			&	573.033		&	908.667			&	838.000			&	Equiv. O				\\
+8	&	212.900		&	129.233		&	171.367			&	Equiv-D			&	398.633		&	776.000			&	603.333			&	Equiv-D				\\
+16	&	176.133		&	43.567		&	90.100			&	Equiv-O			&	573.033		&	908.667			&	838.000			&	Equiv-O				\\
 32	&	121.500		&	42.800		&	33.200			&	56.900			&	733.233		&	959.000			&	937.967			&	918.833				\\
 64	&	96.500		&	54.267		&	34.900			&	37.800		O	&	849.200		&	977.167			&	972.200			&	933.167				\\
 128	&	76.700		&	62.200		&	41.767			&	33.867		D	&	924.000		&	984.733			&	984.367	D		&	966.433				\\ \hline
 \multicolumn{9}{|c|}{ZDT6}																															\\ \hline
-8	&	42.233		&	28.633		&	35.967	BD		&	Equiv. D			&	396.900		&	773.400			&	603.533			&	Equiv. D				\\
-16	&	43.733		&	7.733		&	18.967			&	Equiv. O			&	568.200		&	908.900			&	836.033			&	Equiv. O				\\
+8	&	42.233		&	28.633		&	35.967	BD		&	Equiv-D			&	396.900		&	773.400			&	603.533			&	Equiv-D				\\
+16	&	43.733		&	7.733		&	18.967			&	Equiv-O			&	568.200		&	908.900			&	836.033			&	Equiv-O				\\
 32	&	35.533		&	8.033		&	8.633	D		&	16.233		DO	&	735.700		&	958.900			&	938.600			&	926.167				\\
 64	&	22.600		&	10.700		&	7.500	D		&	7.533		DO	&	850.267		&	978.067			&	972.467			&	940.267				\\
 128	&	18.133		&	15.000	B	&	9.067			&	11.367		D	&	927.233		&	984.667			&	983.933	D		&	969.433				\\ \hline
 \end{tabular}
 }
-\caption{Average number of generations and average number of solutions per island, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
+\caption{Average number of generations and average number of solutions of the front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
 \label{tab:sols512}
 \end{table*}
 
@@ -709,36 +709,36 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 \resizebox{12cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||}
 \hline
-	&	\multicolumn{4}{|c|}{Average solutions per island}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
+	&	\multicolumn{4}{|c|}{Average solutions per front}													&	\multicolumn{4}{|c|}{Generations}															\\ \hline
 %\multicolumn{13}{|c|}{2048 dimensions}																															\\ \hline
 \#Island	&	B		&	D		&	O			&	A			&	B		&	D			&	O			&	A				\\ \hline
 \multicolumn{9}{|c|}{ZDT1}																					\\ \hline
-8	&	137.733		&	47.167		&	119.933	B		&	Equiv. D			&	175.067		&	225.667			&	207.933			&	Equiv. D				\\
-16	&	92.633		&	38.233		&	47.533	D		&	Equiv. O			&	204.867		&	238.533			&	232.900			&	Equiv. O				\\
+8	&	137.733		&	47.167		&	119.933	B		&	Equiv-D			&	175.067		&	225.667			&	207.933			&	Equiv-D				\\
+16	&	92.633		&	38.233		&	47.533	D		&	Equiv-O			&	204.867		&	238.533			&	232.900			&	Equiv-O				\\
 32	&	56.167		&	41.167		&	28.667			&	32.567	O		&	225.433		&	243.833			&	242.533			&	242.000	O			\\
 64	&	50.900		&	49.667	B	&	35.600			&	25.367			&	236.500		&	245.967			&	245.700			&	244.033	D			\\
 128	&	45.767		&	64.933		&	44.167	B		&	31.867			&	242.800		&	247.000			&	247.000	D		&	245.733				\\ \hline
 \multicolumn{9}{|c|}{ZDT2}																															\\ \hline
-8	&	64.267		&	22.733		&	56.867	B		&	Equiv. D			&	175.633		&	226.000			&	208.100			&	Equiv. D				\\
-16	&	52.300		&	10.733		&	20.067	D		&	Equiv. O			&	205.033		&	238.867			&	233.100			&	Equiv. O				\\
+8	&	64.267		&	22.733		&	56.867	B		&	Equiv-D			&	175.633		&	226.000			&	208.100			&	Equiv-D				\\
+16	&	52.300		&	10.733		&	20.067	D		&	Equiv-O			&	205.033		&	238.867			&	233.100			&	Equiv-O				\\
 32	&	34.400		&	10.367		&	10.433	D		&	17.900	O		&	225.600		&	244.267			&	242.633			&	242.000	O			\\
 64	&	24.600		&	10.900		&	9.267	D		&	12.867	DO		&	236.700		&	246.000			&	245.767			&	244.033	D			\\
 128	&	18.667		&	17.833	B	&	10.367			&	12.933	O		&	243.367		&	247.000			&	247.000	d		&	245.833				\\ \hline
 \multicolumn{9}{|c|}{ZDT3}																															\\ \hline
-8	&	163.767		&	83.367		&	119.467			&	Equiv. D			&	176.533		&	226.400			&	207.700			&	Equiv. D				\\
-16	&	108.467		&	49.433		&	47.700	D		&	Equiv. O			&	205.333		&	238.467			&	232.933			&	Equiv. O				\\
+8	&	163.767		&	83.367		&	119.467			&	Equiv-D			&	176.533		&	226.400			&	207.700			&	Equiv-D				\\
+16	&	108.467		&	49.433		&	47.700	D		&	Equiv-O			&	205.333		&	238.467			&	232.933			&	Equiv-O				\\
 32	&	72.133		&	44.333		&	31.833			&	36.533	O		&	225.100		&	243.900			&	242.433			&	242.000	O			\\
 64	&	54.867		&	57.600	B	&	40.633			&	29.300			&	236.333		&	245.933			&	245.733			&	244.000	D			\\
 128	&	50.600		&	72.133		&	49.033	B		&	34.933			&	243.200		&	247.000			&	247.000	D		&	245.833				\\ \hline
 \multicolumn{9}{|c|}{ZDT6}																															\\ \hline
-8	&	22.133		&	13.833		&	14.433	D		&	Equiv. D			&	175.733		&	226.100			&	207.767			&	Equiv. D				\\
-16	&	20.767		&	15.867		&	13.300	D		&	Equiv. O			&	205.033		&	238.433			&	232.933			&	Equiv. O				\\
+8	&	22.133		&	13.833		&	14.433	D		&	Equiv-D			&	175.733		&	226.100			&	207.767			&	Equiv-D				\\
+16	&	20.767		&	15.867		&	13.300	D		&	Equiv-O			&	205.033		&	238.433			&	232.933			&	Equiv-O				\\
 32	&	22.600		&	10.700		&	10.033	D		&	11.967	DO		&	225.833		&	243.667			&	242.500			&	242.000	O			\\
 64	&	19.033		&	11.267		&	10.533	D		&	10.567	DO		&	236.433		&	245.900			&	245.833			&	244.000	D			\\
 128	&	15.800		&	24.500		&	11.600			&	12.233	DO		&	243.800		&	247.000			&	247.000	D		&	245.533				\\ \hline
 \end{tabular}
 }
-\caption{Average number of generations and average number of solutions per island, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
+\caption{Average number of generations and average number of solutions per front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
 \label{tab:sols2048}
 \end{table*}
 
@@ -750,7 +750,7 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 
 %EXPLANATION OF THE RESULTS
 This can be explained comparing the number of non-dominated solutions
-in each island and the average number of generations (Table
+of each front and the average number of generations (Table
 \ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome
 lengths, increasing the number of islands implies more generations
 with all the methods (logically, as there are less individuals in each
@@ -764,7 +764,7 @@ necessarily improve the solution of the global PF, but focusing on
 different elements of the chromosome. As  previously stated, every
 island is unaware of the other islands PFs, and they are trying to
 optimize their solutions independently. With respect to the average
-number of solutions in each island, there is a clear difference 
+number of solutions per front, there is a clear difference 
  with the baseline with $L=512$, where this value is in the most
 of the cases, less than a half. The number of non-dominated solutions
 also implies a better Spread indicator, where the baseline 
