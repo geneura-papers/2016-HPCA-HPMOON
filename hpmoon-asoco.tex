@@ -22,7 +22,7 @@
 \begin{frontmatter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\journal{Applied Soft Computing}
 \title{Distributed multi-objective evolutionary optimization using island-based selective operator application}
 % New title suggestion
 % Should co-evolutionary go somewhere? Are they co-evolutionary? - jj
@@ -492,7 +492,7 @@ This subsection describes the quality indicators used and the experimental setup
 \end{figure}
 
 
-We have chosen those metrics because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}. Mathematical formulation of these metrics can be seen in \cite{Dorronsoro13superlinear}.
+We have chosen those metrics not only because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}, but also because they cover different quality criteria. Mathematical formulation of these metrics can be seen in \cite{Dorronsoro13superlinear}.
 
 %\subsection{Benchmark problems}
 
@@ -574,7 +574,7 @@ distributions. The average results for each configuration are shown in
 Table \ref{tab:results512} (for 512 dimensions) and
 \ref{tab:results2048} (for 2048). As previously explained, when $P=8$
 the results of A are equivalent to the obtained with D (because
-$c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv-} in tables. For example, Equiv-D in an HV cell  means that the HV of A is the same than the one in D column, because the behaviour of this configuration is the same than executing D.
+$c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv-} in tables. For example, Equiv-D in an HV cell  means that the HV of A is the same than the value in D column, because the behaviour of this configuration is the same than executing D.
 
 
 \begin{table*}
@@ -612,7 +612,7 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 
 \end{tabular}
 }
-\caption{Average quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold.}
+\caption{Average quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
 \label{tab:results512}
 \end{table*}
 
@@ -653,7 +653,7 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 
 \end{tabular}
 }
-\caption{Average quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold.}
+\caption{Average quality metrics obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Best values are marked in bold. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
 \label{tab:results2048}
 \end{table*}
 
@@ -696,7 +696,7 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 128	&	18.133		&	15.000	B	&	9.067			&	11.367		D	&	927.233		&	984.667			&	983.933	D		&	969.433				\\ \hline
 \end{tabular}
 }
-\caption{Average number of generations and average number of solutions of the front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
+\caption{Average number of generations and average number of solutions of the front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
 \label{tab:sols512}
 \end{table*}
 
@@ -738,7 +738,7 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 128	&	15.800		&	24.500		&	11.600			&	12.233	DO		&	243.800		&	247.000			&	247.000	D		&	245.533				\\ \hline
 \end{tabular}
 }
-\caption{Average number of generations and average number of solutions per front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value.}
+\caption{Average number of generations and average number of solutions per front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and adaptive overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
 \label{tab:sols2048}
 \end{table*}
 
@@ -866,7 +866,7 @@ This work has been partially funded by projects TIN2014-56494-C4-3-P and TIN2015
 
 
 \bibliographystyle{elsarticle-num}
-\bibliography{hpmoon-coor}
+\bibliography{hpmoon-asoco}
 
 
 
