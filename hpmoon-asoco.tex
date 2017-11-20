@@ -142,7 +142,7 @@ achievable from parallelization and the need to globally recombine the
 results to accurately identify the PF
 \citep{Branke04Parallelizingcone}. 
 
-MOPs usually require a high number of variables, meaning that the MOEAs need to deal with large individuals and spend significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional ones \citep{Gong15models,Tonda12cooperative}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that works involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
+MOPs usually require a high number of variables, meaning that the MOEAs need to deal with large individuals and spend significant extra time for crossover, mutation and migration. Different authors have proposed methods to divide the decision space (the chromosome) to improve the performance and solution quality. In this aspect, the co-evolution model is a dimension-distributed model where a high-dimensional problem is divided into lower dimensional ones \citep{Gong15models,Tonda12cooperative}, and evolved separately. One example of application of this technique was described in \citep{Kimovski15Parallel}. The method presented in that work involves different workers that evolve sub-populations created and recombined by a master process, which performs different recombination alternatives from the parts returned by worker processes. A high dimensional problem was used to compare these
 alternatives. In \citep{Dorronsoro13superlinear}, a distributed
 co-evolutionary island model was used.  Although in both papers
 significant speedups were attained, only a low number of nodes were
@@ -160,7 +160,7 @@ amount of time.
 
 
 A similar approach used to solve this kind of problems is the {\em selective operator application} (SLA). In this case, each island deals with the whole chromosome, but only modifies a fragment of it in the crossover and mutation phase depending on the number of islands, using the whole chromosome for fitness calculation. This allows to deal with un-decomposable problems.
-In our preliminary work \citep{Garcia16hpmoon} we used this method in a preliminary experimental setup, although it is worth mentioning we are establishing its name and acronym in this paper for the first time.  We proved
+In our previous work \citep{Garcia16hpmoon} we used this method in a preliminary experimental setup, although it is worth mentioning we are establishing its name and acronym in this paper for the first time.  We proved
 that applying the variation operators only over specific sections of the whole chromosome improves the quality of the solutions in the same computing time for a multi-objective island-based algorithm.
 Moreover, instead of making every island focus on a disjoint subset of the
 chromosome, the usage of overlapped (shared) sections of the
@@ -286,7 +286,7 @@ sections of the chromosome to use, depending on the number of
 islands. Besides, previous experiments were performed on a single
 processor synchronous island model with a limited number of islands
 (8, 32 and 128). In this paper,  8, 16, 32, 64 and 128 islands have
-been used, and this time, the experiments have been run on a parallel
+been used, and on this occasion, the experiments have been run on a parallel
 cluster. Therefore, at the same time we are proposing an adaptive
 method to divide the individual search space, and also validating the
 previous methods. 
@@ -329,9 +329,9 @@ overlapping sections as the baseline (B).
 This basic distributed algorithm spreads the population among $P$
 islands; after a fixed number of generations,
 one individual in a given island is migrated to another random island,
-thus avoiding to synchronize the global Pareto Front (PF) every
+thus avoiding to synchronize the global PF every
 certain number of generations as other methods described in Section 2
-do. At the end of the run, the Pareto Fronts of all islands are
+do. At the end of the run, the PFs of all islands are
 aggregated into a new one, and the quality measures are evaluated. 
 Different  SLA alternatives can be devised to evolve the
 subpopulations according to the decision space to be explored by each
@@ -492,7 +492,7 @@ This subsection describes the quality indicators used and the experimental setup
 \end{figure}
 
 
-We have chosen those metrics not only because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}, but also because they cover different quality criteria. Mathematical formulation of these metrics can be seen in \cite{Dorronsoro13superlinear}.
+We have chosen those metrics not only because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}, but also because they cover different quality criteria. Mathematical formulation of these metrics can be found in \cite{Dorronsoro13superlinear}.
 
 %\subsection{Benchmark problems}
 
@@ -500,7 +500,7 @@ We have chosen those metrics not only because they have been used extensively, e
 The previously described four approaches have been run with two
 different chromosome lengths ($L$): 512 and 2048. Different number of
 islands ($P$) have also been compared: 8, 16, 32, 64 and 128. This
-maximum number of islands have also been  used in previous work in the
+maximum number of islands has also been  used in a previous work in the
 literature \citep{Martens13asynchronous}. The crossover and mutation
 chosen, SBX and polynomial, have also been  used previously by other
 authors in \citep{Durillo08masterslave}.  % SBX is first mentioned
@@ -549,7 +549,7 @@ Execution time (s) & 25 (for 512) and 100 (for 2048) \\ \hline \hline
 
 The ECJ framework \citep{ECJ} has been used to run the
 experiments, including its own random number generation implementation. Specific operators have been developed as new modules for
-ECJ, and they can be downloaded from our GitHub repository under a
+ECJ, and their source code can be downloaded from our GitHub repository under a
 LGPL V3 License
 \footnote{\url{https://github.com/hpmoon/hpmoon-islands}}. 
 %\footnote{\url{https://ANONYMOUS-REPOSITORY}}. 
@@ -567,11 +567,11 @@ to calculate the quality of the obtained PFs in each configuration. As
 some of the metrics  (such as HV) require a reference point to be
 calculated, the point (1,9) has been chosen as reference, as none of
 the generated PFs in all runs are dominated by it. Metrics are then
-normalized with respect to that point. A Kruskal-Wallis significance
+normalized respecting to that point. A Kruskal-Wallis significance
 test has been performed to the metrics of all runs of the
 configurations, as the Kolmogorov-Smirnov test detected non-normal
 distributions. The average results for each configuration are shown in
-Table \ref{tab:results512} (for 512 dimensions) and
+Table \ref{tab:results512} (for 512 dimensions) and Table
 \ref{tab:results2048} (for 2048). As previously explained, when $P=8$
 the results of A are equivalent to the obtained with D (because
 $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv-} in tables. For example, Equiv-D in an HV cell  means that the HV of A is the same than the value in D column, because the behaviour of this configuration is the same than executing D.
@@ -773,7 +773,7 @@ also implies a better Spread indicator, where the baseline
                               %FINAMENTE
 %Almost always no es muy preciso - JJ Pablo: arreglao
 
-Finally, as was already observed in \citep{Garcia16hpmoon}, results
+Finally, as it was already observed in \citep{Garcia16hpmoon}, results
 show that all the quality indicators decrease in value when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).
 
 
@@ -831,7 +831,7 @@ Problems that require high-performance % problems are not high-performance. They
  these methods can achieve better quality metrics than the baseline in
  the same amount of time, with large chromosome lengths. 
 
-Results also show that when increasing the number of islands, the
+Obtained esults also show that when increasing the number of islands, the
 adaptive overlapping method significantly improves the results with
 respect to the disjoint and overlapped methods. However, this is only
 apparent with larger chromosome sizes. Therefore, the length of the
@@ -860,7 +860,7 @@ could also be  used to validate this approach.
 
 
 \section*{Acknowledgements}
-This work has been partially funded by projects TIN2014-56494-C4-3-P and TIN2015-67020-P (Spanish Ministry of Economy and Competitivity).
+This work has been partially funded by projects TIN2014-56494-C4-3-P, TIN2015-67020-P and TIN2017-85727-C4-2-P (Spanish Ministry of Economy and Competitiveness and FEDER).
 
 
 
