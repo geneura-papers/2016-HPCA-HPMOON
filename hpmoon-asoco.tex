@@ -52,32 +52,7 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %methods have been proposed, with different parallel and distributed
 %computer architectures to cope with them. 
 
-One of the most extended
-methods to deal with high-dimensional multi-objective optimization problems are the distributed co-evolutionary algorithms. In these methods each
-processor deals only with a part of the decision space, that is, the
-individuals belonging to the same sub-population (island) explore the
-same subset of decision variables. However, only decomposable problems could be strictly implemented in parallel this way. %these methods only works with decomposable problems.
-
-A new approach is presented here to deal with un-decomposable problems, the selective operator application:
-instead of sharing parts of individuals, each processor applies the variation 
-operators to a specific subset of the whole individual. We have previously proved 
-that extending the length of these subsets, and therefore, sharing some search 
-space between islands, implies an improvement in the results.
-
-
-Specifically, in this paper, a new method to
-automatically adapt the size of the overlapping, or shared sections,
-of the individuals has been compared to other collaborative
-evolutionary techniques. Different number of islands, chromosome sizes
-and problems have been used. The analysis of the obtained experimental
-results, by using different metrics, shows that our approach can provide statistically significant improvements with
-respect to the base algorithm.%, being the method to automatically adapt
-%the overlapping size the one to obtain the best performance during the
-%same execution time. 
- Results also show that the relation between the number
-of islands (subpopulations) and the length of the chromosome (number of
-decision variables) is also a relevant factor to determine the most
-efficient alternative to distribute the decision variables. 
+One of the most extended methods to deal with high-dimensional multi-objective optimization problems are the distributed co-evolutionary algorithms. In these methods each processor deals only with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables. However, only decomposable problems could be strictly implemented in parallel this way. A new approach is presented here to deal with un-decomposable problems, the selective operator application: instead of sharing parts of individuals, each processor applies the variation operators to a specific subset of the whole individual. We have previously proved that extending the length of these subsets, and therefore, sharing some search space between islands, implies an improvement in the results. Specifically, in this paper, a new method to automatically adapt the size of the overlapping, or shared sections, of the individuals has been compared to other collaborative evolutionary techniques. Different number of islands, chromosome sizes and problems have been used. The analysis of the obtained experimental results, by using different metrics, shows that our approach can provide statistically significant improvements with respect to the base algorithm.  Results also show that the relation between the number of islands (subpopulations) and the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables. 
 \end{abstract}
 
 
@@ -166,9 +141,9 @@ Moreover, instead of making every island focus on a disjoint subset of the
 chromosome, the usage of overlapped (shared) sections of the
 chromosome 
 can improve the quality of the solutions 
-when the number of islands is increased. We discovered that the most
+when the number of islands is increased. We discovered on that paper that the most
 adequate overlapping size may vary depending on a relation between the
-number of islands and the individual size. However, the experiments
+number of islands and the individual size. However, it was a proof-of-concept, and the experiments
 were conducted in a limited experimental system: mono-processor and synchronous island model. This
 motivates us to continue this research line using a more complete environment: a real cluster with up to 128 nodes, and a more complete parameter setting. Besides comparing previous methods in this new experimental setup, in this paper we propose
 a new method that automatically adapts the size of the overlapped
@@ -289,7 +264,7 @@ processor synchronous island model with a limited number of islands
 been used, and on this occasion, the experiments have been run on a parallel
 cluster. Therefore, at the same time we are proposing an adaptive
 method to divide the individual search space, and also validating the
-previous methods. 
+previous approach. 
 
 
 We will describe how we have tested our approach in the next Section.
