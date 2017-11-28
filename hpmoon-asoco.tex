@@ -52,7 +52,9 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %methods have been proposed, with different parallel and distributed
 %computer architectures to cope with them. 
 
-One of the most extended methods to deal with high-dimensional multi-objective optimization problems are the distributed co-evolutionary algorithms. In these methods each processor deals only with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables. However, only decomposable problems could be strictly implemented in parallel this way. A new approach is presented here to deal with un-decomposable problems, the selective operator application: instead of sharing parts of individuals, each processor applies the variation operators to a specific subset of the whole individual. We have previously proved that extending the length of these subsets, and therefore, sharing some search space between islands, implies an improvement in the results. Specifically, in this paper, a new method to automatically adapt the size of the overlapping, or shared sections, of the individuals has been compared to other collaborative evolutionary techniques. Different number of islands, chromosome sizes and problems have been used. The analysis of the obtained experimental results, by using different metrics, shows that our approach can provide statistically significant improvements with respect to the base algorithm.  Results also show that the relation between the number of islands (subpopulations) and the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables. 
+One of the most extended methods to deal with high-dimensional multi-objective optimization problems are the distributed co-evolutionary algorithms. In these methods each processor deals only with a part of the decision space, that is, the individuals belonging to the same sub-population (island) explore the same subset of decision variables. However, only decomposable problems could be strictly implemented in parallel this way. A new approach is presented here to deal with un-decomposable problems, the selective operator application: instead of sharing parts of individuals, each processor applies the variation operators to a specific subset of the whole individual. We have previously proved that extending the length of these subsets, and therefore, sharing some search space between islands, implies an improvement in the results. Specifically, in this paper, a new method to automatically adapt the size of the overlapping, or shared sections, of the individuals has been compared to other collaborative evolutionary techniques considering different number of islands, chromosome sizes and benchmarks. The analysis of the obtained experimental results, by using different metrics, shows that our approach can provide statistically significant improvements with respect to the base algorithm.  Results also show that the relation between the number of islands (subpopulations) and the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables. 
+
+
 \end{abstract}
 
 
@@ -372,7 +374,7 @@ As a first
 approach to automatically calculate this value, the results shown in
 \citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that
 work, the overlapped method ($c=1$) obtained better results when the
-number of islands were $>$8. On the contrary, when the number of
+number of islands were bigger than 8. On the contrary, when the number of
 islands is small, no overlapping is necessary. So, we have used this
 knowledge to create the formula $c=round(0.2*P-1)/2$ to calculate the
 extra sections to overlap. Therefore, when $P=8$ then $c=0$
