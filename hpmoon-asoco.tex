@@ -478,6 +478,7 @@ instead of using one extra section on each side of the $p$ section ($p+1$
 and $p-1$), it uses $c$ fragments on each side ($p+c$ and $p-c$),
 being $c$ a value depending on the number of islands.
 % That's not adaptive. It's simply variable - JJ FERGU: it depends on the number of islands. What term do you suggest?
+
 As a first
 approach to automatically calculate this value, the results shown in
 \citep{Garcia16hpmoon} have been used as a base to obtain $c$. In that
@@ -487,7 +488,8 @@ islands is small, no overlapping is necessary. So, we have used this
 knowledge to create the formula $c=round(0.2*P-1)/2$ to calculate the
 extra sections to overlap. Therefore, when $P=8$ then $c=0$
 (equivalent to D), when $P=16$ then $c=1$ (equivalent to O), and so
-on. As mentioned, this is only a first approach to obtain $c$, and future work will study new methods to calculate it. Figure \ref{fig:adaptive} explains this method. 
+on. \textcolor{blue}{Dividing individuals by blocks of equal size, instead a percentage, allow the future integration of our method with other recombination mechanisms, such as the ones presented in \cite{Dorronsoro13superlinear} or \cite{Kimovski15Parallel}}.
+Also, as mentioned, this is only a first approach to obtain $c$, and future work will study new methods to calculate it. Figure \ref{fig:adaptive} explains this method. 
 
 \begin{figure*}[h!tb]
 \centering
@@ -916,16 +918,17 @@ Problems that require high-performance % problems are not high-performance. They
  these methods can achieve better quality metrics than the baseline in
  the same amount of time, with large chromosome lengths. 
 
-Obtained esults also show that when increasing the number of islands, the
+Obtained results also show that when increasing the number of islands, the
 adaptive overlapping method significantly improves the results with
 respect to the disjoint and overlapped methods. However, this is only
 apparent with larger chromosome sizes. Therefore, the length of the
 chromosome is also a key factor to take into account in adaptive
 methods, and not only the number of islands. Studying this factor with
 more types of problems, and new configurations of population size and
-chromosome lengths could be addressed in the future. For example, comparing 
+chromosome lengths could be addressed in the future. \textcolor{blue}{Since our method divides the individuals into blocks of divisible size, aggregation methods after migration, such as the ones used in \cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be also tested. But as we are dealing with complete individuals in each island, the possibility of using a real number, such as 0.3 (30\% overlapping) instead an integer value opens future experimental setups.}
+For example, comparing 
 different ways to calculate $c$ using linear, logarithmic or exponential functions
-depending on these values. Moreover, a diversity analysis of the individuals
+depending \textcolor{blue}{on population size, number of islands, or other values}. Moreover, a diversity analysis of the individuals
 in each island during the algorithm run could be carried out to understand its influence
 on results.
 % 
