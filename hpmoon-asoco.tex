@@ -319,16 +319,19 @@ the different processors or islands.
 To solve this issue, some authors have proposed using Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches: synchronous generational, asynchronous generational and asynchronous steady-state, being the latter the most promising option. On the other hand, the method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power.
 
 %This is an improvement over the previous? What is the relationship? FERGU: linked
-Other kind of approaches have also been explored. The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. In that paper, authors concluded that dividing the search space is a good idea, although achieving this is not trivial. The division of the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separating it in processors by objective \citep{Xiao03specialized}. Other authors, such as Martens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
+Other kind of approaches have also been explored. The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. In that paper, authors concluded that dividing the search space is a good idea, although achieving this is not trivial. The division of the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separating it in processors by objective \citep{Xiao03specialized}. \textcolor{blue}{For example, in \cite{Zhang17DECAL}, a weighted function is used to decompose the objective function and every subpopulation is responsible to solve the problem defined by a weighted vector.} Other authors, such as Martens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
 
 % Is this really cooperative co-evolution? - JJ FERGU: You mean the Dorronsoro one? The title says it
-Addressing high-dimensional problems with cooperative co-evolution has
+\textcolor{blue}{Many real-world problems require high-dimensionality \cite{Zhang17DECAL,XU2018268}.
+Addressing this kind of problems with cooperative co-evolution has
 also been studied in several works with approaches closer to the one
-presented here. The approach to focus on a portion of the chromosome,
+presented here.} The approach to focus on a portion of the chromosome,
 as in our overlapped method, was firstly used in the work by
 Dorronsoro et al. \citep{Dorronsoro13superlinear}, obtaining
 super-linear performance 
-in several instances. This approach has also been used by Kimovski et al. \citep{Kimovski15Parallel}, but using a
+in several instances. \textcolor{blue}{Recently, this approach has also been tested using a Particle Swarm Optimization (PSO) algorithm \cite{DorronsoroPSO2018}, also obtaining significant improvements in speedups and solution quality}. 
+
+The approach described by Dorronsoro et al. has also been used by Kimovski et al. \citep{Kimovski15Parallel}, but using a
 master-slave method that splits the population into several processors. As in previous works, each node
 runs a parallel MOEA that only affects some portion of 
 the individuals and the master
@@ -607,7 +610,7 @@ mutation can be spent on improving the sub-populations and more
 operations and migrations can be achieved. Also, we are using
 different number of islands (with different sub-population sizes) and that
 could lead to different execution times, so it would be difficult to
-compare different times and quality of solutions at the same time. The number of generations between migrations has been set to 5, as this number is usually repeated in the literature \cite{Deb03distributed,Martens13asynchronous}.
+compare different times and quality of solutions at the same time. The number of generations between migrations has been set to 5, as this number is usually repeated in the literature \cite{Deb03distributed,Martens13asynchronous}. \textcolor{blue}{The individual chosen to migrate is selected using Binary Tournament, as it has been previously used by other authors \cite{xiong2003parallel,Xiao03specialized}. As there is not a synchronization step to arrange the individual parts besides the specific crossover and mutation operations, the destination island after migration is chosen randomly to ensure that the modified parts of the migrated individual can be shared in the whole set of different islands. Migration is performed asynchronously, as it have the advantage of being a non-blocking operation \cite{TalbiUnified18}.}.
  The whole parameter set is summarized in Table \ref{tab:parameters}.
 
 \begin{table*}
