@@ -47,10 +47,10 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %methods have been proposed, with different parallel and distributed
 %computer architectures to cope with them. 
 
-  Real world optimization problems usually have many dimensions and
+  \textcolor{blue}{Real world optimization problems usually have many dimensions and
   several objectives. The high dimensionality requires exceptional
   computing power, and the fact that several dimensions have to be
-  searched at the same time add additional difficulty.
+  searched at the same time add additional difficulty.}
 % One of the most extended methods to deal with high-dimensional
 % multi-objective optimization problems are the distributed
 % co-evolutionary algorithms.
@@ -61,14 +61,14 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 % title, but "island-based selective operator application". This
 % should go to the abstract too - JJ
   
-  In these methods %which ones? coevolutionary or selective operator
+In these methods %which ones? coevolutionary or selective operator
                    %application? - JJ
   each processor deals only with a part of the decision
 space, that is, the individuals belonging to the same sub-population,
-which are called {\em islands} in this context, explore the same subset of decision variables. However, only
+\textcolor{blue}{which are called {\em islands} in this context}, explore the same subset of decision variables. However, only
 decomposable problems could be strictly implemented in parallel this
-way. A new approach, which we call {\em selective operator application} is presented here to deal with un-decomposable
-problems: % so we are saying that high-dimensional multi-objective
+way. \textcolor{blue}{A new approach, which we call {\em selective operator application} is presented here to deal with un-decomposable
+problems:} % so we are saying that high-dimensional multi-objective
           % problems are a challenge, but we are presenting a solution
           % for non-decomposable problems. What's what? - JJ
 instead of sharing parts
@@ -76,22 +76,24 @@ of individuals, each processor applies the variation operators to a
 specific subset of the whole individual. % this solves... - JJ
 We have previously proved
 that extending the length of these subsets, and therefore, sharing
-a part of the search space among islands, implies an improvement in the
-results % which results? - JJ
-but in this paper, a new method to automatically
+\textcolor{blue}{some search space between islands, implies an improvement in different performance metrics}.
+ % which results? - JJ PABLO: answered
+But in this paper, a new method to automatically
 adapt the size of the overlapping, or shared sections, of the
 individuals has been compared to other collaborative evolutionary
 techniques considering different number of islands, chromosome sizes
 and benchmarks. The analysis of the obtained experimental results, by
 using different metrics, shows that our approach can provide
 statistically significant improvements with respect to the base
-algorithm. % in high-dimensional multi-objective problems? - JJ
+algorithm \textcolor{blue}{in high-dimensional multi-objective problems}. % in high-dimensional multi-objective problems? - JJ PABLO: ok, puesto
 Results also show that the relation between the number of
 islands (subpopulations) and the length of the chromosome (number of
 decision variables) is also a relevant factor to determine the most
-efficient alternative to distribute the decision variables.  % This
+efficient alternative to distribute the decision variables.  
+\textcolor{blue}{This opens up a new challenge that can be addressed in the future.}
+% This
                                 % solves a problem or challenge we
-                                % hadn't stated. - JJ
+                                % hadn't stated. - JJ Pablo: metido, mira a ver si queda frase memorable
 
 
 \end{abstract}
@@ -571,7 +573,7 @@ This subsection describes the quality indicators used and the experimental setup
 \begin{itemize}
 \item Hypervolume (HV): measures the area formed by all non-dominated solutions found with respect to a reference point. Higher values imply better quality of the PF. Figure \ref{fig:hypervolume} clarifies how the hypervolume is calculated.
 \item Inverted Generational distance (IGD): calculates the distance of the obtained set of solutions to the optimal PF. Therefore, this metric requires the optimal PF found in the literature, or the theoretical one. In this metric, the lower the better. %Pablo: theoretical?
-\item Spread (S): Measures the spread between solutions, taking into account the euclidean distance between consecutive solutions. As in previous metric, the lower value, the better, as it implies solutions distributed along all the PF.
+\item Spread (S): Measures the spread between solutions, taking into account the \textcolor{blue}{Euclidean} distance between consecutive solutions. As in previous metric, the lower value, the better, as it implies solutions distributed along all the PF.
 \end{itemize}
 
 \begin{figure}
@@ -656,7 +658,7 @@ Different metrics, previously explained, have been used
 to calculate the quality of the obtained PFs in each configuration. As
 some of the metrics  (such as HV) require a reference point to be
 calculated, the point (1,9) has been chosen as reference, as none of
-the generated PFs in all runs are dominated by it. Metrics are then
+the generated PFs in all runs \textcolor{blue}{is} dominated by it. Metrics are then
 normalized respecting to that point. A Kruskal-Wallis significance
 test has been performed to the metrics of all runs of the
 configurations, as the Kolmogorov-Smirnov test detected non-normal
@@ -838,6 +840,68 @@ Results show that there is a difference in performance when using 512 or 2048 di
 However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the adaptive version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods. Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, besides depending on the number of islands and population size.
 
 
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt1_512.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt1_512}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt2_512.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt2_512}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt3_512.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt3_512}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt6_512.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt6_512}
+\end{figure}
+
+
+
+%%%%%2018
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt1_2048.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt1_2048}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt2_2048.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt2_2048}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt3_2048.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt3_2048}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt6_2048.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and adaptive overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt6_2048}
+\end{figure}
+
+
+
 %EXPLANATION OF THE RESULTS
 This can be explained comparing the number of non-dominated solutions
 of each front and the average number of generations (Table
@@ -858,10 +922,7 @@ number of solutions per front, there is a clear difference
  with the baseline with $L=512$, where this value is in the most
 of the cases, less than a half. The number of non-dominated solutions
 also implies a better Spread indicator, where the baseline 
- obtains better (or not significantly different) values in the majority of the compared configurations. %TENGO QUE COMENTAR MAS LOS RESULTADOS Y
-                              %ENTENDERLO TODO Y JUSTIFICARLO
-                              %FINAMENTE
-%Almost always no es muy preciso - JJ Pablo: arreglao
+ obtains better (or not significantly different) values in the majority of the compared configurations. 
 
 Finally, as it was already observed in \citep{Garcia16hpmoon}, results
 show that all the quality indicators decrease in value when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).
