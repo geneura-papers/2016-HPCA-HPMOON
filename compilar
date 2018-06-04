@@ -6,6 +6,9 @@ rm *.blg
 rm *.log
 rm *~
 rm *.dvi
+rm *.spl
+rm *.out
+
 rm hpmoon-asoco.pdf
 
 pdflatex hpmoon-asoco.tex && bibtex hpmoon-asoco && pdflatex hpmoon-asoco.tex && pdflatex hpmoon-asoco.tex
