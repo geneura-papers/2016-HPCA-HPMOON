@@ -612,7 +612,7 @@ mutation can be spent on improving the sub-populations and more
 operations and migrations can be achieved. Also, we are using
 different number of islands (with different sub-population sizes) and that
 could lead to different execution times, so it would be difficult to
-compare different times and quality of solutions at the same time. The number of generations between migrations has been set to 5, as this number is usually repeated in the literature \cite{Deb03distributed,Martens13asynchronous}. \textcolor{blue}{The individual chosen to migrate is selected using Binary Tournament, as it has been previously used by other authors \cite{xiong2003parallel,Xiao03specialized}. As there is not a synchronization step to arrange the individual parts besides the specific crossover and mutation operations, the destination island after migration is chosen randomly to ensure that the modified parts of the migrated individual can be shared in the whole set of different islands. Migration is performed asynchronously, as it have the advantage of being a non-blocking operation \cite{TalbiUnified2018}.}.
+compare different times and quality of solutions at the same time. The number of generations between migrations has been set to 5, as this number is usually repeated in the literature \cite{Deb03distributed,Martens13asynchronous}. \textcolor{blue}{The individual chosen to migrate is selected using Binary Tournament, as it has been previously used by other authors \cite{xiong2003parallel,Xiao03specialized}. As there is not a synchronization step to arrange the individual parts besides the specific crossover and mutation operations, the destination island after migration is chosen randomly to ensure that the modified parts of the migrated individual can be shared in the whole set of different islands. Migration is performed asynchronously, as it have the advantage of being a non-blocking operation \cite{TalbiUnified2018}.}
  The whole parameter set is summarized in Table \ref{tab:parameters}.
 
 \begin{table*}
@@ -839,7 +839,7 @@ Results show that there is a difference in performance when using 512 or 2048 di
 
 However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the automatic ($A$) version (Table \ref{tab:results2048}), even improving the overlapping and disjoint methods. Therefore, there exist some kind of limit point in chromosome length where one method will be preferable to another, besides depending on the number of islands and population size.
 
-
+%ZDT1
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt1_512.png}
@@ -849,34 +849,22 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 
 \begin{figure}
 \centering
-\includegraphics[width=12cm]{plot_zdt2_512.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
-\label{fig:plot_zdt2_512}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt3_512.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
-\label{fig:plot_zdt3_512}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt6_512.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
-\label{fig:plot_zdt6_512}
-\end{figure}
-
-
-
-%%%%%2018
-
-\begin{figure}
-\centering
 \includegraphics[width=12cm]{plot_zdt1_2048.png}
 \caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt1_2048}
+\end{figure}
+
+
+
+
+
+
+%ZDT2
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt2_512.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt2_512}
 \end{figure}
 
 \begin{figure}
@@ -886,11 +874,34 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 \label{fig:plot_zdt2_2048}
 \end{figure}
 
+
+
+
+
+%ZDT3
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt3_512.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt3_512}
+\end{figure}
+
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt3_2048.png}
 \caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt3_2048}
+\end{figure}
+
+
+
+
+%ZDT6
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{plot_zdt6_512.png}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\label{fig:plot_zdt6_512}
 \end{figure}
 
 \begin{figure}
@@ -922,7 +933,19 @@ number of solutions per front, there is a clear difference
  with the baseline with $L=512$, where this value is in the most
 of the cases, less than a half. The number of non-dominated solutions
 also implies a better Spread indicator, where the baseline 
- obtains better (or not significantly different) values in the majority of the compared configurations. 
+ obtains better (or not significantly different) values in the majority of the compared configurations.
+
+%%%%%%FERGU: WARNING, THIS SECTION IS STILL SHIT
+%ZDT1 
+\textcolor{blue}{FINISH THIS SECTION!!!! Plotting the final PFs of each combination of parameters, problems and sizes also allow to see the different .... ZDT1 has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=512$ (Figure \ref{fig:plot_zdt1_2048}) it is visually clear that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown in average in Table \ref{tab:results512}. But if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048}) that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is larger.}
+
+%ZDT2
+\textcolor{blue}{ZDT2 has a non-convex Pareto-optimal front. This is the reason that some solutions ....WHAT. As in previous problem, there is a decrease of quality in all configurations when increasing the size of $P$.}
+
+%ZDT3
+\textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, some the $A$ configurations skip the last region on the right with $P=8$  and $P=16$ (being equivalent to $O$ and $A$). This can be explained because...  In the case of $L=2048$...} 
+
+\textcolor{blue}{In ZDT6, the Pareto-optimal solutions are not only non-uniformly distributed along the PF, but their density also increases as we move further away from it. That is the reason why some PFs obtained have a extremely low number of solutions in some configurations, and also, they are aggregated toward the areas with more density...}
 
 Finally, as it was already observed in \citep{Garcia16hpmoon}, results
 show that all the quality indicators decrease in value when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).
@@ -970,8 +993,7 @@ show that all the quality indicators decrease in value when the number of island
 
 \section{Conclusions}
 
-Problems that require high-performance % problems are not high-performance. They
-                          % _require_ high performance Fergu: done
+Problems that require high-performance 
  and deal with a large number of decision variables can leverage the
  division of the decision space that parallel and distributed
  algorithms imply. This can be done in dMOEAs by selective operator application (SLA), that is, dividing the
