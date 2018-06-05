@@ -155,6 +155,9 @@ computing nodes, which are usually called islands. The fact that
 they are population-based helps find many solutions that compose the
 Pareto fron simultaneously.
 
+
+%The availability of metaheuristics which are able to efficiently approach these multi-objective optimization problems have made it possible to cope with many real applications from such multi-objective point of view [4, 5, 6, 7, 8].  Evolutionary algorithms (EAs) [9] are bio-inspired meta-heuristics that can be effectively used to find nearly optimal solutions for optimization problems and have been extended to multi-objective optimization through quite a number of Multi-Objective Evolutionary Algorithms (MOEAs) [29]. 
+
 Usually an EA starts by generating a set of random solutions, called
 \emph{population}, following a user-defined description. Then, it
 evaluates each candidate solution, called \emph{individual}, assigning
@@ -166,21 +169,22 @@ iteration, called \emph{generation}, the least fit individuals are
 removed, and the process continues until a user-defined stop condition
 is met.
 
+\textcolor{blue}{EAs have been extended to multi-objective optimization through quite a number of Multi-Objective Evolutionary Algorithms (MOEAs) \cite{TalbiUnified2018}}.
 One of the best known and referenced MOEAs
 \citep{Dorronsoro13superlinear} is the {\em 
   Non-dominated Sorting Genetic Algorithm} (NSGA-II)
 \citep{Deb00NSGAII}. Classical genetic operators are applied to all
 the individuals, which are divided into different ranks, based on the
-dominance, to be selected for the next generations. 
+dominance, to be selected for the next generations.
 % This paragraph has nothing to do with anything. Is it useful for
 % what you are doing in the paper? Is there any challenge that you
 % will be solving here? For instance, you could talk about the problem
-% it's got for parallelization and how it deals with them - JJ
+% it's got for parallelization and how it deals with them - JJ FERGU: Could you add some paragraph to justify it? (use \textcolor{blue}{} please)
 
 %4 BUT THE EASY PARALLELIZATION IS NOT NECESSARILY EFFICIENT
 
 Different approaches have been used to parallelize EAs, as each individual can be considered as an
-independent unit \citep{Alba13parallel}. Classic methods, such as the
+independent unit \citep{Alba13parallel,Gong15models}. Classic methods, such as the
 global parallel EAs (Master-Slave), or the spatially structured
 algorithms (Island model or Cellular EAs) have been applied
 successfully in the past \citep{Folino03cellular,Alba02Parallelism}.
@@ -192,8 +196,8 @@ achievable from parallelization and the need to globally recombine the
 results to accurately identify the PF
 \citep{Branke04Parallelizingcone}. % Is that the case with NSGA? - JJ
 
-MOPs usually require a high number of variables, % No they don't, and
-                                % if they do, add a reference - JJ
+\textcolor{blue}{MOPs usually require a high number of decision variables \cite{Zhang17DECAL,XU2018268}}, % No they don't, and
+                                % if they do, add a reference - JJ FERGU: added references
 meaning that the
 MOEAs need to deal with large individuals and spend significant extra
 time for crossover, mutation and migration. %depending on the
@@ -263,8 +267,9 @@ synchronous island model. %where we couldn't prove that... Or, we
                           %couldn't experiment... - JJ
 This
 motivates us to continue this research line using a more complete environment: a real cluster with up to 128 nodes, and a more complete parameter setting. Besides comparing previous methods in this new experimental setup, in this paper we propose
-a new method that automatically adapts the size of the overlapped
+a new method that automatically \textcolor{blue}{sets} the size of the overlapped
 sections depending on the number of available islands, comparing it with previous versions. 
+
 % We have to
                                 % emphasize what is actually done. Is
                                 % this an addition to the old paper,
@@ -273,12 +278,12 @@ sections depending on the number of available islands, comparing it with previou
 
 %6 IN THIS PAPER WE WILL BE PROVING
 
-The hypothesis of this paper is that the use of automatically calculated overlapped sections of the
+The hypothesis of this paper is that the use of \textcolor{blue}{automatically} calculated overlapped sections of the
 chromosome for the SLA can improve the
 quality of the solutions in the same computing time with respect to
 the baseline, disjoint and partly overlapped methods. 
-These overlapped sections are calculated from the number of available islands, in a
-multi-objective island-based algorithm, and tested in a real computational environment.
+\textcolor{blue}{The size of the overlapped sections are calculated from  the number of available subpopulations in the multi-objective evolutionary algorithm, and tested in a real computational environment.}
+
 
 In order to prove this claim, our new automatic method has been
 compared against different overlapping island schemes: a
@@ -300,19 +305,17 @@ Then, the results of the experiments are presented (Section \ref{sec:results}), 
 \section{State of the Art}
 \label{sec:soa}
 
+%FERGU: Texto que me ha pasado Julio
+%\textcolor{blue}{Multi-objective optimization evolutionary algorithms (MOEAs) can take advantage of parallel and distributed processing \cite{Gong15models} not only to improve the quality of the solutions found, but also to speed up the execution times. Among the functional and data decomposition alternatives to parallelize an algorithm, parallel evolutionary algorithms usually implement data decomposition by identifying tasks that have to be repeatedly executed on different data. For example, in an evolutionary algorithm, the evaluation of the fitness function and the application of mutation operators to the individuals of the population can be independently applied to each individual. Moreover, in the context of data decomposition, two main alternatives can be distinguished. In the first one, the individuals of the population are distributed among several processes that independently compute their corresponding fitness functions. Once each process completes the fitness evaluation of the individuals allocated to it, another process applies the corresponding evolutionary operators to the individuals of the whole population to determine the population for the next generation. Then, the population is distributed again among the processes to obtain the new values of the fitness and so on until the end condition (a given number of generations, or a solution quality level) is met. It is clear that this alternative does not modify the convergence characteristics of the corresponding sequential evolutionary algorithm, although to complete each iteration communication is required between the process that applies the evolutionary operators to the population and the processes that evaluate the fitness values of the population. In the second alternative, several parallel processes execute iterations of the corresponding evolutionary algorithm on different subpopulations. In this case, the convergence behaviour could be different in sequential and parallel versions of the algorithms as the different subpopulations evolve in parallel and only exchange information about their individuals after completing a given number of generations. The number of individuals in the subpopulations (the grain size of the parallel procedure), and the characteristics of the communication (frequency of communication, character synchronous or asynchronous of the communication, characteristics of the communicated data, etc.) determine the performance of the parallel procedure. This second parallelization alternative (concurrent execution of evolutionary algorithms over multiple subpopulations) is the one considered in this paper. It can be implemented either by a master-worker approximation or by assigning each subpopulation to a different processor and communicating this processor with the others when it is required. In this second approach, according to the size of the grain (number of individuals in the subpopulations), two main alternatives can be also distinguished: the island parallel approach (coarse grain) and the cellular or diffusion approach (fine grain). In the master-worker approximation, the master distributes the subpopulations among the workers that communicate through the master. This way, as the communications increase (with the number of subpopulations and/or the frequency of communications among subpopulations) the master could become a bottleneck that reduces the efficiency of the parallel procedure.}
 
 
-
-% Parallel multiobjective optimization is the theme. And there are
-% papers that do that. Please include them in the state of the art:
-% dennis2003parallel (added to bibliography). FERGU: why this paper in particular? It parallelizes the fitness function steps and it is not multi-objective. It does not even describes the GA in detail.
 
 Since the early 2000s distributed and parallel EAs
  have been used mostly to leverage systems such
 as clusters or grids \citep{Talbi08Parallel}, since a first-order
 approach to EA parallelization is as easy as dividing the population
 and add a simple communication mechanism among them. But in the case of
-MOEAs, the distribution and parallelization is not as direct as in
+MOEAs, the distribution and parallelization is \textcolor{blue}{more difficult}
 single-objective EAs. This is because in different steps of the
 algorithm a whole set of dependent solutions, the Pareto Front, should
 be managed as a whole, spending time in gathering all individuals from
@@ -350,11 +353,11 @@ researchers. For example, some authors focus on the solution space
 modeling the PF by dividing it in different clusters, allowing an
 easily parallelizable {\em divide and conquer} approach
 \citep{cheng2015adaptive}. 
-Even other types of metaheuristics, 
-such as the Multi-Objective Ant Colony Optimization (MOACO) 
-or Artificial Bee Colony Algorithm, 
+\textcolor{blue}{Even other types of metaheuristics, 
+such as the Multi-Objective Ant Colony Optimization (MOACO) \cite{Mora13paretobased}
+or Artificial Bee Colony Algorithm \cite{LUO2017235}, 
 can rely on island models to divide the search space depending on 
-the node to achieve better results \cite{Mora13paretobased,LUO2017235}. 
+the node to achieve better results. }
 
 In our previous work \citep{Garcia16hpmoon} we used some of
 the aforementioned ideas to compare two different dMOEAs. The first
@@ -377,9 +380,8 @@ islands. Besides, previous experiments were performed on a single
 processor synchronous island model with a limited number of islands
 (8, 32 and 128). In this paper,  8, 16, 32, 64 and 128 islands have
 been used, and on this occasion, the experiments have been run on a parallel
-cluster. Therefore, at the same time we are proposing an automatic
-method to divide the individual search space, and also validating the
-previous approach. 
+cluster. 
+\textcolor{blue}{Therefore, at the same time, we are proposing a new method to divide the individual search space according to the number of evolved subpopulations, and also validating the previous approach.}
 
 
 We will describe how we have tested our approach in the next Section.
@@ -391,14 +393,7 @@ We will describe how we have tested our approach in the next Section.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  METHODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{Methodology} % This should be called
-                                % methodology. The object of the
-                                % section is to explain the
-                                % methodology used to test the
-                                % problem, in order to do that we have
-                                % tested different versions that prove
-                                % that our methodology works for the
-                                % precise reasons we think it works- JJ FERGU: Done, and explained
+\section{Methodology} 
 \label{sec:methodology}
 
 The objective of this section is to explain the methodology we have followed to
@@ -415,7 +410,7 @@ before
 Therefore, we have used a basic distributed NSGA-II algorithm without
 overlapping sections as the baseline (B).
 
-%This probably should deserve a "Algorithm" environment too - JJ FERGU: You mean the LaTeX one? I've used it in the pseudocode figures
+
 This basic distributed algorithm spreads the population among $P$
 islands; after a fixed number of generations,
 one individual in a given island is migrated to another random island,
@@ -461,7 +456,7 @@ describes this approach.
 \begin{figure*}[h!tb]
 \centering
 \includegraphics[width=12cm]{islandDisjoint.jpg}
-\caption{SLA with disjoint islands (D): every island $p$ only modifies the $p_{th}$ components (in grey) of the individuals.}
+\caption{SLA with disjoint islands (D): every island $p$ only modifies the $p_{th}$ components (in grey) of the individuals \textcolor{blue}{using genetic operators (crossover and mutation). Also, every island evaluates its own individuals using the complete chromosome. After a given number of generations it cooperates with the other islands through migration.}}
 \label{fig:disjoint}
 \end{figure*}
 
@@ -473,7 +468,7 @@ each island.
 \centering
 \includegraphics[width=12cm]{islandNoDisjoint.jpg}
 \caption{SLA with overlapping islands (O): every island $p$ modifies the  $p+1$,
-  $p_{th}$ and $p-1$  components (in grey) of the individuals.}
+  $p_{th}$ and $p-1$  components (in grey) of the individuals \textcolor{blue}{using genetic operators (crossover and mutation). Also, every island evaluates its own individuals using the complete chromosome. After a given number of generations it cooperates with the other islands through migration.}}
   \label{fig:overlapping}
 \end{figure*}
 
@@ -500,7 +495,7 @@ Also, as mentioned, this is only a first approach to obtain $c$, and future work
 \centering
 \includegraphics[width=12cm]{islandAdaptive.jpg}
 \caption{\textcolor{blue}{Automatic} SLA with overlapping islands (A): every island $p$ modifies the  $p+c$,
-  $p_{th}$ and $p-c$  components (in grey) of the individuals. $c$ is calculated depending on the number of islands. In this case, $c=2$.}
+  $p_{th}$ and $p-c$  components (in grey) of the individuals \textcolor{blue}{using genetic operators (crossover and mutation). Also, every island evaluates its own individuals using the complete chromosome. After a given number of generations it cooperates with the other islands through migration.} $c$ is calculated depending on the number of islands. In this case, $c=2$.}
   \label{fig:adaptive}
 \end{figure*}
 % --------------------------------------------------------------
@@ -598,7 +593,7 @@ chosen, SBX and polynomial, have also been  used previously by other
 authors in \citep{Durillo08masterslave}.  % SBX is first mentioned
                                 % here. Has to explain - JJ
 
-ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This benchmark includes several functions, with different features that are representative of real world optimization problems. Mathematical formulation of each function is available in \citep{zdt2000a}.  The optimal PF distribution used for comparison has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.}. 
+ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This benchmark includes several functions, with different features that are representative of real world optimization problems. Mathematical formulation of each function is available in \citep{zdt2000a}. 
 
 
 
@@ -640,11 +635,11 @@ Execution time (s) & 25 (for 512) and 100 (for 2048) \\ \hline \hline
 \end{table*}
 
 The ECJ framework \citep{ECJ} has been used to run the
-experiments, including its own random number generation implementation. Specific operators have been developed as new modules for
-ECJ, and their source code can be downloaded from our GitHub repository under a
+experiments, including its own random number generation implementation.  \textcolor{blue}{The specific modifications to deal with the proposed approaches have been developed as new modules for
+ECJ}, and their source code can be downloaded from our GitHub repository under a
 LGPL V3 License
-\footnote{\url{https://github.com/hpmoon/hpmoon-islands}}. 
-%\footnote{\url{https://ANONYMOUS-REPOSITORY}}. 
+\footnote{\url{https://github.com/hpmoon/hpmoon-islands}}. \textcolor{blue}{The quality metrics (HV, Spread and IGD) have been calculated using the jMetal \cite{Durillo11Jmetal} library.}
+
 The
 island model has been executed asynchronously, using the ECJ distributed inter-population exchange
  model, in a cluster of 16 nodes, each one with 16 Intel(R) Xeon(R) CPU E5520
@@ -655,11 +650,10 @@ island model has been executed asynchronously, using the ECJ distributed inter-p
 
 
 Different metrics, previously explained, have been used
-to calculate the quality of the obtained PFs in each configuration. As
-some of the metrics  (such as HV) require a reference point to be
-calculated, the point (1,9) has been chosen as reference, as none of
-the generated PFs in all runs \textcolor{blue}{is} dominated by it. Metrics are then
-normalized respecting to that point. A Kruskal-Wallis significance
+to calculate the quality of the obtained PFs in each configuration. \textcolor{blue}{As HV require a reference point to be
+calculated (see Figure \ref{fig:hypervolume}), we have chosen the value (1,9) as none of the existing solutions on all fronts obtained during all executions is dominated by it. In other words, as we are minimizing in both objectives, this reference point is required to be numerically larger or equal in each objective, and strictly larger in at least one of them (dominated) for all solutions in the PFs we are going to measure. HV is then
+normalized respecting to that point. Also, the optimal reference PF distribution used to calculate the IGD and Spread metrics has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.} }.  
+A Kruskal-Wallis significance
 test has been performed to the metrics of all runs of the
 configurations, as the Kolmogorov-Smirnov test detected non-normal
 distributions. The average results for each configuration are shown in
@@ -937,15 +931,15 @@ also implies a better Spread indicator, where the baseline
 
 %%%%%%FERGU: WARNING, THIS SECTION IS STILL SHIT
 %ZDT1 
-\textcolor{blue}{FINISH THIS SECTION!!!! Plotting the final PFs of each combination of parameters, problems and sizes also allow to see the different .... ZDT1 has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=512$ (Figure \ref{fig:plot_zdt1_2048}) it is visually clear that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown in average in Table \ref{tab:results512}. But if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048}) that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is larger.}
+\textcolor{blue}{Plotting the final PFs of each parameter combination also allow to see visually the effect of the different chromosome sizes and number of islands in each different problem. The first one, ZDT1, has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=512$ (Figure \ref{fig:plot_zdt1_2048}) it is visually clear that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown in average in Table \ref{tab:results512}. But if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048}) that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is still larger.}
 
 %ZDT2
-\textcolor{blue}{ZDT2 has a non-convex Pareto-optimal front. This is the reason that some solutions ....WHAT. As in previous problem, there is a decrease of quality in all configurations when increasing the size of $P$.}
+\textcolor{blue}{ZDT2 has a non-convex Pareto-optimal front. This is the reason that some solutions ....WHAT...... With $L=512$ As in previous problem, there is a decrease of quality in all configurations when increasing the size of $P$.}
 
 %ZDT3
-\textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, some the $A$ configurations skip the last region on the right with $P=8$  and $P=16$ (being equivalent to $O$ and $A$). This can be explained because...  In the case of $L=2048$...} 
+\textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, some the $A$ configurations skip the last region on the right with $P=8$  and $P=16$ (being equivalent to $O$ and $A$). This can be explained because... WHAT  In the case of $L=2048$, the rightmost part appears in all configurations, and being the Spread metric not significantly different between all the configurations (as shown in Table \ref{tab:results2048}), the HV metric is the only that can be used can be used to show the effectiveness of our approach in this type of problem with non-continuous PFs.} 
 
-\textcolor{blue}{In ZDT6, the Pareto-optimal solutions are not only non-uniformly distributed along the PF, but their density also increases as we move further away from it. That is the reason why some PFs obtained have a extremely low number of solutions in some configurations, and also, they are aggregated toward the areas with more density...}
+\textcolor{blue}{In ZDT6, the Pareto-optimal solutions are not only non-uniformly distributed along the PF, but their density also increases as we move further away from it. That is the reason why some PFs obtained have a extremely low number of solutions in some configurations, and also, they are aggregated toward the areas with more density. Moreover, all configurations, including $B$, obtained PFs relatively far away from the optimal PF, as opposed as in previous problems. Spread is very similar between all methods with the different $L$ sizes, that there was not significant difference between methods, with some exceptions: Spread using $A$ with $L=512$ was significantly worse. As in previous approaches it is visually clear than increasing the number of islands, and therefore, reducing the number of individual per island, imply a decrease in quality of the HV.}
 
 Finally, as it was already observed in \citep{Garcia16hpmoon}, results
 show that all the quality indicators decrease in value when the number of islands is increased, as the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).
