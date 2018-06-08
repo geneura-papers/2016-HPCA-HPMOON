@@ -15,6 +15,7 @@
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{url}
+%\usepackage{refcheck}
 \usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
 \begin{document}
@@ -264,7 +265,7 @@ Moreover, instead of making every island focus on a disjoint subset of the
 chromosome, the usage of overlapped (shared) sections of the
 chromosome 
 can improve the quality of the solutions 
-when the number of islands is increased. On that paper we showed that the most
+when the number of islands is increased. In that paper, we showed that the most
 adequate overlapping size may vary depending on a relation between the
 number of islands and the individual size. However, it was a proof-of-concept, and the experiments
 were conducted in a limited experimental system: mono-processor and
@@ -329,7 +330,7 @@ the different processors or islands.
 To solve this issue, some authors have proposed using Master-Slave approaches. For example,  \citep{Durillo08masterslave} compared different master-slave approaches: synchronous generational, asynchronous generational and asynchronous steady-state, being the latter the most promising option. On the other hand, the method proposed by Hiroyasu \citep{Hiroyasu07discussion} generates offspring depending on the computational power.
 
 %This is an improvement over the previous? What is the relationship? FERGU: linked
-Other kind of approaches have also been explored. The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. In that paper, authors concluded that dividing the search space is a good idea, although achieving this is not trivial. The division of the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separating it in processors by objective \citep{Xiao03specialized}. \textcolor{blue}{For example, in \cite{Zhang17DECAL}, a weighted function is used to decompose the objective function and every subpopulation is responsible to solve the problem defined by a weighted vector.} Other authors, such as M{\"a}rtens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
+\textcolor{blue}{Another kind of approaches has also been explored}. The work by Deb et al. \citep{Deb03distributed} was one of the first approaches for distributed MOEAs (dMOEAs). In that work, the dominance of the solutions was divided into the islands using a coordinate transformation. In that paper, the authors concluded that dividing the search space is a good idea, although achieving this is not trivial. The division of the search space has been explored by other researchers, for example, dividing the population in elite and search sub-populations \citep{Wang09parallel}, or separating it in processors by objective \citep{Xiao03specialized}. \textcolor{blue}{For example, in \cite{Zhang17DECAL}, a weighted function is used to decompose the objective function and every subpopulation is responsible to solve the problem defined by a weighted vector.} Other authors, such as M{\"a}rtens \citep{Martens13asynchronous} use migration to accept individuals based on diversity, and migrating from not-crowded areas.
 
 % Is this really cooperative co-evolution? - JJ FERGU: You mean the Dorronsoro one? The title says it
 \textcolor{blue}{Many real-world problems require high-dimensionality \cite{Zhang17DECAL,XU2018268}.
@@ -339,7 +340,7 @@ presented here.} The approach to focus on a portion of the chromosome,
 as in our overlapped method, was firstly used in the work by
 Dorronsoro et al. \citep{Dorronsoro13superlinear}, obtaining
 super-linear performance 
-in several instances. \textcolor{blue}{Recently, this approach has also been tested using a Particle Swarm Optimization (PSO) algorithm \cite{DorronsoroPSO2018}, also obtaining significant improvements in speedups and solution quality}. 
+in several instances. \textcolor{blue}{Recently, this approach has also been tested using a Particle Swarm Optimization (PSO) algorithm \cite{DorronsoroPSO2018}, also obtaining significant improvements in speedups and solution quality. Others authors, such as Cao et al. \cite{CaoZLL17} separate the decision variables into several subpopulations after performing an interdependence analysis, but using a fixed number of processors.}
 
 The approach described by Dorronsoro et al. has also been used by Kimovski et al. \citep{Kimovski15Parallel}, but implementing a
 master-slave method that splits the population into several processors. As in previous works, each node
@@ -442,8 +443,8 @@ As in the baseline (B), an individual is migrated to another random
 island after a fixed number of generations. In the new island, this
 individual will be considered as one of the others in the island,
 crossed and mutated in the same way, depending on the island
-identifier (from 1 to $P$). Note that, differently from other works such as the ones
-described by Talbi et al. \citep{Talbi08Parallel}, all the islands deal
+identifier (from 1 to $P$). \textcolor{blue}{Note that, unlike the other works such as the ones
+described by Talbi et al. \citep{Talbi08Parallel}}, all the islands deal
 with complete chromosomes for fitness calculation, so our approach can
 deal with decomposable and no decomposable problems. %Don't understand what you say
                                 %here. What you are saying is that our
@@ -579,7 +580,7 @@ This subsection describes the quality indicators used and the experimental setup
 \begin{figure}
 \centering
 \includegraphics[width=6cm]{hypervolume.jpg}
-\caption{Hypervolume calculation. Areas from Pareto Front solutions (black points) to a reference point (white point) are added.}
+\caption{Hypervolume calculation. \textcolor{blue}{Areas from Pareto Front solutions (black points) to a reference point (white point) are used to calculate the value of the hypervolume (all the gray area)}.}
 \label{fig:hypervolume}
 \end{figure}
 
@@ -595,13 +596,13 @@ islands ($P$) have also been compared: 8, 16, 32, 64 and 128. This
 maximum number of islands has also been  used in a previous work in the
 literature \cite{Martens13asynchronous}. The crossover and mutation
 chosen, SBX and polynomial, have also been  used previously by other
-authors in \cite{Durillo08masterslave}.  % SBX is first mentioned
+authors in \cite{Durillo08masterslave,CaoZLL17}.  % SBX is first mentioned
                                 % here. Has to explain - JJ
 
 ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This benchmark includes several functions, with different features that are representative of real world optimization problems. Mathematical formulation of each function is available in \citep{zdt2000a}. 
 
 
-\textcolor{blue}{The global population size is set to 1024. We have decided to use that value for two reasons: the first is that it is large enough to have 8 individuals per island by dividing that number when using 128 islands and small enough to have 128 individuals when using 8 islands. This is the minimum and maximum population size per island used by M{\''a}rtens et al. in his work \cite{Martens13asynchronous}.}
+\textcolor{blue}{The global population size is set to 1024. We have decided to use that value for two reasons: the first is that it is large enough to have 8 individuals per island by dividing that number when using 128 islands and small enough to have 128 individuals when using 8 islands. This is the minimum and maximum population size per island used by M{\"a}rtens et al. in his work \cite{Martens13asynchronous}.}
 
 
 The criterion used for terminating an experiment has been the running
@@ -670,7 +671,7 @@ configurations, as the Kolmogorov-Smirnov test detected non-normal
 distributions. The average results for each configuration are shown in
 Table \ref{tab:results512} (for 512 dimensions) and Table
 \ref{tab:results2048} (for 2048). As previously explained, when $P=8$
-the results of A are equivalent to the obtained with D (because
+the results of A are equivalent to the obtained by D (because
 $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv-} in tables. For example, Equiv-D in an HV cell  means that the HV of A is the same than the value in D column, because the behaviour of this configuration is the same than executing D.
 
 
@@ -942,15 +943,15 @@ also implies a better Spread indicator, where the baseline
 
 %%%%%%FERGU: WARNING, THIS SECTION IS STILL SHIT
 %ZDT1 
-\textcolor{blue}{Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048}, showing the final PFs of one arbitrary sample run of each combination. These figures allow to visualize the effect of the different chromosome sizes and number of islands in each different benchmark. The first one, ZDT1, has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) it is apparent that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown in average in Table \ref{tab:results512}. Nevertheless, if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048} that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is still larger.}
+\textcolor{blue}{Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048}, showing the final PFs of one arbitrary sample run of each combination. These figures allow to visualize the effect of the different chromosome sizes and number of islands in each different benchmark. The first one, ZDT1, has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) it is apparent that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown on average in Table \ref{tab:results512}. Nevertheless, if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048} that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is still larger.}
 
 %ZDT2
-\textcolor{blue}{ZDT2 has a non-convex Pareto front. From Figures \cite{fig:plot_zdt2_512} and \cite{fig:plot_zdt2_2048} is clear that, as in the previous problem ZDT1, there is a decrease of quality for all configurations as the size of $P$ increases.  Nevertheless, for this benchmark, there is not a clear decrease in the PF quality when $L$ goes from 512 to 2048.}
+\textcolor{blue}{ZDT2 has a non-convex Pareto front. From Figures \ref{fig:plot_zdt2_512} and \ref{fig:plot_zdt2_2048} is clear that, as in the previous problem ZDT1, there is a decrease of quality for all configurations as the size of $P$ increases.  Nevertheless, for this benchmark, there is not a clear decrease in the PF quality when $L$ goes from 512 to 2048.}
 
 %ZDT3
-\textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, the rightmost part of the obtaninde non-dominated solutions is not obtained in the $A$ alternative with $P=8$  and $P=16$ (being equivalent to alternatives $O$ and $D$). This explains why with this chromosome length, the SLA methods not improve the results obtained by $B$. This problem does not appear when $L=2048$. Although the differences in the Spread metric are not significant for the different alternatives for this benchmark, (as shown in Table \ref{tab:results2048}), the HV and IGD metrics are the ones that can be used to show the effectiveness of our approach in this type of problem with non-continuous PFs.} 
+\textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, the rightmost part of the obtaninde non-dominated solutions is not obtained in the $A$ alternative with $P=8$  and $P=16$ (being equivalent to alternatives $O$ and $D$). This explains why with this chromosome length, the SLA methods do not improve the results obtained by $B$. This problem does not appear when $L=2048$. Although the differences in the Spread metric are not significant for the different alternatives for this benchmark, (as shown in Table \ref{tab:results2048}), the HV and IGD metrics are the ones that can be used to show the effectiveness of our approach in this type of problem with non-continuous PFs.} 
 
-\textcolor{blue}{In ZDT6, the Pareto-optimal solutions are not only non-uniformly distributed along the PF, but their density also increases as we move further away from it. That is the reason why some PFs obtained have an extremely low number of solutions in some configurations, and also, they are aggregated toward the areas with more density. Moreover, all configurations, including $B$, obtained PFs relatively far away from the optimal PF, as opposed as in previous problems. Spread is very similar for all methods $B$, $D$, $O$, $A$ across different $L$ sizes. Indeed, there is not significant difference between methods, with an exception: Spread using $A$ with $L=512$ is significantly worse. As in previous approaches it is visually clear that increasing the number of islands, and therefore, reducing the number of individuals per island, imply a decrease in quality of the HV.}
+\textcolor{blue}{In ZDT6, the Pareto-optimal solutions are not only non-uniformly distributed along the PF, but their density also increases as we move further away from it. That is the reason why some PFs obtained have an extremely low number of solutions in some configurations, and also, they are aggregated toward the areas with more density. Moreover, all configurations, including $B$, obtained PFs relatively far away from the optimal PF, as opposed as in previous problems. Spread is very similar for all methods $B$, $D$, $O$, $A$ across different $L$ sizes. Indeed, there is not a significant difference between methods, with an exception: Spread using $A$ with $L=512$ is significantly worse. As in previous approaches it is visually clear that increasing the number of islands, and therefore, reducing the number of individuals per island, imply a decrease in quality of the HV.}
 
 \textcolor{blue}{Finally, as it was already observed in \citep{Garcia16hpmoon}, all the performance indicators show worse values as the number of islands increases, and so the  sizes of the subpopulations are smaller. This is consistent with the claim by Dorronsoro et al. \citep{Dorronsoro13superlinear}, who found that cooperative co-evolutionary MOEAs work better on bigger populations (more than 100 individuals).}
 
@@ -1020,7 +1021,7 @@ For example, comparing
 different ways to calculate $c$ using linear, logarithmic or exponential functions
 depending \textcolor{blue}{on population size, number of islands, or other values, or using some statistical parameter setting method, such as Taguchi's \cite{Keratmatpour2018Taguchi}}. Moreover, a diversity analysis of the individuals
 in each island during the algorithm run could be carried out to understand its influence
-on results.
+on the results.
 % 
 % More discussion should be added. Why is adaptive better? Is the high
 % performance really needed? - JJ
