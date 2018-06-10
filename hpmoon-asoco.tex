@@ -585,7 +585,13 @@ This subsection describes the quality indicators used and the experimental setup
 \end{figure}
 
 
-We have chosen those metrics not only because they have been used extensively, especially in some of the papers presented in Section 2 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous}, but also because they cover different quality criteria. Mathematical formulation of these metrics can be found in \cite{Dorronsoro13superlinear}.
+We have chosen those metrics not only because they have been used
+extensively, especially in some of the papers presented in Section 2
+% Still section 2? Please create a reference and use it - JJ
+\cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous},
+but also because they cover different quality criteria. Mathematical
+formulation of these metrics can be found in
+\cite{Dorronsoro13superlinear}. 
 
 %\subsection{Benchmark problems}
 
@@ -600,7 +606,12 @@ authors in \cite{Durillo08masterslave,CaoZLL17}.  % SBX is first mentioned
 % here. Has to explain - JJ
 % Still not done - JJ
 
-ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This benchmark includes several functions, with different features that are representative of real world optimization problems. Mathematical formulation of each function is available in \citep{zdt2000a}. 
+ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the
+most widely used in this area
+\citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This
+benchmark includes several functions, with different features that are
+representative of real world optimization problems. Mathematical
+formulation of each function is available in \citep{zdt2000a}. 
 
 
 \textcolor{blue}{The global population size is set to 1024. We have decided to use that value for two reasons: the first is that it is large enough to have 8 individuals per island by dividing that number when using 128 islands and small enough to have 128 individuals when using 8 islands. This is the minimum and maximum population size per island used by M{\"a}rtens et al. in his work \cite{Martens13asynchronous}.}
@@ -616,9 +627,24 @@ different number of islands (with different sub-population sizes) and that
 could lead to different execution times, so it would be difficult to
 compare different times and quality of solutions at the same time.
 
-The number of generations between migrations has been set to 5, as
-this number is usually repeated in the literature
-\cite{Deb03distributed,Martens13asynchronous}. \textcolor{blue}{Migration
+The number of generations between migrations has been set to 5,
+\textcolor{blue} as
+reported by \cite{Deb03distributed,Martens13asynchronous}. In general
+\cite{cantu1998survey}, this migration gap has contradictory effects
+on the result: by increasing it, we make the system closer to a
+single-node one, since populations tend to mix without restriction; by
+decreasing it, we make the isolate islands more prone to being stuck
+in local minima. \cite{Martens13asynchronous} mentions that several
+values were tested with no influence in the result; in our particular
+case, the mixing is essential for the algorithm to spread the result
+to all parts of the chromosome, so while we tend to agree with
+Martens on the small influence of this value on the result, we also
+think that making this value much bigger in our case would havea
+negative inpact. However, a precise fine-tuning of this value is left
+as future work, as the main focus of this paper was to prove the
+general concept, and not tune the values for a maximum performance}.
+
+\textcolor{blue}{This migration
   is performed asynchronously, as it has the advantage of being a
   non-blocking operation \cite{TalbiUnified2018}. The individual
   chosen to migrate is selected from the subpopulation using Binary
