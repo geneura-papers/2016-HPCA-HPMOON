@@ -628,8 +628,9 @@ could lead to different execution times, so it would be difficult to
 compare different times and quality of solutions at the same time.
 
 The number of generations between migrations has been set to 5,
-\textcolor{blue} as
+\textcolor{blue}{as
 reported by \cite{Deb03distributed,Martens13asynchronous}. In general
+and as affirmed by 
 \cite{cantu1998survey}, this migration gap has contradictory effects
 on the result: by increasing it, we make the system closer to a
 single-node one, since populations tend to mix without restriction; by
@@ -639,8 +640,8 @@ values were tested with no influence in the result; in our particular
 case, the mixing is essential for the algorithm to spread the result
 to all parts of the chromosome, so while we tend to agree with
 Martens on the small influence of this value on the result, we also
-think that making this value much bigger in our case would havea
-negative inpact. However, a precise fine-tuning of this value is left
+think that making this value much bigger in our case would have a
+negative impact. However, a precise fine-tuning of this value is left
 as future work, as the main focus of this paper was to prove the
 general concept, and not tune the values for a maximum performance}.
 
