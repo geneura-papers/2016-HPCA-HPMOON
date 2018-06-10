@@ -909,14 +909,14 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt1_512.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent to running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt1_512}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt1_2048.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent to running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt1_2048}
 \end{figure}
 
@@ -929,14 +929,14 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt2_512.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent to running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt2_512}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt2_2048.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent to running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt2_2048}
 \end{figure}
 
@@ -948,14 +948,22 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt3_512.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent to running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt3_512}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{plot_zdt3_2048.png}
-\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }}
+\caption{\textcolor{blue}{PFs obtained in one arbitrary run for the
+    ZDT3 problem with a chromosome size ($L$) of 2048 for each
+    combination of number of islands ($P$) and method: baseline ($B$),
+    disjoint ($D$), overlapped ($O$) and automatic overlapped
+    ($A$). Results for 8 and 16 islands of $A$ are equivalent to
+    running $D$ and $O$ respectively. }}
+% It would be interesting to comment something about what is the key
+% thing here and what's good about it. Without an a priori idea, I
+% wouldn't know which one looks the best - JJ
 \label{fig:plot_zdt3_2048}
 \end{figure}
 
@@ -1001,7 +1009,9 @@ of the cases, less than a half. The number of non-dominated solutions
 also implies a better Spread indicator, where the baseline 
  obtains better (or not significantly different) values in the majority of the compared configurations.
 
-%%%%%%FERGU: WARNING, THIS SECTION IS STILL SHIT
+ %%%%%% FERGU: WARNING, THIS SECTION IS STILL SHIT
+ % By now, maybe it should not be (or you should delete this
+ % comment) - JJ
 %ZDT1 
 \textcolor{blue}{Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048}, showing the final PFs of one arbitrary sample run of each combination. These figures allow to visualize the effect of the different chromosome sizes and number of islands in each different benchmark. The first one, ZDT1, has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) it is apparent that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown on average in Table \ref{tab:results512}. Nevertheless, if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048} that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is still larger.}
 
