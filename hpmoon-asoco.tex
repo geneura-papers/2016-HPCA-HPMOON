@@ -49,7 +49,7 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %computer architectures to cope with them. 
 
   \textcolor{blue}{Real world optimization problems usually have many dimensions and
-  several objectives. The high dimensionality requires exceptional
+  several objectives, and are usually tackled using Multi-Objective Evolutionary Algorithms. The high dimensionality requires exceptional
   computing power, and the fact that several dimensions have to be
   searched at the same time add additional difficulty.}
 % One of the most extended methods to deal with high-dimensional
@@ -72,7 +72,7 @@ processors. Thus, each processor only deals with the individuals of a sub-popula
 island in this context) that explores the part of the decision space allocated to the processor.}
 
 However, only
-decomposable problems could be strictly implemented in parallel this
+decomposable problems \textcolor{blue}{, those whose decision variables are independent of each other,} could be strictly implemented in parallel this
 way. \textcolor{blue}{A new approach, which we call {\em selective operator application} is presented here to deal with un-decomposable
 problems:} % so we are saying that high-dimensional multi-objective
           % problems are a challenge, but we are presenting a solution
@@ -91,7 +91,7 @@ techniques considering different number of islands, chromosome sizes
 and benchmarks. The analysis of the obtained experimental results, by
 using different metrics, shows that our approach can provide
 statistically significant improvements with respect to the base
-algorithm \textcolor{blue}{in high-dimensional multi-objective problems}. % in high-dimensional multi-objective problems? - JJ PABLO: ok, puesto
+algorithm \textcolor{blue}{in high-dimensional multi-objective problems}. 
 Results also show that the relation between the number of
 islands (subpopulations) and the length of the chromosome (number of
 decision variables) is also a relevant factor to determine the most
@@ -248,7 +248,7 @@ amount of time.
 
 
 A similar approach used to solve this kind of problems is the {\em
-  selective operator application} (SLA) \textcolor{blue}{presented in this paper}. In this case, each island
+  SeLective operator Application} (SLA) \textcolor{blue}{presented in this paper}. In this case, each island
 deals with the whole chromosome, but only modifies a fragment of it in
 the crossover and mutation phase depending on the number of islands,
 using the whole chromosome for fitness calculation. This allows to
@@ -639,7 +639,7 @@ in local minima. \cite{Martens13asynchronous} mentions that several
 values were tested with no influence in the result; in our particular
 case, the mixing is essential for the algorithm to spread the result
 to all parts of the chromosome, so while we tend to agree with
-Martens on the small influence of this value on the result, we also
+M{\"a}rtens on the small influence of this value on the result, we also
 think that making this value much bigger in our case would have a
 negative impact. However, a precise fine-tuning of this value is left
 as future work, as the main focus of this paper was to prove the
