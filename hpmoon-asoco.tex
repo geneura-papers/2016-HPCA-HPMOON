@@ -597,7 +597,8 @@ maximum number of islands has also been  used in a previous work in the
 literature \cite{Martens13asynchronous}. The crossover and mutation
 chosen, SBX and polynomial, have also been  used previously by other
 authors in \cite{Durillo08masterslave,CaoZLL17}.  % SBX is first mentioned
-                                % here. Has to explain - JJ
+% here. Has to explain - JJ
+% Still not done - JJ
 
 ZDT \citep{zdt2000a} has been chosen as a benchmark, since it is the most widely used in this area \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This benchmark includes several functions, with different features that are representative of real world optimization problems. Mathematical formulation of each function is available in \citep{zdt2000a}. 
 
@@ -613,7 +614,22 @@ mutation can be spent on improving the sub-populations and more
 operations and migrations can be achieved. Also, we are using
 different number of islands (with different sub-population sizes) and that
 could lead to different execution times, so it would be difficult to
-compare different times and quality of solutions at the same time. The number of generations between migrations has been set to 5, as this number is usually repeated in the literature \cite{Deb03distributed,Martens13asynchronous}. \textcolor{blue}{Migration is performed asynchronously, as it has the advantage of being a non-blocking operation \cite{TalbiUnified2018}. The individual chosen to migrate is selected from the subpopulation using Binary Tournament, as proposed in previous papers  \cite{xiong2003parallel,Xiao03specialized}. Whenever an island starts the migration step, the migrated individual is sent to another randomly selected island. This makes it possible a dissemination of the modified parts of the individuals among the whole set of islands, thus avoiding a specific synchronization step to compose solutions obtained by different islands, as occurs other works \cite{Dorronsoro13superlinear}.}
+compare different times and quality of solutions at the same time.
+
+The number of generations between migrations has been set to 5, as
+this number is usually repeated in the literature
+\cite{Deb03distributed,Martens13asynchronous}. \textcolor{blue}{Migration
+  is performed asynchronously, as it has the advantage of being a
+  non-blocking operation \cite{TalbiUnified2018}. The individual
+  chosen to migrate is selected from the subpopulation using Binary
+  Tournament, as proposed in previous papers
+  \cite{xiong2003parallel,Xiao03specialized}. Whenever an island
+  starts the migration step, the migrated individual is sent to
+  another randomly selected island. This makes it possible a
+  dissemination of the modified parts of the individuals among the
+  whole set of islands, thus avoiding a specific synchronization step
+  to compose solutions obtained by different islands, as occurs other
+  works \cite{Dorronsoro13superlinear}.} 
  The whole parameter set is summarized in Table \ref{tab:parameters}. 
  \textcolor{blue}{It is important to point out that we have carried out experiments modifying only the number of islands and the size of the problem, as other researchers have done \cite{CaoZLL17,Dorronsoro13superlinear,DorronsoroPSO2018,Martens13asynchronous,Durillo08masterslave}, who did not carry out studies on other parameters apart from these. This allows us to focus on the objective of this article, which is to demonstrate that on equal terms, the use of SLA can lead to improved performance depending on the combination of the number of islands and the size of the chromosome.}
 
