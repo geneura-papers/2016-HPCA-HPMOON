@@ -18,6 +18,9 @@
 %\usepackage{refcheck}
 \usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
+\newenvironment{bluecolor}{\par\color{blue}}{\par}
+
+
 \begin{document}
 
 \begin{frontmatter}
@@ -48,68 +51,52 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %methods have been proposed, with different parallel and distributed
 %computer architectures to cope with them. 
 
-  \textcolor{blue}{Real world optimization problems usually have many dimensions and
-  several objectives, and are usually tackled using Multi-Objective Evolutionary Algorithms. The high dimensionality requires exceptional
-  computing power, and the fact that several dimensions have to be
-  searched at the same time add additional difficulty.}
-% One of the most extended methods to deal with high-dimensional
-% multi-objective optimization problems are the distributed
-% co-evolutionary algorithms.
-% ----------------- This sentence is meaningless. It should be
-% substituted by other stating that co-evolutionary algorithms can
-% deal with it for some reason
-% Besides, we're no longer saying that they are co-evolutionary in the
-% title, but "island-based selective operator application". This
-% should go to the abstract too - JJ
-  
-%In these methods %which ones? coevolutionary or selective operator
-                   %application? - JJ
-%  each processor deals only with a part of the decision
-%space, that is, the individuals belonging to the same sub-population,
-%\textcolor{blue}{which are called {\em islands} in this context}, explore the same subset of decision variables. 
-\textcolor{blue}{An approach to cope with these issues is to allocate parts of the decision space to different
-processors. Thus, each processor only deals with the individuals of a sub-population (called
-island in this context) that explores the part of the decision space allocated to the processor.}
 
+%Real world optimization problems usually have many dimensions and
+%  several objectives, thus requiring exceptional computing power to be addressed. 
+
+ % The high dimensionality requires exceptional computing power, and the fact that several dimensions have to be searched at the same time add additional difficulty. 
+
+%Usually, distributed co-evolutionary algorithms are used to cope with these issues, by allocating parts of the decision space to different processors. Thus, each processor only deals with the individuals of a sub-population (called island in this context) that explores a specific part of the decision space.
+
+\begin{bluecolor}
+One of the most extended methods to deal with high-dimensional multi-objective optimization problems are the distributed co-evolutionary algorithms. %Pablo: reducing previous two paragraphs into one
 However, only
 decomposable problems could strictly be implemented in parallel this
-way. \textcolor{blue}{A new approach, which we call {\em selective operator application} is presented here to deal with un-decomposable
-problems:} % so we are saying that high-dimensional multi-objective
+way. 
+
+A new approach, which we call {\em selective operator application}, is used here to deal with un-decomposable
+problems: % so we are saying that high-dimensional multi-objective
           % problems are a challenge, but we are presenting a solution
           % for non-decomposable problems. What's what? - JJ
-% Still not addressed - JJ
+% Still not addressed - JJ PABLO: rewritten almost all the abstract.
 instead of sharing parts
 of individuals, each processor applies the variation operators to a
-specific subset of the whole individual. % this solves... - JJ
-% not addressed - JJ
-We have previously proved
-that extending the length of these subsets, and therefore, sharing
-\textcolor{blue}{some search space between islands, implies an
-  improvement in different performance metrics}.
-% In this paper, we intend to prove that adapting the size of the
-% overlapping section, since it improves *, is able to obtain better
-% results than a non-adaptive strategy. In order to prove that, we
-% compare - JJ
-In this paper, a new method for automatically
-adapting the size of the overlapping, or shared, sections of the
-individuals has been compared to other collaborative evolutionary
+specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation. 
+% this solves... - JJ
+% not addressed - JJ Pablo: done now
+%We have previously proved that extending the length of these subsets, and therefore, sharing some search space between islands, implies an improvement in different performance metrics.
+ 
+ In this paper, we intend to prove that automatically setting the size of the
+ overlapping section, since it focus the search between borders of the different search spaces, is able to obtain better
+ results than using the same size independently of the number of islands. In order to prove that, we
+ have compared it to other collaborative evolutionary
 techniques considering different number of islands, chromosome sizes
 and benchmarks. The analysis of the obtained experimental results, by
 using different metrics, shows that our approach can provide
 statistically significant improvements with respect to the base
-algorithm \textcolor{blue}{in high-dimensional multi-objective problems}. 
+algorithm in high-dimensional multi-objective problems. 
+
 Results also show that the relation between the number of
 islands (subpopulations) and the length of the chromosome (number of
 decision variables) is also a relevant factor to determine the most
-efficient alternative to distribute the decision variables.   % Say
+efficient alternative to distribute the decision variables: it is better to distribute them the higher the dimensionality, and to increase the overlapping size if individuals are distributed in a large number of islands.
+  % Say
                                 % something how it's relevant, and
                                 % what you have to do if you have so
-                                % many decision variables - JJ
-\textcolor{blue}{This opens up a new challenge that to be addressed in the future.}
-% This
-                                % solves a problem or challenge we
-                                % hadn't stated. - JJ Pablo: metido, mira a ver si queda frase memorable
-
+                                % many decision variables - JJ PABLO: Done
+This opens up a new challenge to be addressed in the future, by experimenting on new ways to calculate the overlapping sizes depending of different factors and parameters.
+\end{bluecolor}
 
 \end{abstract}
 
@@ -211,8 +198,7 @@ achievable from parallelization and the need to globally recombine the
 results to accurately identify the PF
 \citep{Branke04Parallelizingcone}. % Is that the case with NSGA? - JJ
 
-\textcolor{blue}{Real-world MOPs usually require a high number of decision variables \cite{Zhang17DECAL,XU2018268}}, % No they don't, and
-                                % if they do, add a reference - JJ FERGU: added references
+\textcolor{blue}{Real-world MOPs usually require a high number of decision variables \cite{Zhang17DECAL,XU2018268}}, 
 meaning that the
 MOEAs need to deal with large individuals and spend significant extra
 time for crossover, mutation and migration. %depending on the
@@ -595,8 +581,8 @@ This subsection describes the quality indicators used and the experimental setup
 
 
 We have chosen those metrics not only because they have been used
-extensively, especially in some of the papers presented in Section 2
-% Still section 2? Please create a reference and use it - JJ
+extensively, especially in some of the papers presented in Section \ref{sec:soa}
+% Still section 2? Please create a reference and use it - JJ Pablo: done
 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous},
 but also because they cover different quality criteria. Mathematical
 formulation of these metrics can be found in
@@ -1076,12 +1062,13 @@ apparent with larger chromosome sizes. Therefore, the length of the
 chromosome is also a key factor to take into account in automatic overlapping
 methods, and not only the number of islands. Studying this factor with
 more types of problems, and new configurations of population size and
-chromosome lengths could be addressed in the future. \textcolor{blue}{Since our method divides the individuals into blocks of divisible size, aggregation methods after migration, such as the ones used in \cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be also tested. But as we are dealing with complete individuals in each island, the possibility of using a real number, such as 0.3 (30\% overlapping) instead an integer value opens future experimental setups.}
+chromosome lengths could be addressed in the future. \begin{bluecolor}Since our method divides the individuals into blocks of divisible size, aggregation methods after migration, such as the ones used in \cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be also tested. But as we are dealing with complete individuals in each island, the possibility of using a real number, such as 0.3 (30\% overlapping) instead an integer value opens future experimental setups.
 For example, comparing 
 different ways to calculate $c$ using linear, logarithmic or exponential functions
-depending \textcolor{blue}{on population size, number of islands, or other values, or using some statistical parameter setting method, such as Taguchi's \cite{Keratmatpour2018Taguchi}}. Moreover, a diversity analysis of the individuals
+depending on population size, number of islands, or other values, or using some statistical parameter setting method, such as Taguchi's \cite{Keratmatpour2018Taguchi}. Moreover, a diversity analysis of the individuals
 in each island during the algorithm run could be carried out to understand its influence
 on the results.
+\end{bluecolor}
 % 
 % More discussion should be added. Why is adaptive better? Is the high
 % performance really needed? - JJ
