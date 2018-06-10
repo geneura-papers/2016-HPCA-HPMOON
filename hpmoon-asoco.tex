@@ -72,20 +72,26 @@ processors. Thus, each processor only deals with the individuals of a sub-popula
 island in this context) that explores the part of the decision space allocated to the processor.}
 
 However, only
-decomposable problems \textcolor{blue}{, those whose decision variables are independent of each other,} could be strictly implemented in parallel this
+decomposable problems could strictly be implemented in parallel this
 way. \textcolor{blue}{A new approach, which we call {\em selective operator application} is presented here to deal with un-decomposable
 problems:} % so we are saying that high-dimensional multi-objective
           % problems are a challenge, but we are presenting a solution
           % for non-decomposable problems. What's what? - JJ
+% Still not addressed - JJ
 instead of sharing parts
 of individuals, each processor applies the variation operators to a
 specific subset of the whole individual. % this solves... - JJ
+% not addressed - JJ
 We have previously proved
 that extending the length of these subsets, and therefore, sharing
-\textcolor{blue}{some search space between islands, implies an improvement in different performance metrics}.
- % which results? - JJ PABLO: answered
-In this paper, a new method to automatically
-adapt the size of the overlapping, or shared sections, of the
+\textcolor{blue}{some search space between islands, implies an
+  improvement in different performance metrics}.
+% In this paper, we intend to prove that adapting the size of the
+% overlapping section, since it improves *, is able to obtain better
+% results than a non-adaptive strategy. In order to prove that, we
+% compare - JJ
+In this paper, a new method for automatically
+adapting the size of the overlapping, or shared, sections of the
 individuals has been compared to other collaborative evolutionary
 techniques considering different number of islands, chromosome sizes
 and benchmarks. The analysis of the obtained experimental results, by
@@ -95,7 +101,10 @@ algorithm \textcolor{blue}{in high-dimensional multi-objective problems}.
 Results also show that the relation between the number of
 islands (subpopulations) and the length of the chromosome (number of
 decision variables) is also a relevant factor to determine the most
-efficient alternative to distribute the decision variables.  
+efficient alternative to distribute the decision variables.   % Say
+                                % something how it's relevant, and
+                                % what you have to do if you have so
+                                % many decision variables - JJ
 \textcolor{blue}{This opens up a new challenge that to be addressed in the future.}
 % This
                                 % solves a problem or challenge we
@@ -649,16 +658,24 @@ general concept, and not tune the values for a maximum performance}.
   is performed asynchronously, as it has the advantage of being a
   non-blocking operation \cite{TalbiUnified2018}. The individual
   chosen to migrate is selected from the subpopulation using Binary
-  Tournament, as proposed in previous papers
+  Tournament from a randomly selected couple, as proposed in previous papers
   \cite{xiong2003parallel,Xiao03specialized}. Whenever an island
   starts the migration step, the migrated individual is sent to
   another randomly selected island. This makes it possible a
   dissemination of the modified parts of the individuals among the
   whole set of islands, thus avoiding a specific synchronization step
   to compose solutions obtained by different islands, as occurs other
-  works \cite{Dorronsoro13superlinear}.} 
+  works \cite{Dorronsoro13superlinear}.}
+
  The whole parameter set is summarized in Table \ref{tab:parameters}. 
- \textcolor{blue}{It is important to point out that we have carried out experiments modifying only the number of islands and the size of the problem, as other researchers have done \cite{CaoZLL17,Dorronsoro13superlinear,DorronsoroPSO2018,Martens13asynchronous,Durillo08masterslave}, who did not carry out studies on other parameters apart from these. This allows us to focus on the objective of this article, which is to demonstrate that on equal terms, the use of SLA can lead to improved performance depending on the combination of the number of islands and the size of the chromosome.}
+ \textcolor{blue}{The main parameters in the proposed system were the number of islands and the size
+   of the problem, as pointed out by other authors 
+   \cite{CaoZLL17,Dorronsoro13superlinear,DorronsoroPSO2018,Martens13asynchronous,Durillo08masterslave}. This is why those have been the focus of this particular
+   article. Although all the parameters indicated above have an
+   influence on the general result of the MOEA, their general effect
+   is well understood and, although there will be an interplay between
+ them and the number of islands and problem size, this is left mainly
+ as future work.} 
 
 
 
