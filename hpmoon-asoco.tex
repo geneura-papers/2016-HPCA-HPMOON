@@ -72,30 +72,39 @@ processors. Thus, each processor only deals with the individuals of a sub-popula
 island in this context) that explores the part of the decision space allocated to the processor.}
 
 However, only
-decomposable problems could be strictly implemented in parallel this
+decomposable problems could strictly be implemented in parallel this
 way. \textcolor{blue}{A new approach, which we call {\em selective operator application} is presented here to deal with un-decomposable
 problems:} % so we are saying that high-dimensional multi-objective
           % problems are a challenge, but we are presenting a solution
           % for non-decomposable problems. What's what? - JJ
+% Still not addressed - JJ
 instead of sharing parts
 of individuals, each processor applies the variation operators to a
 specific subset of the whole individual. % this solves... - JJ
+% not addressed - JJ
 We have previously proved
 that extending the length of these subsets, and therefore, sharing
-\textcolor{blue}{some search space between islands, implies an improvement in different performance metrics}.
- % which results? - JJ PABLO: answered
-In this paper, a new method to automatically
-adapt the size of the overlapping, or shared sections, of the
+\textcolor{blue}{some search space between islands, implies an
+  improvement in different performance metrics}.
+% In this paper, we intend to prove that adapting the size of the
+% overlapping section, since it improves *, is able to obtain better
+% results than a non-adaptive strategy. In order to prove that, we
+% compare - JJ
+In this paper, a new method for automatically
+adapting the size of the overlapping, or shared, sections of the
 individuals has been compared to other collaborative evolutionary
 techniques considering different number of islands, chromosome sizes
 and benchmarks. The analysis of the obtained experimental results, by
 using different metrics, shows that our approach can provide
 statistically significant improvements with respect to the base
-algorithm \textcolor{blue}{in high-dimensional multi-objective problems}. % in high-dimensional multi-objective problems? - JJ PABLO: ok, puesto
+algorithm \textcolor{blue}{in high-dimensional multi-objective problems}. 
 Results also show that the relation between the number of
 islands (subpopulations) and the length of the chromosome (number of
 decision variables) is also a relevant factor to determine the most
-efficient alternative to distribute the decision variables.  
+efficient alternative to distribute the decision variables.   % Say
+                                % something how it's relevant, and
+                                % what you have to do if you have so
+                                % many decision variables - JJ
 \textcolor{blue}{This opens up a new challenge that to be addressed in the future.}
 % This
                                 % solves a problem or challenge we
