@@ -1,11 +1,3 @@
-%\affiliation{\affilnum{1}Dept. of Computer Architecture and Computer Technology, University of Granada, Spain}
-
-%\corrauth{Pablo Garc\'ia-S\'anchez,
-%ETS. Ingenier\'ias en Inform\'atica y Telecomunicaci\'on and CITIC-UGR,
-%C/Periodista Daniel Saucedo s/n,
-%Universidad de Granada,
-%18071, Granada, Spain.}
-
 \documentclass[preprint]{elsarticle}
 \usepackage[latin1]{inputenc}
 \usepackage[english]{babel}
@@ -60,42 +52,38 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %Usually, distributed co-evolutionary algorithms are used to cope with these issues, by allocating parts of the decision space to different processors. Thus, each processor only deals with the individuals of a sub-population (called island in this context) that explores a specific part of the decision space.
 
 \begin{bluecolor}
-One of the most extended methods to deal with high-dimensional multi-objective optimization problems are the distributed co-evolutionary algorithms. %Pablo: reducing previous two paragraphs into one
+One of the  methods most extensively used to deal with high-dimensional multi-objective optimization problems are distributed co-evolutionary algorithms. %Pablo: reducing previous two paragraphs into one 
 However, only
 decomposable problems could strictly be implemented in parallel this
 way. 
-
-A new approach, which we call {\em selective operator application}, is used here to deal with un-decomposable
+A new parallel island-model evolutionary algorithm approach, which we call {\em selective operator application}, is used here to deal with un-decomposable
 problems: % so we are saying that high-dimensional multi-objective
           % problems are a challenge, but we are presenting a solution
           % for non-decomposable problems. What's what? - JJ
 % Still not addressed - JJ PABLO: rewritten almost all the abstract.
 instead of sharing parts
-of individuals, each processor applies the variation operators to a
+of individuals, each island, hosted by a single processor, applies the variation operators to a
 specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation. 
-% this solves... - JJ
-% not addressed - JJ Pablo: done now
-%We have previously proved that extending the length of these subsets, and therefore, sharing some search space between islands, implies an improvement in different performance metrics.
- 
- In this paper, we intend to prove that automatically setting the size of the
- overlapping section, since it focus the search between borders of the different search spaces, is able to obtain better
+% 
+ In this paper, we intend to prove that automatically setting the size of these
+ overlapping section, since it focuses the search between borders of the different search spaces, is able to obtain better
  results than using the same size independently of the number of islands. In order to prove that, we
- have compared it to other collaborative evolutionary
+ have compared it to other parallel evolutionary
 techniques considering different number of islands, chromosome sizes
 and benchmarks. The analysis of the obtained experimental results, by
 using different metrics, shows that our approach can provide
 statistically significant improvements with respect to the base
-algorithm in high-dimensional multi-objective problems. 
-
+algorithm in high-dimensional, un-decomposable, multi-objective problems. 
+%
 Results also show that the relation between the number of
 islands (subpopulations) and the length of the chromosome (number of
 decision variables) is also a relevant factor to determine the most
-efficient alternative to distribute the decision variables: it is better to distribute them the higher the dimensionality, and to increase the overlapping size if individuals are distributed in a large number of islands.
-  % Say
-                                % something how it's relevant, and
-                                % what you have to do if you have so
-                                % many decision variables - JJ PABLO: Done
-This opens up a new challenge to be addressed in the future, by experimenting on new ways to calculate the overlapping sizes depending of different factors and parameters.
+efficient alternative to distribute the decision variables: the higher
+the dimensionality and the overlapping, the greater the benefit of distribution in a
+large number of islands.
+This opens up a new challenge to be addressed in the future, by
+experimenting on new ways to calculate the overlapping sizes depending
+of different factors and parameters.
 \end{bluecolor}
 
 \end{abstract}
