@@ -138,7 +138,7 @@ of computational time, leading to the proposal of parallel and distributed metho
 one of which are evolutionary algorithms (EAs)
 \citep{DBLP:series/ncs/EibenS15}. EAs are bio-inspired meta-heuristics
 that can be effectively used to find nearly optimal solutions for
-optimization problems and are easily paralellizable, since they are
+optimization problems and are easily parallelizable, since they are
 population-based and creating a functionally equivalent parallel
 version is as easy as distributing the population in communicating
 computing nodes, which are usually called islands. The fact that
@@ -389,7 +389,7 @@ The objective of this section is to explain the methodology we have followed to
 compare the different versions of the overlapping schemes.
 
 \subsection{Proposed methods}
-In this paper we analyse several SLA algorithms we have
+In this paper we analyze several SLA algorithms we have
 implemented by using a parallel multi-objective baseline algorithm
 as a basis for comparisons. Our proposed methods, using different overlapping schemes, %methods or method?
                                 %Which methods? - JJ Fergu: clarifying
@@ -983,7 +983,7 @@ also implies a better Spread indicator, where the baseline
 \textcolor{blue}{ZDT2 has a non-convex Pareto front. From Figures \ref{fig:plot_zdt2_512} and \ref{fig:plot_zdt2_2048} is clear that, as in the previous problem ZDT1, there is a decrease of quality for all configurations as the size of $P$ increases.  Nevertheless, for this benchmark, there is not a clear decrease in the PF quality when $L$ goes from 512 to 2048.}
 
 %ZDT3
-\textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, the rightmost part of the obtaninde non-dominated solutions is not obtained in the $A$ alternative with $P=8$  and $P=16$ (being equivalent to alternatives $O$ and $D$). This explains why with this chromosome length, the SLA methods do not improve the results obtained by $B$. This problem does not appear when $L=2048$. Although the differences in the Spread metric are not significant for the different alternatives for this benchmark, (as shown in Table \ref{tab:results2048}), the HV and IGD metrics are the ones that can be used to show the effectiveness of our approach in this type of problem with non-continuous PFs.} 
+\textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, the rightmost part of the obtained non-dominated solutions is not obtained in the $A$ alternative with $P=8$  and $P=16$ (being equivalent to alternatives $O$ and $D$). This explains why with this chromosome length, the SLA methods do not improve the results obtained by $B$. This problem does not appear when $L=2048$. Although the differences in the Spread metric are not significant for the different alternatives for this benchmark, (as shown in Table \ref{tab:results2048}), the HV and IGD metrics are the ones that can be used to show the effectiveness of our approach in this type of problem with non-continuous PFs.} 
 
 \textcolor{blue}{In ZDT6, the Pareto-optimal solutions are not only non-uniformly distributed along the PF, but their density also increases as we move further away from it. That is the reason why some PFs obtained have an extremely low number of solutions in some configurations, and also, they are aggregated toward the areas with more density. Moreover, all configurations, including $B$, obtained PFs relatively far away from the optimal PF, as opposed as in previous problems. Spread is very similar for all methods $B$, $D$, $O$, $A$ across different $L$ sizes. Indeed, there is not a significant difference between methods, with an exception: Spread using $A$ with $L=512$ is significantly worse. As in previous approaches it is visually clear that increasing the number of islands, and therefore, reducing the number of individuals per island, imply a decrease in quality of the HV.}
 
