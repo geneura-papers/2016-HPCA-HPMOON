@@ -52,29 +52,26 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %Usually, distributed co-evolutionary algorithms are used to cope with these issues, by allocating parts of the decision space to different processors. Thus, each processor only deals with the individuals of a sub-population (called island in this context) that explores a specific part of the decision space.
 
 \begin{bluecolor}
-One of the  methods most extensively used to deal with high-dimensional multi-objective optimization problems are distributed co-evolutionary algorithms. %Pablo: reducing previous two paragraphs into one 
+One of the  most extensively used methods to deal with high-dimensional, multi-objective optimization problems are distributed co-evolutionary algorithms. 
 However, only
 decomposable problems could strictly be implemented in parallel this
 way. 
 A new parallel island-model evolutionary algorithm approach, which we call {\em selective operator application}, is used here to deal with un-decomposable
-problems: % so we are saying that high-dimensional multi-objective
-          % problems are a challenge, but we are presenting a solution
-          % for non-decomposable problems. What's what? - JJ
-% Still not addressed - JJ PABLO: rewritten almost all the abstract.
+problems: 
 instead of sharing parts
 of individuals, each island, hosted by a single processor, applies the variation operators to a
 specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation. 
-% 
+
  In this paper, we intend to prove that automatically setting the size of these
- overlapping section, since it focuses the search between borders of the different search spaces, is able to obtain better
+ overlapping sections, since it focuses the search between borders of the different search spaces, is able to obtain better
  results than using the same size independently of the number of islands. In order to prove that, we
- have compared it to other parallel evolutionary
+ have compared this method to other parallel evolutionary
 techniques considering different number of islands, chromosome sizes
 and benchmarks. The analysis of the obtained experimental results, by
 using different metrics, shows that our approach can provide
 statistically significant improvements with respect to the base
 algorithm in high-dimensional, un-decomposable, multi-objective problems. 
-%
+
 Results also show that the relation between the number of
 islands (subpopulations) and the length of the chromosome (number of
 decision variables) is also a relevant factor to determine the most
@@ -82,7 +79,7 @@ efficient alternative to distribute the decision variables: the higher
 the dimensionality and the overlapping, the greater the benefit of distribution in a
 large number of islands.
 This opens up a new challenge to be addressed in the future, by
-experimenting on new ways to calculate the overlapping sizes depending
+experimenting with new ways to calculate the overlapping sizes depending
 of different factors and parameters.
 \end{bluecolor}
 
