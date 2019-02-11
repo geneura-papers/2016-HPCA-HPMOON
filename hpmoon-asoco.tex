@@ -52,35 +52,17 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %Usually, distributed co-evolutionary algorithms are used to cope with these issues, by allocating parts of the decision space to different processors. Thus, each processor only deals with the individuals of a sub-population (called island in this context) that explores a specific part of the decision space.
 
 \begin{bluecolor}
-One of the  most extensively used methods to deal with high-dimensional, multi-objective optimization problems are distributed co-evolutionary algorithms. 
-However, only
-decomposable problems could strictly be implemented in parallel this
-way. 
-A new parallel island-model evolutionary algorithm approach, which we call {\em selective operator application}, is used here to deal with un-decomposable
-problems: 
-instead of sharing parts
-of individuals, each island, hosted by a single processor, applies the variation operators to a
-specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation. 
 
- In this paper, we intend to prove that automatically setting the size of these
- overlapping sections, since it focuses the search between borders of the different search spaces, is able to obtain better
- results than using the same size independently of the number of islands. In order to prove that, we
- have compared this method to other parallel evolutionary
-techniques considering different number of islands, chromosome sizes
-and benchmarks. The analysis of the obtained experimental results, by
-using different metrics, shows that our approach can provide
-statistically significant improvements with respect to the base
-algorithm in high-dimensional, un-decomposable, multi-objective problems. 
+%One of the  most extensively used methods to deal with high-dimensional, multi-objective optimization problems are distributed co-evolutionary algorithms. However, only decomposable problems could strictly be implemented in parallel this way. A new parallel island-model evolutionary algorithm approach, which we call {\em selective operator application}, is used here to deal with un-decomposable problems: instead of sharing parts of individuals, each island, hosted by a single processor, applies the variation operators to a specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation.
 
-Results also show that the relation between the number of
-islands (subpopulations) and the length of the chromosome (number of
-decision variables) is also a relevant factor to determine the most
-efficient alternative to distribute the decision variables: the higher
-the dimensionality and the overlapping, the greater the benefit of distribution in a
-large number of islands.
-This opens up a new challenge to be addressed in the future, by
-experimenting with new ways to calculate the overlapping sizes depending
-of different factors and parameters.
+%In this paper, we intend to demonstrate that automatically setting the size of these  overlapping sections, since it focuses the search between borders of the different search spaces, is able to obtain better  results than using the same size independently of the number of islands. In order to demonstrate that, we  have compared this method to other parallel evolutionary techniques considering different number of islands, chromosome sizes and benchmarks. The analysis of the obtained experimental results, by using different metrics, shows that our approach can provide statistically significant improvements with respect to the base algorithm in high-dimensional, un-decomposable, multi-objective problems. 
+
+%Results also show that the relation between the number of islands (subpopulations) and the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables: the higher the dimensionality and the overlapping, the greater the benefit of distribution in a large number of islands. This opens up a new challenge to be addressed in the future, by experimenting with new ways to calculate the overlapping sizes depending of different factors and parameters.
+
+%%%NEW AND SHORTED
+Parallel island-model co-evolutionary algorithms are a well-known and suitable methods to deal with large multi-objective optimization problems. In these algorithms each island modifies a fragment of the chromosome that encodes a possible solution to the problem. In this paper, we want to demonstrate that automatically setting the size of the overlapping fragments depending on the number of islands obtains better results than using the same size. We  have compared this method to other parallel evolutionary techniques considering different number of islands, chromosome sizes and benchmarks. The analysis of the obtained experimental results, by using different metrics, shows that our approach can provide statistically significant improvements with respect to the base algorithm in high-dimensional, un-decomposable, multi-objective problems. This opens a very challenging line to automatically adapt the overlapping sizes.
+
+
 \end{bluecolor}
 
 \end{abstract}
@@ -113,8 +95,13 @@ Multi-objective algorithms \sep NSGA-II  \sep distributed evolutionary algorithm
 % 6. In this paper we will be proving whatever - JJ FERGU: Addressing JJ order
 % OK - JJ
 
+\begin{bluecolor}
+One of the  most extensively used methods to deal with high-dimensional, Multi-Objective Optimization problems (MOPs) are distributed co-evolutionary algorithms \cite{Gong15models}. However, only decomposable problems could strictly be implemented in parallel this way. A new parallel island-model evolutionary algorithm approach \cite{Alba02Parallelism}, is used here to deal with un-decomposable problems: instead of sharing parts of individuals, each island, hosted by a single processor, applies the variation operators to a specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation.
+\end{bluecolor}
+
+
 %1. MOP ARE
-Multi-objective optimization problems (MOP) are those where several
+MOPs are those where several
 objectives have to be simultaneously optimized
 \citep{Mora13paretobased,LIU2017344}. Solving a MOP implies optimizing a function composed of several independent cost functions, one per objective. In
 these problems the aim is to obtain a set of solutions that are better
@@ -143,8 +130,6 @@ they are population-based helps find many solutions that compose the
 Pareto front simultaneously.
 
 
-%The availability of metaheuristics which are able to efficiently approach these multi-objective optimization problems have made it possible to cope with many real applications from such multi-objective point of view [4, 5, 6, 7, 8].  Evolutionary algorithms (EAs) [9] are bio-inspired meta-heuristics that can be effectively used to find nearly optimal solutions for optimization problems and have been extended to multi-objective optimization through quite a number of Multi-Objective Evolutionary Algorithms (MOEAs) [29]. 
-
 Usually an EA starts by generating a set of random solutions, called
 \emph{population}, following a user-defined description. Then, it
 evaluates each candidate solution, called \emph{individual}, assigning
@@ -156,17 +141,14 @@ iteration, called \emph{generation}, the least fit individuals are
 removed, and the process continues until a user-defined stop condition
 is met.
 
-\textcolor{blue}{EAs have been extended to multi-objective optimization through quite a number of Multi-Objective Evolutionary Algorithms (MOEAs) \cite{TalbiUnified2018}}.
+EAs have been extended to multi-objective optimization through quite a number of Multi-Objective Evolutionary Algorithms (MOEAs) \cite{TalbiUnified2018}.
 One of the best known and referenced MOEAs
 \citep{Dorronsoro13superlinear} is the {\em 
   Non-dominated Sorting Genetic Algorithm} (NSGA-II)
 \citep{Deb00NSGAII}. Classical genetic operators are applied to all
 the individuals, which are divided into different ranks, based on the
 dominance, to be selected for the next generations.
-% This paragraph has nothing to do with anything. Is it useful for
-% what you are doing in the paper? Is there any challenge that you
-% will be solving here? For instance, you could talk about the problem
-% it's got for parallelization and how it deals with them - JJ FERGU: Could you add some paragraph to justify it? (use \textcolor{blue}{} please)
+
 
 %4 BUT THE EASY PARALLELIZATION IS NOT NECESSARILY EFFICIENT
 
@@ -186,23 +168,11 @@ results to accurately identify the PF
 \textcolor{blue}{Real-world MOPs usually require a high number of decision variables \cite{Zhang17DECAL,XU2018268}}, 
 meaning that the
 MOEAs need to deal with large individuals and spend significant extra
-time for crossover, mutation and migration. %depending on the
-                                %language, this time might not be
-                                %significant at all, and will depend
-                                %on the length of the chromosome, not
-                                %the part of the chromosome you will
-                                %be applying it to. Besides, this is
-                                %not the critical part of the
-                                %algorithm, the critical part is
-                                %searching the solution space. 
-Different authors have % this is only one possibility. You should talk
-                       % about simple island models, too - JJ
+time for crossover, mutation and migration.
+Different authors have 
 proposed methods to divide the decision space (the chromosome) to
 improve the performance and solution quality. In this aspect, the
-co-evolution model is a dimension-distributed model where a % first
-                                % reference to co-evolution in this
-                                % paper. Is it still a paper about
-                                % co-evolution? - JJ
+co-evolution model is a dimension-distributed model where a 
 high-dimensional problem is divided into lower dimensional ones
 \citep{Gong15models,Tonda12cooperative}, and evolved separately. One
 example of application of this technique was described in
@@ -232,10 +202,8 @@ A similar approach used to solve this kind of problems is the {\em
 deals with the whole chromosome, but only modifies a fragment of it in
 the crossover and mutation phase depending on the number of islands,
 using the whole chromosome for fitness calculation. This allows to
-deal with un-decomposable problems. % if the whole chromosome is used,
-                                % mutation and crossover will take the
-                                % same time. You are modifying the
-                                % search space, though. 
+deal with un-decomposable problems. 
+
 In our previous work \citep{Garcia16hpmoon} we used this method in a
 preliminary experimental setup, although it is worth mentioning we are
 establishing its name and acronym in this paper for the first time.
@@ -249,17 +217,13 @@ when the number of islands is increased. In that paper, we showed that the most
 adequate overlapping size may vary depending on a relation between the
 number of islands and the individual size. However, it was a proof-of-concept, and the experiments
 were conducted in a limited experimental system: mono-processor and
-synchronous island model. %where we couldn't prove that... Or, we
-                          %couldn't experiment... - JJ
+synchronous island model. 
 This
 motivates us to continue this research line using a more complete environment: a real cluster with up to 128 nodes, and a more complete parameter setting. Besides comparing previous methods in this new experimental setup, in this paper we propose
 a new method that automatically \textcolor{blue}{sets} the size of the overlapped
 sections depending on the number of available islands, comparing it with previous versions. 
 
-% We have to
-                                % emphasize what is actually done. Is
-                                % this an addition to the old paper,
-                                % or a complete rewrite? - JJ FERGU: rewritten previous paragraph
+
 
 
 %6 IN THIS PAPER WE WILL BE PROVING
@@ -280,6 +244,8 @@ Several benchmark problems and different large number of islands
 have been used. Results show that this new technique can improve
 different quality indicators in the same amount of time when the
 problem size is large.  
+
+\textcolor{blue}{Results also show that the relation between the number of islands (subpopulations) and the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables: the higher the dimensionality and the overlapping, the greater the benefit of distribution in a large number of islands. This opens up a new challenge to be addressed in the future, by experimenting with new ways to calculate the overlapping sizes depending of different factors and parameters.}
 
 The rest of the paper is organized as follows: after the State of the Art in distributed and co-evolutionary MOEAs, 
 the used methodology and the compared algorithms are described in Section \ref{sec:methodology}. 
