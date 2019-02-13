@@ -894,8 +894,8 @@ also implies a better Spread indicator, where the baseline
 %%%%%%FERGU: WARNING, THIS SECTION IS STILL SHIT
 %ZDT1 
 \textcolor{blue}{After establishing the performance of the new method and in order to
-have some insight on how they work, let's check the effect of the different chromosome sizes and number of
-islands. Plotting the solution sets allows to observe its quality, distribution and shape, specially if they are limited to 2 or 3 objectives, as in this paper \cite{Li17read}. } Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048} show the
+have some insight on how they work, the effect of the different chromosome sizes and number of
+islands can be checked. Plotting the solution sets allows to observe its quality, distribution and shape, specially if they are limited to 2 or 3 objectives, as in this paper \cite{Li17read}. } Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048} show the
 final PFs of one arbitrary sample run of each combination;. The first
 one, ZDT1, has a convex Pareto-optimal front. Comparing results from
 $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure
@@ -981,14 +981,17 @@ automatic overlapping method ($A$) significantly improves the results with
 respect to the disjoint and overlapped methods. However, this is only
 apparent with larger chromosome sizes. Therefore, the length of the
 chromosome is also a key factor to take into account in automatic overlapping
-methods, and not only the number of islands. Studying this factor with
-more types of problems, and new configurations of population size and
-chromosome lengths could be addressed in the future. Since our method divides the individuals into blocks of divisible size, aggregation methods after migration, such as the ones used in \cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be also tested. But as we are dealing with complete individuals in each island, the possibility of using a real number, such as 0.3 (30\% overlapping) instead an integer value opens future experimental setups.
+methods, and not only the number of islands. 
+%Studying this factor with more types of problems, and new configurations of population size and chromosome lengths could be addressed in the future. 
+Since our method divides the individuals into blocks of divisible size, aggregation methods after migration, such as the ones used in \cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be also tested. But as we are dealing with complete individuals in each island, the possibility of using a real number, such as 0.3 (30\% overlapping) instead an integer value opens future experimental setups.
 For example, comparing 
 different ways to calculate $c$ using linear, logarithmic or exponential functions
-depending on population size, number of islands, or other values, or using some statistical parameter setting method, such as Taguchi's \cite{Keratmatpour2018Taguchi}. Moreover, a diversity analysis of the individuals
-in each island during the algorithm run could be carried out to understand its influence
-on the results. \textcolor{blue}{Parallel coordinates will be used when dealing with problems with more than 2 objectives \cite{Li17read}}.
+depending on population size, number of islands, or other values, or using some statistical parameter setting method, such as Taguchi's \cite{Keratmatpour2018Taguchi}. 
+
+\textcolor{blue}{Although the results obtained in this work are promising, it is clear that this method requires more future experiments, in addition to the automatic calculation of $c$. These new experiments should involve a more complete parameter study, including a sensitivity analysis, to validate our approach. Other benchmarks and real problems should be addressed in the future. These problems could involve dealing with more than two objectives, so polar coordinates should be used to visually understand the results \cite{Li17read}. Also, other MOEA algorithms available in the literature, such as SPEA or MOEA/D could also be compared.}
+
+
+% Moreover, a diversity analysis of the individuals in each island during the algorithm run could be carried out to understand its influence on the results.
 
 % 
 % More discussion should be added. Why is adaptive better? Is the high
@@ -997,12 +1000,11 @@ on the results. \textcolor{blue}{Parallel coordinates will be used when dealing 
 % paragraph of results begs an explanation of the influence of diversity on
 % results - JJ Pablo: extending this section
 
-Also, more distributed implementations in several systems (such as a
+Finally, more distributed implementations in several systems (such as a
 GPUs or heterogeneous clusters) with different amounts of
 islands/processors, could be used to perform a scalability study of the
 different methods, being the transmission time between islands a
-relevant issue to be addressed. \textcolor{blue}{Other MOEA algorithms available in the literature, such as SPEA or MOEA/D could also be compared. Moreover, new benchmarks and real problems
-could be  used to validate this approach.}
+relevant issue to be addressed.
 
 
 
