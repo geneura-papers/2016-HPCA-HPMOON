@@ -76,8 +76,8 @@ these problems the aim is to obtain a set of solutions that are better
 than the rest considering all the objectives; this set is known as
 the Pareto Front (PF). The solutions in this set are {\em non-dominated},
 which means that there is no other solution that is equal or better
-for all objectives; the objective of MOP algorithms is to find as many
-solutions equally distributed in the Pareto Front as possible, and in order to do that the
+for all \textcolor{blue}{objectives. The} objective of MOP algorithms is to find as many
+solutions equally distributed in the Pareto Front as \textcolor{blue}{possible. In} order to do that the
 exploration of the search space must be very efficient, trying to
 cover many possible exploration paths at the same time. 
 
@@ -91,7 +91,7 @@ one of which are evolutionary algorithms (EAs)
 \citep{DBLP:series/ncs/EibenS15}. EAs are bio-inspired meta-heuristics
 that can be effectively used to find nearly optimal solutions for
 optimization problems and are easily parallelizable, since they are
-population-based and creating a functionally equivalent parallel
+\textcolor{blue}{population-based. This means that} creating a functionally equivalent parallel
 version is as easy as distributing the population in communicating
 computing nodes, which are usually called islands. The fact that
 they are population-based helps find many solutions that compose the
@@ -545,7 +545,7 @@ decreasing it, we make the isolate islands more prone to being stuck
 in local minima. \cite{Martens13asynchronous} mentions that several
 values were tested with no influence in the result; in our particular
 case, the mixing is essential for the algorithm to spread the result
-to all parts of the chromosome, so while we tend to agree with
+to all parts of the \textcolor{blue}{chromosome. So,} while we tend to agree with
 M{\"a}rtens on the small influence of this value on the result, we also
 think that making this value much bigger in our case would have a
 negative impact. However, a precise fine-tuning of this value is left
