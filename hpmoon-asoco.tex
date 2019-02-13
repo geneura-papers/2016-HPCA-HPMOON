@@ -32,24 +32,6 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 
 
 \begin{abstract}
-  % First, state the problem!!!! - JJ Pablo: ok!
-%Real-world optimization problems usually require to deal with several objectives.
-%Multi-objective optimization methods have gained interest in the last
-%years because of the performance they can achieve solving this kind of problems. 
-%Many of them usually require a high-dimensional
-%decision space, and multi-objective Evolutionary Algorithms have been
-%successfully used in the past. Due to the large computational cost
-%these algorithms require, different parallelization and distribution
-%methods have been proposed, with different parallel and distributed
-%computer architectures to cope with them. 
-
-
-%Real world optimization problems usually have many dimensions and
-%  several objectives, thus requiring exceptional computing power to be addressed. 
-
- % The high dimensionality requires exceptional computing power, and the fact that several dimensions have to be searched at the same time add additional difficulty. 
-
-%Usually, distributed co-evolutionary algorithms are used to cope with these issues, by allocating parts of the decision space to different processors. Thus, each processor only deals with the individuals of a sub-population (called island in this context) that explores a specific part of the decision space.
 
 \begin{bluecolor}
 
@@ -60,7 +42,7 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %Results also show that the relation between the number of islands (subpopulations) and the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distribute the decision variables: the higher the dimensionality and the overlapping, the greater the benefit of distribution in a large number of islands. This opens up a new challenge to be addressed in the future, by experimenting with new ways to calculate the overlapping sizes depending of different factors and parameters.
 
 %%%NEW AND SHORTED
-Parallel island-model co-evolutionary algorithms are well-known and suitable methods to deal with large multi-objective optimization problems. In these algorithms, each island modifies a fragment of the chromosome that encodes a possible solution to the problem. In this paper, we want to demonstrate that automatically setting the size of the overlapping fragments depending on the number of islands obtains better results than using the same size. We  have compared this method to other parallel evolutionary techniques considering a different number of islands, chromosome sizes and benchmarks. The analysis of the obtained experimental results, by using different metrics, shows that our approach can provide statistically significant improvements with respect to the base algorithm in high-dimensional, un-decomposable, multi-objective problems. This opens a very challenging line to automatically adapt the overlapping sizes in this kind of algorithms.
+Parallel island-model co-evolutionary algorithms are well-known methods, suitable for dealing with large multi-objective optimization problems. In these algorithms, each island modifies a fragment of the chromosome that encodes a possible solution to the problem. In this paper, we want to demonstrate that automatically setting the size of the overlapping fragments depending on the number of islands obtains better results than using the same size. We  have compared this method to other parallel evolutionary techniques considering a different number of islands, chromosome sizes and benchmarks. The analysis of the obtained experimental results, by using different metrics, shows that our approach can provide statistically significant improvements with respect to the base algorithm in high-dimensional, un-decomposable, multi-objective problems. This opens a very challenging line to automatically adapt the overlapping sizes in this kind of algorithms.
 
 
 \end{bluecolor}
@@ -80,32 +62,18 @@ Multi-objective algorithms \sep NSGA-II  \sep distributed evolutionary algorithm
 
 \section{Introduction}
 
-%Introduction should start in the same way as the abstract. And
-%starting with something that is not really applicable here, talking
-%about general parallel evolutionary algorithms, is even worse.
-% Right way (IMNSHO)
-% 1. Multiobjective problems are
-% 2. They usually require a good amount of computation → parallel
-% distributed
-% 3. One way to solve them is to use MOEAs _because_ they can be
-% easily parallelized
-% 4. But the easy paralellization is not necessarily efficient.
-% 5. We have proposed the HPMOON (or whatever) technique to improve
-% it. In paper (whatever) we proved that (whatever)
-% 6. In this paper we will be proving whatever - JJ FERGU: Addressing JJ order
-% OK - JJ
-
+% Maybe add a sentence explaining what problems are decomposable and which ones are not. - JJ
 \begin{bluecolor}
-One of the  most extensively used methods to deal with high-dimensional, Multi-Objective Optimization problems (MOPs) are distributed co-evolutionary algorithms \cite{Gong15models}. However, only decomposable problems could strictly be implemented in parallel this way. A new parallel island-model evolutionary algorithm approach \cite{Alba02Parallelism}, is used here to deal with un-decomposable problems: instead of sharing parts of individuals, each island, hosted by a single processor, applies the variation operators to a specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation.
+One of the methods that are most extensively used  to deal with high-dimensional, multi-objective optimization problems (MOPs) are distributed co-evolutionary algorithms \cite{Gong15models}. However, only decomposable problems could strictly be implemented in parallel this way. A new parallel island-model evolutionary algorithm approach \cite{Alba02Parallelism}, is used here to deal with un-decomposable problems: instead of sharing parts of individuals, each island, hosted by a single processor, applies the variation operators to a specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation. 
 \end{bluecolor}
 
 
 %1. MOP ARE
-MOPs are those where several
+In MOPs, several
 objectives have to be simultaneously optimized
 \citep{Mora13paretobased,LIU2017344}. Solving a MOP implies optimizing a function composed of several independent cost functions, one per objective. In
 these problems the aim is to obtain a set of solutions that are better
-than the rest, considering all the objectives; this set is known as
+than the rest considering all the objectives; this set is known as
 the Pareto Front (PF). The solutions in this set are {\em non-dominated},
 which means that there is no other solution that is equal or better
 for all objectives; the objective of MOP algorithms is to find as many
