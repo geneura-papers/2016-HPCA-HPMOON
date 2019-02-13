@@ -626,19 +626,14 @@ island model has been executed asynchronously, using the ECJ distributed inter-p
 
 
 Different metrics, previously explained, have been used
-to calculate the quality of the obtained PFs in each configuration. As HV \textcolor{blue}{requires} a reference point to be
+to calculate the quality of the obtained PFs in every configuration. As HV \textcolor{blue}{requires} a reference point to be
 calculated (see Figure \ref{fig:hypervolume}), we have chosen the value (1,9) as none of the existing solutions on all fronts obtained during all executions are dominated by it. In other words, as we are minimizing in both objectives, this reference point is required to be numerically larger or equal in each objective, and strictly larger in at least one of them (dominated) for all solutions in the PFs we are going to measure. HV is then
 normalized \textcolor{blue}{with respect to} to that point. Also, the optimal reference PF distribution used to calculate the IGD and Spread metrics \cite{Durillo11Jmetal} has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.} .  
 A Kruskal-Wallis significance
 test has been performed to the metrics of all runs of the
 configurations, as the Kolmogorov-Smirnov test detected non-normal
-distributions. The average results for each configuration are shown in
-Table \ref{tab:results512} (for 512 dimensions) and Table
-\ref{tab:results2048} (for 2048). As previously explained, when $P=8$
-the results of A are equivalent to the obtained by D (because
-$c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv-} in tables. For example, Equiv-D in an HV cell  means that the HV of A is the same than the value in D column, because the behaviour of this configuration is the same than executing D.
-
-
+distributions.
+%
 \begin{table*}
 \centering
 \resizebox{14cm}{!}{
@@ -689,6 +684,13 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 
 
 
+The average results for each configuration are shown in
+Table \ref{tab:results512} (for 512 dimensions) and Table
+\ref{tab:results2048} (for 2048). As previously explained, when $P=8$
+the results of A are equivalent to the obtained by D (because
+$c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivalence with the word {\em Equiv-} in tables. For example, Equiv-D in an HV cell  means that the HV of A is the same than the value in D column, because the behaviour of this configuration is the same than executing D.
+
+
 \begin{table*}
 \centering
 \resizebox{13cm}{!}{
@@ -730,10 +732,13 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 
 
 
+%DESCRIPTION OF THE RESULTS
+Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values better or significantly equal than \textcolor{blue}{those} obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply these methods. A contradiction arises with respect to the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoon}, where the overlapping method obtained better results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes of the cluster requires more time than the time saved during the crossover and migration. This was not a problem in the mono-processor version, where the individuals shared the same memory space.
+
+However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the automatic ($A$) version (Table \ref{tab:results2048}), even overcoming the overlapping ($O$) and disjoint ($D$) methods. Therefore, there \textcolor{blue}{exists} some kind of limit point in chromosome length where one method will be preferable to another, besides depending on the number of islands and population size.
 
 
-
-\begin{table*}
+\begin{table*}[h!tb]
 \centering
 \resizebox{12cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||}
@@ -767,15 +772,11 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 128	&	18.133		&	15.000	B	&	9.067			&	11.367		D	&	927.233		&	984.667			&	983.933	D		&	969.433				\\ \hline
 \end{tabular}
 }
-\caption{Average number of generations and average number of solutions of the front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and \textcolor{blue}{automatic} overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
+\caption{Average number of generations and  solutions per front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and \textcolor{blue}{automatic} overlapped (A), using a chromosome length of 512 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
 \label{tab:sols512}
 \end{table*}
-
-
-
-
-
-\begin{table*}
+%
+\begin{table*}[h!tb]
 \centering
 \resizebox{12cm}{!}{
 \begin{tabular}{|c||c|c|c|c||c|c|c|c||}
@@ -809,93 +810,16 @@ $c=0$), and when $P=16$ they are equivalent to O ($c=1$). We refer this equivale
 128	&	15.800		&	24.500		&	11.600			&	12.233	DO		&	243.800		&	247.000			&	247.000	D		&	245.533				\\ \hline
 \end{tabular}
 }
-\caption{Average number of generations and average number of solutions per front, obtained after 30 runs per configuration, for the 4 methods compared: baseline (B), disjoint (D), overlapped (O) and \textcolor{blue}{automatic} overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
+\caption{Average number of generations and solutions per front after 30 runs per configuration, for methods baseline (B), disjoint (D), overlapped (O) and \textcolor{blue}{automatic} overlapped (A), using a chromosome length of 2048 dimensions. Acronyms next to values indicate that there is not significant difference with respect to that method for that value. Equiv-$X$ implies that value is the same as executing $X$, since both configurations would be the same.}
 \label{tab:sols2048}
 \end{table*}
-
-%DESCRIPTION OF THE RESULTS
-Results show that there is a difference in performance when using 512 or 2048 dimensions. Although in some cases the overlapped methods obtain quality metrics values better or significantly equal than \textcolor{blue}{those} obtained by the baseline, it is clear that 512 dimensions is not a value high enough to apply these methods. A contradiction arises with respect to the results obtained in our previous work in a shared-memory mono-processor version \citep{Garcia16hpmoon}, where the overlapping method obtained better results than the baseline in both dimension lengths. This can be explained because the added migration latency between nodes of the cluster requires more time than the time saved during the crossover and migration. This was not a problem in the mono-processor version, where the individuals shared the same memory space.
-
-However, with 2048 dimensions, results show that dividing the chromosome produces an improvement in all the quality indicators using the automatic ($A$) version (Table \ref{tab:results2048}), even overcoming the overlapping ($O$) and disjoint ($D$) methods. Therefore, there \textcolor{blue}{exists} some kind of limit point in chromosome length where one method will be preferable to another, besides depending on the number of islands and population size.
-
-%ZDT1
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt1_512.png}
-\caption{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt1_512}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt1_2048.png}
-\caption{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt1_2048}
-\end{figure}
-
-
-
-
-
-
-%ZDT2
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt2_512.png}
-\caption{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt2_512}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt2_2048.png}
-\caption{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt2_2048}
-\end{figure}
-
-
-
-
-
-%ZDT3
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt3_512.png}
-\caption{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt3_512}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt3_2048.png}
-\caption{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt3_2048}
-\end{figure}
-
-
-
-
-%ZDT6
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt6_512.png}
-\caption{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt6_512}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{plot_zdt6_2048.png}
-\caption{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
-\label{fig:plot_zdt6_2048}
-\end{figure}
-
-
-
+%
 %EXPLANATION OF THE RESULTS
 This can be explained comparing the number of non-dominated solutions
 of each front and the average number of generations (Table
-\ref{tab:sols512} and Table \ref{tab:sols2048}). With both chromosome
+\ref{tab:sols512} and Table \ref{tab:sols2048}).
+
+With both chromosome
 lengths, increasing the number of islands implies more generations
 with all the methods (logically, as there are \textcolor{blue}{fewer} individuals in each
 island). But also, the SLA methods
@@ -907,12 +831,81 @@ it happens with $L=512$. Therefore, more generations do not
 necessarily mean improve the solution of the global PF, but focusing on
 different elements of the chromosome. As  previously stated, every
 island is unaware of the other islands PFs, and they are trying to
-optimize their solutions independently. With respect to the average
+optimize their solutions independently.
+
+With respect to the average
 number of solutions per front, there is a clear difference 
  with the baseline with $L=512$, where this value is in the most
 of the cases, less than a half. The number of non-dominated solutions
 also implies a better Spread indicator, where the baseline 
  obtains better (or not significantly different) values in the majority of the compared configurations.
+
+
+
+%ZDT1
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt1_512.png}
+\caption{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt1_512}
+\end{figure}
+%
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt1_2048.png}
+\caption{PFs obtained in one arbitrary run for the ZDT1 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt1_2048}
+\end{figure}
+%
+%ZDT2
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt2_512.png}
+\caption{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt2_512}
+\end{figure}
+%
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt2_2048.png}
+\caption{PFs obtained in one arbitrary run for the ZDT2 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt2_2048}
+\end{figure}
+%
+%ZDT3
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt3_512.png}
+\caption{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt3_512}
+\end{figure}
+%
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt3_2048.png}
+\caption{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt3_2048}
+\end{figure}
+%
+%
+%
+%ZDT6
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt6_512.png}
+\caption{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt6_512}
+\end{figure}
+%
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=12cm]{plot_zdt6_2048.png}
+\caption{PFs obtained in one arbitrary run for the ZDT6 problem with a chromosome size ($L$) of 2048 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent of running $D$ and $O$ respectively. }
+\label{fig:plot_zdt6_2048}
+\end{figure}
+
+
+
 
 %%%%%%FERGU: WARNING, THIS SECTION IS STILL SHIT
 %ZDT1 
