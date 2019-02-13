@@ -835,8 +835,8 @@ optimize their solutions independently.
 
 With respect to the average
 number of solutions per front, there is a clear difference 
- with the baseline with $L=512$, where this value is in the most
-of the cases, less than a half. The number of non-dominated solutions
+ with the baseline with $L=512$, where this value is in most
+cases, less than a half. The number of non-dominated solutions
 also implies a better Spread indicator, where the baseline 
  obtains better (or not significantly different) values in the majority of the compared configurations.
 
@@ -909,10 +909,27 @@ also implies a better Spread indicator, where the baseline
 
 %%%%%%FERGU: WARNING, THIS SECTION IS STILL SHIT
 %ZDT1 
-Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048}, showing the final PFs of one arbitrary sample run of each combination. These figures allow visualizing the effect of the different chromosome sizes and number of islands in each different benchmark. The first one, ZDT1, has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) it is apparent that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown on average in Table \ref{tab:results512}. Nevertheless, if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048} that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is still larger.
+After establishing the performance of the new method and in order to
+have some insight on how they work, let's check the effect of the different chromosome sizes and number of
+islands. Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048} show the
+final PFs of one arbitrary sample run of each combination;. The first
+one, ZDT1, has a convex Pareto-optimal front. Comparing results from
+$L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure
+\ref{fig:plot_zdt1_2048}) it is apparent that the quality of the
+generated PFs depends on the chromosome size. Specifically, all
+configurations  with
+$L=512$  seem to have a worse Spread and HV, on the other hand, the
+SLA methods behave worse than $B$, as it was also shown on average in
+Table \ref{tab:results512}. Nevertheless, if we focus on the plots
+obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this
+difference is less clear. Figure \ref{fig:plot_zdt1_2048} shows that
+solutions obtained by the SLA methods show higher dispersion than the
+baseline as $P$ grows. However, with $A$, the area covered by the PF
+is still larger.
 
 %ZDT2
-ZDT2 has a non-convex Pareto front. From Figures \ref{fig:plot_zdt2_512} and \ref{fig:plot_zdt2_2048} is clear that, as in the previous problem ZDT1, there is a decrease of quality for all configurations as the size of $P$ increases.  Nevertheless, for this benchmark, there is not a clear decrease in the PF quality when $L$ goes from 512 to 2048.
+ZDT2 has a non-convex Pareto front. From Figures
+\ref{fig:plot_zdt2_512} and \ref{fig:plot_zdt2_2048} it is clear that, as in the previous problem ZDT1, there is a decrease of quality for all configurations as the size of $P$ increases.  Nevertheless, for this benchmark, there is not a clear decrease in the PF quality when $L$ goes from 512 to 2048.
 
 %ZDT3
 ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, the rightmost part of the obtained non-dominated solutions is not obtained in the $A$ alternative with $P=8$  and $P=16$ (being equivalent to alternatives $O$ and $D$). This explains why with this chromosome length, the SLA methods do not improve the results obtained by $B$. This problem does not appear when $L=2048$. Although the differences in the Spread metric are not significant for the different alternatives for this benchmark, (as shown in Table \ref{tab:results2048}), the HV and IGD metrics are the ones that can be used to show the effectiveness of our approach in this type of problem with non-continuous PFs.
