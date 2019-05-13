@@ -851,8 +851,8 @@ increasing the number of islands. However, with $L=2048$ the migration
 time is big enough  to not improve the number of generations
 with respect to the baseline, even in the lower number of islands, as
 it happens with $L=512$. Therefore, more generations do not
-necessarily mean improve the solution of the global PF, but focusing on
-different elements of the chromosome. As  previously stated, every
+necessarily mean \textcolor{blue}{an improvement in} the solution of the global PF, but focusing on
+different elements of the chromosome. As previously stated, every
 island is unaware of the other islands PFs, and they are trying to
 optimize their solutions independently.
 
@@ -1037,9 +1037,22 @@ setups. \textcolor{blue}{This should also take care of epistatic
   this fact is, in fact, going to be avoided.}
 For example, comparing 
 different ways to calculate $c$ using linear, logarithmic or exponential functions
-depending on population size, number of islands, or other values, or using some statistical parameter setting method, such as Taguchi's \cite{Keratmatpour2018Taguchi}. 
+depending on population size, number of islands, or other values, or
+using some statistical parameter setting method, such as Taguchi's
+\cite{Keratmatpour2018Taguchi}. \textcolor{blue}{However, taking into
+  account that the linear change tested in this paper in fact obtains
+  good results with a simple formula, it is our conclusion that
+  further complication would not be necessary.}
 
-Although the results obtained in this work are promising, it is clear that this method requires more future experiments, in addition to the automatic calculation of $c$. These new experiments should involve a more complete parameter study, including a sensitivity analysis, to validate our approach. Other benchmarks and real problems should be addressed in the future. These problems could involve dealing with more than two objectives, so polar coordinates should be used to visually understand the results \cite{Li17read}. Also, other MOEA algorithms available in the literature, such as SPEA or MOEA/D could also be compared.
+Although the results obtained in this work are promising, it is clear
+that this method requires more future experiments. These new
+experiments should involve a more complete parameter study, including
+a sensitivity analysis, to validate our approach. Other benchmarks and
+real problems should be addressed in the future. These problems could
+involve dealing with more than two objectives, so polar coordinates
+should be used to visually understand the results
+\cite{Li17read}. Also, other MOEA algorithms available in the
+literature, such as SPEA or MOEA/D could also be compared. 
 
 
 % Moreover, a diversity analysis of the individuals in each island during the algorithm run could be carried out to understand its influence on the results.
