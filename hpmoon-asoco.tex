@@ -1015,14 +1015,26 @@ Problems that require high-performance
  these methods can achieve better quality metrics than the baseline in
  the same amount of time, with large chromosome lengths. 
 
-Obtained results also show that when increasing the number of islands, the
+Obtained results also show that when the number of islands
+\textcolor{blue}{is increased}, the
 automatic overlapping method ($A$) significantly improves the results with
 respect to the disjoint and overlapped methods. However, this is only
 apparent with larger chromosome sizes. Therefore, the length of the
 chromosome is also a key factor to take into account in automatic overlapping
 methods, and not only the number of islands. 
 %Studying this factor with more types of problems, and new configurations of population size and chromosome lengths could be addressed in the future. 
-Since our method divides the individuals into blocks of divisible size, aggregation methods after migration, such as the ones used in \cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be also tested. But as complete individuals \textcolor{blue}{treated} in each island, the possibility of using a real number, such as 0.3 (30\% overlapping) instead an integer value opens future experimental setups.
+Since our method divides the individuals into blocks of divisible
+size, aggregation methods after migration, such as the ones used in
+\cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be
+also tested. But as complete individuals \textcolor{blue}{treated} in
+each island, the possibility of using a real number, such as 0.3 (30\%
+overlapping) instead an integer value opens future experimental
+setups. \textcolor{blue}{This should also take care of epistatic
+  interactions between chromosome sizes: although variation operators
+  operate on chromosome fragments, selection and fitness evaluation
+  operates on the whole chromosome; besides, there is migration
+  between islands, so the probability of reaching local minima due to
+  this fact is, in fact, going to be avoided.}
 For example, comparing 
 different ways to calculate $c$ using linear, logarithmic or exponential functions
 depending on population size, number of islands, or other values, or using some statistical parameter setting method, such as Taguchi's \cite{Keratmatpour2018Taguchi}. 
