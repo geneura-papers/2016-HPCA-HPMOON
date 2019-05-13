@@ -950,6 +950,9 @@ However, with 2048 dimensions, results show that dividing the chromosome produce
 \includegraphics[width=12cm]{plot_zdt3_512.png}
 \caption{\textcolor{blue}{PFs obtained in one arbitrary run for the ZDT3 problem with a chromosome size ($L$) of 512 for each combination of number of islands ($P$) and method: baseline ($B$), disjoint ($D$), overlapped ($O$) and automatic overlapped ($A$). Results for 8 and 16 islands of $A$ are equivalent to running $D$ and $O$ respectively. }}
 \label{fig:plot_zdt3_512}
+% I really have no idea what this is representing. Maybe plotting the
+% real Pareto front would help. I wouldn't know if this wiggle lines
+% are better or worse than whatever - JJ
 \end{figure}
 
 \begin{figure}
@@ -1013,10 +1016,37 @@ also implies a better Spread indicator, where the baseline
  % By now, maybe it should not be (or you should delete this
  % comment) - JJ
 %ZDT1 
-\textcolor{blue}{Figures \ref{fig:plot_zdt1_512} to \ref{fig:plot_zdt6_2048}, showing the final PFs of one arbitrary sample run of each combination. These figures allow to visualize the effect of the different chromosome sizes and number of islands in each different benchmark. The first one, ZDT1, has a convex Pareto-optimal front. Comparing results from $L=512$ (Figure \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) it is apparent that the quality of the generated PFs depends on the chromosome size. Specifically, with $L=512$ it can be seen that the PFs quality decreases in Spread and HV with all configurations, but the SLA methods behave worse than $B$, as it also was shown on average in Table \ref{tab:results512}. Nevertheless, if we focus on the plots obtained with $L=2048$ (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It can be seen in Figure \ref{fig:plot_zdt1_2048} that solutions obtained by the SLA methods are more dispersed than the baseline as $P$ grows. However, with $A$, the area covered by the PF is still larger.}
+\textcolor{blue}{Figures \ref{fig:plot_zdt1_512} to
+  \ref{fig:plot_zdt6_2048}, show the final PFs of one arbitrary sample
+  run of each combination. % Is it representative? Would it vary much?
+                           % - JJ
+  These figures allow to visualize the effect of the different
+  chromosome sizes and number of islands in each different
+  benchmark. The first one, ZDT1, has a convex Pareto-optimal
+  front. Comparing results from $L=512$ (Figure
+  \ref{fig:plot_zdt1_512}) and $L=2048$ (Figure
+  \ref{fig:plot_zdt1_2048}) it is apparent that the quality of the
+  generated PFs depends on the chromosome size. Specifically, with
+  $L=512$ it can be seen that the PFs quality decreases in Spread and
+  HV with all configurations, but the SLA methods behave worse than
+  $B$, as it also was shown on average in Table
+  \ref{tab:results512}. % Are we supposed to appreciate spread and HV
+                        % by looking at those graphs? - JJ
+  Nevertheless, if we focus on the plots obtained with $L=2048$
+  (Figure \ref{fig:plot_zdt1_2048}) this difference is less clear. It
+  can be seen in Figure \ref{fig:plot_zdt1_2048} that solutions
+  obtained by the SLA methods are more dispersed than the baseline as
+  $P$ grows. However, with $A$, the area covered by the PF is still
+  larger.} % than what? - JJ
 
 %ZDT2
-\textcolor{blue}{ZDT2 has a non-convex Pareto front. From Figures \ref{fig:plot_zdt2_512} and \ref{fig:plot_zdt2_2048} is clear that, as in the previous problem ZDT1, there is a decrease of quality for all configurations as the size of $P$ increases.  Nevertheless, for this benchmark, there is not a clear decrease in the PF quality when $L$ goes from 512 to 2048.}
+\textcolor{blue}{ZDT2 has a non-convex Pareto front. From Figures
+  \ref{fig:plot_zdt2_512} and \ref{fig:plot_zdt2_2048} is clear
+  that, % not to me - JJ
+  as in the previous problem ZDT1, there is a decrease of quality for
+  all configurations as the size of $P$ increases.  Nevertheless, for
+  this benchmark, there is not a clear decrease in the PF quality when
+  $L$ goes from 512 to 2048.} 
 
 %ZDT3
 \textcolor{blue}{ZDT3 Pareto-optimal front is formed by non-contiguous convex parts, and plots for both chromosome sizes (Figures \ref{fig:plot_zdt3_512} and \ref{fig:plot_zdt3_2048}) show solutions gathered in similar regions in all configurations. However, with $L=512$, the rightmost part of the obtaninde non-dominated solutions is not obtained in the $A$ alternative with $P=8$  and $P=16$ (being equivalent to alternatives $O$ and $D$). This explains why with this chromosome length, the SLA methods do not improve the results obtained by $B$. This problem does not appear when $L=2048$. Although the differences in the Spread metric are not significant for the different alternatives for this benchmark, (as shown in Table \ref{tab:results2048}), the HV and IGD metrics are the ones that can be used to show the effectiveness of our approach in this type of problem with non-continuous PFs.} 
@@ -1080,11 +1110,27 @@ Problems that require high-performance
  the same amount of time, with large chromosome lengths. 
 
 Obtained results also show that when increasing the number of islands, the
-automatic overlapping method ($A$) significantly improves the results with
-respect to the disjoint and overlapped methods. However, this is only
+automatic overlapping method ($A$) % $A$ or SLA? - JJ
+significantly improves the results with
+respect to the disjoint and overlapped methods. %Always? Which cases?
+                                %Which sizes? Which measure? - JJ
+However, this is only
 apparent with larger chromosome sizes. Therefore, the length of the
 chromosome is also a key factor to take into account in automatic overlapping
-methods, and not only the number of islands. Studying this factor with
+methods, and not only the number of islands. % This is the extent of
+                                % the conclusions. The referees have
+                                % said they should be
+                                % expanded. Conclusions should include
+                                % the reasons why this method obtains
+                                % better results. What is the
+                                % influence of adaptativity in the
+                                % result? It closes "gaps" in the
+                                % Pareto front? Does it work better
+                                % when there are no gaps? - JJ
+
+
+
+Studying this factor with
 more types of problems, and new configurations of population size and
 chromosome lengths could be addressed in the future. \textcolor{blue}{Since our method divides the individuals into blocks of divisible size, aggregation methods after migration, such as the ones used in \cite{Kimovski15Parallel} or \cite{Dorronsoro13superlinear} can be also tested. But as we are dealing with complete individuals in each island, the possibility of using a real number, such as 0.3 (30\% overlapping) instead an integer value opens future experimental setups.}
 For example, comparing 
