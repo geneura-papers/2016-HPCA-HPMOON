@@ -159,9 +159,11 @@ Real-world MOPs usually require a high number of decision variables \cite{Zhang1
 meaning that the
 MOEAs need to deal with large individuals \textcolor{blue}{representing those variables} and spend significant extra
 time \textcolor{blue}{applying the} crossover, mutation and migration \textcolor{blue}{operators}.
+% If this is the only justification, it should have been assessed at the end. It would be better if it was qualified, in the sense that more exploration is needed or something like that - JJ
 Different authors have 
 proposed methods to divide the decision space (the chromosome) to
-improve the performance and solution quality. In this aspect, the
+improve the performance and solution quality. % Why should it improve quality? - JJ
+In this aspect, the
 co-evolution model is a dimension-distributed model where a 
 high-dimensional problem is divided into lower dimensional ones
 \citep{Gong15models,Tonda12cooperative}, and evolved separately. One
@@ -173,7 +175,7 @@ alternatives from the parts returned by worker processes. A high
 dimensional problem was used to compare these 
 alternatives. In \citep{Dorronsoro13superlinear}, a distributed
 co-evolutionary island model was used.  Although in both papers
-significant speedups were attained, only a low number of nodes were
+significant speedups were attained, only a \textcolor{blue}{small} number of nodes were
 employed (8). However, when the number of islands is increased, the division
 of each section of the chromosome becomes smaller, and the scalability
 may be affected by obtaining lower quality solutions in the same
@@ -208,11 +210,10 @@ number of islands and the individual size. However, it was a proof-of-concept, a
 were conducted in a limited experimental system: mono-processor and
 synchronous island model. 
 This
-motivates us to continue this research line using a more complete environment: a real cluster with up to 128 nodes, and a more \textcolor{blue}{extensive parameter evaluation}. Besides comparing previous methods in this new experimental setup, in this paper 
+motivate\textcolor{blue}{d} us to continue this research line using a more complete environment: a real cluster with up to 128 nodes, and a more \textcolor{blue}{extensive parameter evaluation}. %Again, "testing more stuff" is not a good motivation. You should try to address a specific research question that might have been raised in the previous paper - JJ
+Besides comparing previous methods in this new experimental setup, in this paper 
 a new method that automatically sets the size of the overlapped
 sections depending on the number of available islands \textcolor{blue}{is proposed}, comparing it with previous versions. 
-
-
 
 
 %6 IN THIS PAPER WE WILL BE PROVING
