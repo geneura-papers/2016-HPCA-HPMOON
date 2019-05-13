@@ -173,9 +173,9 @@ different workers that evolve sub-populations created and recombined
 by a master process, which performs different recombination
 alternatives from the parts returned by worker processes. A high
 dimensional problem was used to compare these 
-alternatives. In \citep{Dorronsoro13superlinear}, a distributed
-co-evolutionary island model was used.  Although in both papers
-significant speedups were attained, only a \textcolor{blue}{small} number of nodes were
+alternatives\textcolor{blue}{; also, i}n \citep{Dorronsoro13superlinear}, a distributed
+co-evolutionary island model was used.  Although  both papers \textcolor{blue}{described}
+significant speedups, only a \textcolor{blue}{small} number of nodes were
 employed (8). However, when the number of islands is increased, the division
 of each section of the chromosome becomes smaller, and the scalability
 may be affected by obtaining lower quality solutions in the same
@@ -198,8 +198,8 @@ deal with un-decomposable problems.
 
 In our previous work \citep{Garcia16hpmoon} \textcolor{blue}{this method was used} in a
 preliminary experimental setup, although it is worth mentioning \textcolor{blue}{that its name and acronym is established} in this paper for the first time.
-\textcolor{blue}{It was shown}
-that applying the variation operators only over specific sections of the whole chromosome improves the quality of the solutions in the same computing time for a multi-objective island-based algorithm.
+\textcolor{blue}{In that paper, it was shown}
+that applying the variation operators only \textcolor{blue}{to} specific sections of the whole chromosome improves the quality of the solutions in the same computing time for a multi-objective island-based algorithm.
 Moreover, instead of making every island focus on a disjoint subset of the
 chromosome, the usage of overlapped (shared) sections of the
 chromosome 
@@ -237,7 +237,15 @@ problem size is large.
 
 % There's no mention of the type of the benchmark problems. Insert here some characterization, including whether they are epistatic or not - JJ
 
-Results also show that the relation between the number of islands (subpopulations) and the length of the chromosome (number of decision variables) is also a relevant factor to determine the most efficient alternative to distributing the decision variables: the higher the dimensionality and the overlapping, the greater the benefit of distribution in a large number of islands. This opens up a new challenge to be addressed in the future, by experimenting with new ways to calculate the overlapping sizes depending on different factors and parameters.
+Results also show that the relation between the number of islands
+(subpopulations) and the length of the chromosome (number of decision
+variables) is also a relevant factor to determine the most efficient
+alternative to distributing the decision variables: the higher the
+dimensionality and the overlapping, the greater the benefit of
+distribution in a large number of islands. This opens up a new
+challenge to be addressed in the future, by experimenting with new
+ways to calculate the overlapping sizes depending on different factors
+and parameters.
 
 The rest of the paper is organized as follows: after the State of the Art in distributed and co-evolutionary MOEAs, 
 the used methodology and the compared algorithms are described in Section \ref{sec:methodology}. 
