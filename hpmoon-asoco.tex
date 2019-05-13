@@ -77,12 +77,22 @@ Multi-objective algorithms \sep NSGA-II  \sep distributed evolutionary algorithm
 
 % Maybe add a sentence explaining what problems are decomposable and which ones are not. - JJ
 \begin{bluecolor}
-One of the methods that are most extensively used  to deal with high-dimensional, multi-objective optimization problems (MOPs) are distributed co-evolutionary algorithms \cite{Gong15models}. However, only decomposable problems could strictly be implemented in parallel this way. A new parallel island-model evolutionary algorithm approach \cite{Alba02Parallelism} is used here to deal with un-decomposable problems: instead of sharing parts of individuals, each island, hosted by a single processor, applies the variation operators to a specific subset of the whole individual. This avoids extra steps to recompose the complete individuals from other islands before evaluation. 
+One of the methods that are most extensively used  to deal with
+high-dimensional, multi-objective optimization problems (MOPs) are
+distributed co-evolutionary algorithms \cite{Gong15models}. However,
+only decomposable problems could strictly be implemented in parallel
+this way. A new parallel island-model evolutionary algorithm approach
+\cite{Alba02Parallelism} is used here to deal with un-decomposable
+problems: instead of sharing parts of individuals, each island, hosted
+by a single processor, applies the variation operators to a specific
+subset of the whole individual. This avoids extra steps (and
+subsequent communication overhead) to recompose the complete
+individuals from other islands before evaluation. 
 \end{bluecolor}
 
 
 %1. MOP ARE
-In MOPs, several
+In MOPs, several \textcolor{blue}{independent}
 objectives have to be simultaneously optimized
 \citep{Mora13paretobased,LIU2017344}. Solving a MOP implies optimizing a function composed of several independent cost functions, one per objective. In
 these problems the aim is to obtain a set of solutions that are better
