@@ -509,9 +509,13 @@ Pseudo-code of the proposed algorithms is described in Algorithm \ref{alg:EA}.
 %
 \subsection{Experimental setup}
 
+% Some introduction. ... We will describe here the design of the
+% experiments bla bla bla--- JJ
 
-This subsection describes the quality indicators used and the experimental setup. The chosen quality indicators are:
+This subsection describes the \textcolor{blue}{measurements of
+  quality} used \textcolor{blue}{; these are}:
 
+% Justify this - JJ
 \begin{itemize}
 \item Hypervolume (HV): measures the area formed by all non-dominated solutions found with respect to a reference point. Higher values imply better quality of the PF. Figure \ref{fig:hypervolume} clarifies how the hypervolume is calculated.
 \item Inverted Generational distance (IGD): calculates the distance of the obtained set of solutions to the optimal PF. Therefore, this metric requires the optimal PF found in the literature, or the theoretical one. In this metric, the lower the better. %Pablo: theoretical?
@@ -526,6 +530,7 @@ This subsection describes the quality indicators used and the experimental setup
 \end{figure}
 
 
+% Move this to the top - JJ
 Those metrics \textcolor{blue}{have been chosen} not only because they have been used
 extensively, especially in some of the papers presented in Section \ref{sec:soa}
 \cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous},
@@ -550,7 +555,10 @@ most widely used in this area
 \citep{Deb03distributed,Martens13asynchronous,Wang09parallel,Durillo08masterslave}. This
 benchmark includes several functions, with different features that are
 representative of real-world optimization problems. Mathematical
-formulation of each function is available in \citep{zdt2000a}. 
+formulation of each function is available in \citep{zdt2000a}. \textcolor{blue}{Please
+note that the ZDT problems are non-epistatic, so in principle our
+conclusions should be extensible only to multiobjective problems with
+the same nature.}
 
 
 The global population size is set to 1024. \textcolor{blue}{That value has been chosen} for two reasons: the first is that it is large enough to have 8 individuals per island by dividing that number when using 128 islands and small enough to have 128 individuals when using 8 islands. This is the minimum and maximum population size per island used by M{\"a}rtens et al. in his work \cite{Martens13asynchronous}.
