@@ -81,7 +81,7 @@ Multi-objective algorithms \sep NSGA-II  \sep distributed evolutionary algorithm
 One of the methods that are most extensively used  to deal with
 high-dimensional, multi-objective optimization problems (MOPs) are
 distributed co-evolutionary algorithms \cite{Gong15models}. However,
-only decomposable problems \textcolor{blue}{-that is, the ones whose  domain can be divided into subsets, calculate their solutions, and combine them to form the solution of the original problem-,} could strictly be implemented in parallel
+only decomposable problems \textcolor{blue}{--that is, the ones whose  domain can be divided into subsets, calculate their partial solutions, and combine them to form the solution of the original problem--,} could strictly be implemented in parallel
 this way. A new parallel island-model evolutionary algorithm approach
 \cite{Alba02Parallelism} is used here to deal with un-decomposable
 problems: \textcolor{blue}{instead of allocating disjoint subsets of components to the islands hosted by the available processors, it applies the variation operators only to the components  of the subset allocated to a given population, while keeping the rest of the components of the whole individual unaltered.}. This avoids extra steps (and
@@ -161,16 +161,15 @@ time \textcolor{blue}{applying the} crossover, mutation and migration \textcolor
 % If this is the only justification, it should have been assessed at the end. It would be better if it was qualified, in the sense that more exploration is needed or something like that - JJ
 Different authors have 
 proposed methods to divide the decision space (the chromosome) to
-improve the performance and solution quality. % Why should it improve quality? - JJ
+improve the performance and solution quality. % Why should it improve quality? - JJ Pablo: look at the 2 new paragraphs sent by Julio below (between \begin{bluecolor})
 In this aspect, the
 co-evolution model is a dimension-distributed model where a 
 high-dimensional problem is divided into lower dimensional ones
-\citep{Gong15models,Tonda12cooperative}, and evolved separately. One
-example of the application of this technique was described in
+\citep{Gong15models,Tonda12cooperative}, and evolved separately. \textcolor{blue}{To evolve the individuals of a subpopulation, the processor where it has been allocated can operate according to two main alternatives.} One
+example of the application of the \textcolor{blue}{first alternative} was described in
 \citep{Kimovski15Parallel}. The method presented in that work involves
 different workers that evolve sub-populations created and recombined
-by a master process, which performs different recombination
-alternatives from the parts returned by worker processes. A high
+by a master process, which performs \textcolor{blue}{different alternatives for the recombinattion/cooperation of the subpopulations returned by worker processes}. A high
 dimensional problem was used to compare these 
 alternatives\textcolor{blue}{; also, i}n \citep{Dorronsoro13superlinear}, a distributed
 co-evolutionary island model was used.  Although  both papers \textcolor{blue}{described}
@@ -178,7 +177,7 @@ significant speedups, only a \textcolor{blue}{small} number of nodes were
 employed (8). However, when the number of islands is increased, the division
 of each section of the chromosome becomes smaller, and the scalability
 may be affected by obtaining lower quality solutions in the same
-amount of time. 
+amount of time. \textcolor{blue}{Moreover, in this first alternative, each processor only works with the variables of the individuals in its population. Thus, only whenever the cost function is decomposable in such a way that the variables allocated to different processors are not interdependent, the evaluation of the fitness of an individual in the population can be done by composing the cost evaluated separately by each processor from the values of the variables allocated to it. Otherwise, it has to be determined after composing the whole solution from the components allocated to each processor the components of the solutions in the subpopulations.}
 
 
 
@@ -188,12 +187,18 @@ amount of time.
 
 
 
-A similar approach used to solve this kind of problems is the {\em
-  SeLective operator Application} (SLA) presented in this paper. In this case, each island
+Another approach used to solve this kind of problems is the {\em
+  SeLective operator Application} (SLA), presented in this paper, \textcolor{blue}{can be considered as the second alternative to evolve the individuals of a subpopulation}. In this case, each island
 deals with the whole chromosome, but only modifies a fragment of it in
 the crossover and mutation phase depending on the number of islands,
 using the whole chromosome for fitness calculation. This allows to
 deal with un-decomposable problems. 
+
+\begin{bluecolor}
+ Thus, in this second alternative a suitable cooperation function must be defined to select the individuals for the new set of subpopulations. Nevertheless, the right approach would be to define an approach that makes it possible to build the right cooperation procedure to improve the convergence and convergence rate of the parallel cooperative co-evolutionary procedure with respect to the base sequential optimization procedure. 
+
+This way, the open issues are related with the searching for strategies that mathematically determine convergence rates according to the cost function and associate sampling distributions in the sequential and parallel co-evolutionary procedures including the effect of the communications providing not fully actualized components. 
+\end{bluecolor}
 
 In our previous work \citep{Garcia16hpmoon} \textcolor{blue}{this method was used} in a
 preliminary experimental setup, although it is worth mentioning \textcolor{blue}{that its name and acronym is established} in this paper for the first time.
