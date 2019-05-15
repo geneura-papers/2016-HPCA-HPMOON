@@ -44,7 +44,7 @@ $^2$ Department of Computer Architecture and Computer Technology.\\ ETSIIT - CIT
 %%%NEW AND SHORTED
 Parallel island-model co-evolutionary algorithms are well-known
 methods, suitable for dealing with large multi-objective optimization
-problems. \textcolor{blue}{We propose a version of these algorithms where} each island modifies a fragment of the
+problems. \textcolor{blue}{This paper proposes a version of these algorithms where} each island modifies a fragment of the
 chromosome that encodes a possible solution to the
 problem. \textcolor{blue}{The objective of this paper is} to
 demonstrate that automatically setting the size of the overlapping
@@ -76,16 +76,15 @@ Multi-objective algorithms \sep NSGA-II  \sep distributed evolutionary algorithm
 \section{Introduction}
 
 % Maybe add a sentence explaining what problems are decomposable and which ones are not. - JJ
+% Pablo: ok, done in blue
 \begin{bluecolor}
 One of the methods that are most extensively used  to deal with
 high-dimensional, multi-objective optimization problems (MOPs) are
 distributed co-evolutionary algorithms \cite{Gong15models}. However,
-only decomposable problems could strictly be implemented in parallel
+only decomposable problems \textcolor{blue}{-that is, the ones whose  domain can be divided into subsets, calculate their solutions, and combine them to form the solution of the original problem-,} could strictly be implemented in parallel
 this way. A new parallel island-model evolutionary algorithm approach
 \cite{Alba02Parallelism} is used here to deal with un-decomposable
-problems: instead of sharing parts of individuals, each island, hosted
-by a single processor, applies the variation operators to a specific
-subset of the whole individual. This avoids extra steps (and
+problems: \textcolor{blue}{instead of allocating disjoint subsets of components to the islands hosted by the available processors, it applies the variation operators only to the components  of the subset allocated to a given population, while keeping the rest of the components of the whole individual unaltered.}. This avoids extra steps (and
 subsequent communication overhead) to recompose the complete
 individuals from other islands before evaluation. 
 \end{bluecolor}
@@ -152,8 +151,8 @@ approaches \citep{Luna15Survey} need to deal with the whole solution set, the PF
 and sharing mechanisms, as there exists a tradeoff between the speedup
 achievable from parallelization and the need to globally recombine the
 results to accurately identify the PF
-\citep{Branke04Parallelizingcone}. % Is that the case with NSGA? - JJ
-% Please check the last question - JJ
+\citep{Branke04Parallelizingcone}. \textcolor{blue}{This is also the case with the NSGA-II.} % Is that the case with NSGA? - JJ
+% Please check the last question - JJ Pablo: done
 
 Real-world MOPs usually require a high number of decision variables \cite{Zhang17DECAL,XU2018268}, 
 meaning that the
@@ -510,15 +509,21 @@ Pseudo-code of the proposed algorithms is described in Algorithm \ref{alg:EA}.
 \subsection{Experimental setup}
 
 % Some introduction. ... We will describe here the design of the
-% experiments bla bla bla--- JJ
+% experiments bla bla bla--- JJ Pablo: Done
+\textcolor{blue}{In this subsection, the design of the experiments will be described, starting with the measurements of quality, the benchmark problems, the different configurations compared, and the specific parameter set used.}
 
-This subsection describes the \textcolor{blue}{measurements of
-  quality} used \textcolor{blue}{; these are}:
+% Move this to the top - JJ Pablo: Done
+\textcolor{blue}{Three different quality metrics have been used in this paper. These metrics have been chosen} not only because they have been used
+extensively, especially in some of the papers presented in Section \ref{sec:soa}
+\cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous},
+but also because they cover different quality criteria. Mathematical
+formulation of these metrics can be found in
+\cite{Dorronsoro13superlinear}.
 
-% Justify this - JJ
+
 \begin{itemize}
 \item Hypervolume (HV): measures the area formed by all non-dominated solutions found with respect to a reference point. Higher values imply better quality of the PF. Figure \ref{fig:hypervolume} clarifies how the hypervolume is calculated.
-\item Inverted Generational distance (IGD): calculates the distance of the obtained set of solutions to the optimal PF. Therefore, this metric requires the optimal PF found in the literature, or the theoretical one. In this metric, the lower the better. %Pablo: theoretical?
+\item Inverted Generational distance (IGD): calculates the distance of the obtained set of solutions to the optimal PF. Therefore, this metric requires the optimal PF found in the literature, or the theoretical one. In this metric, the lower the better.
 \item Spread (S): Measures the spread between solutions, taking into account the Euclidean distance between consecutive solutions. As in previous metric, the lower the value, the better, as it implies solutions distributed along all the PF.
 \end{itemize}
 
@@ -530,13 +535,7 @@ This subsection describes the \textcolor{blue}{measurements of
 \end{figure}
 
 
-% Move this to the top - JJ
-Those metrics \textcolor{blue}{have been chosen} not only because they have been used
-extensively, especially in some of the papers presented in Section \ref{sec:soa}
-\cite{Dorronsoro13superlinear,Durillo08masterslave,Hiroyasu07discussion,Wang09parallel,Martens13asynchronous},
-but also because they cover different quality criteria. Mathematical
-formulation of these metrics can be found in
-\cite{Dorronsoro13superlinear}. 
+
 
 %\subsection{Benchmark problems}
 
