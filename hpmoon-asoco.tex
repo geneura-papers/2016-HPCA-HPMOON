@@ -81,7 +81,7 @@ Multi-objective algorithms \sep NSGA-II  \sep distributed evolutionary algorithm
 One of the methods that are most extensively used  to deal with
 high-dimensional, multi-objective optimization problems (MOPs) are
 distributed co-evolutionary algorithms \cite{Gong15models}. However,
-only decomposable problems \textcolor{blue}{--that is, the ones whose  domain can be divided into subsets to calculate their partial solutions and combine them to form the solution of the original problem--,} could strictly be implemented in parallel
+only decomposable problems \textcolor{blue}{--that is, those whose  domain can be divided into subsets to calculate their partial solutions and combine them to form the solution of the original problem--,} could strictly be implemented in parallel
 this way. A new parallel island-model evolutionary algorithm approach
 \cite{Alba02Parallelism} is used here to deal with un-decomposable
 problems: \textcolor{blue}{instead of allocating disjoint subsets of components to the islands hosted by the available processors, it applies the variation operators only to the components  of the subset allocated to a given population, while keeping the rest of the components of the whole individual unaltered}. This avoids extra steps (and
@@ -654,7 +654,7 @@ island model has been executed asynchronously, using the ECJ distributed inter-p
 
 Different metrics, previously explained, have been used
 to calculate the quality of the obtained PFs in every configuration. As HV requires a reference point to be
-calculated (see Figure \ref{fig:hypervolume}), the value (1,9) \textcolor{blue}{has been chosen} as none of the existing solutions on all fronts obtained during all executions are dominated by it. In other words, as both objectives \textcolor{blue}{are being minimized}, this reference point is required to be numerically larger or equal in each objective, and strictly larger in at least one of them (dominated) for all solutions in the PFs \textcolor{blue}{used to be measured}. HV is then
+calculated (see Figure \ref{fig:hypervolume}), the value (1,9) \textcolor{blue}{has been chosen} as none of the existing solutions on all fronts obtained during all executions are dominated by it. In other words, as both objectives \textcolor{blue}{are being minimized}, this reference point is required to be numerically larger or equal in each objective, and strictly larger in at least one of them (dominated) for all solutions in the PFs \textcolor{blue}{that are going to be measured}. HV is then
 normalized with respect to that point. Also, the optimal reference PF distribution used to calculate the IGD and Spread metrics \cite{Durillo11Jmetal} has 1000 solutions \footnote{Optimal PFs are available at:   \url{http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/}.} .  
 A Kruskal-Wallis significance
 test has been performed to the metrics of all runs of the
@@ -1049,9 +1049,9 @@ using some statistical parameter setting method, such as Taguchi's
   further complication would not be necessary to validate our approach.}
 
 Although the results obtained in this work are promising, it is clear
-that this method requires more future experiments. These new
+that \textcolor{blue}{the proposed method can be tested in more scenarios}. These new
 experiments should involve a more complete parameter study, including
-a sensitivity analysis, to validate our approach. Other benchmarks and
+a sensitivity analysis. Other benchmarks and
 real problems should be addressed in the future. These problems could
 involve dealing with more than two objectives, so polar coordinates
 should be used to visually understand the results
